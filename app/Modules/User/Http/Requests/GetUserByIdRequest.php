@@ -2,9 +2,9 @@
 
 namespace App\Modules\User\Http\Requests;
 
-use App\Ship\Parents\Request;
+use App\Ship\Abstraction\AbstractRequest;
 
-class GetUserByIdRequest extends Request
+class GetUserByIdRequest extends AbstractRequest
 {
     protected $urlParameters = [
         'id'

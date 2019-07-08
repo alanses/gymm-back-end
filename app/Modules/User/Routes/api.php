@@ -13,11 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('registration', 'ApiController@createUser');
+Route::post('registration', 'UserController@createUser');
 
 
 Route::middleware('auth:api')->group(function () {
-
-    Route::get('users/{id}', 'ApiController@getUserById');
-
+    Route::get('users/{id}', 'UserController@getUserById');
 });

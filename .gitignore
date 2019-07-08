@@ -10,3 +10,15 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+.env
+.phpunit.result.cache
+docker-compose.yml
+phpdocker
+rabbitMQ
+## .gitkeep
+!/public/documentation
+!/public/favicon.ico
+!/public/favicon.png
+!/public/web.config
+!/public/index.php
+!/public/robots.txt

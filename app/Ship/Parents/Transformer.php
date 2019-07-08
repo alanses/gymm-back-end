@@ -3,6 +3,7 @@
 
 namespace App\Ship\Parents;
 
+use App\Ship\Interfaces\EntityInterface;
 use App\Ship\Interfaces\ParentInterface;
 use App\Ship\Interfaces\TransformerInterface;
 use League\Fractal\Resource\Collection;
@@ -15,11 +16,11 @@ use ReflectionException;
 class Transformer extends TransformerAbstract implements TransformerInterface, ParentInterface
 {
     /**
-     * @param Entity $entity
+     * @param AbstractEntity $entity
      * @return string
      * @throws ReflectionException
      */
-    protected function objectName(Entity $entity)
+    protected function objectName(EntityInterface $entity)
     {
         return (new ReflectionClass($entity))->getShortName();
     }

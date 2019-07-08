@@ -4,10 +4,10 @@ namespace App\Modules\User\Tasks;
 
 use App\Modules\User\Entities\User;
 use App\Modules\User\Repositories\UserRepository;
-use App\Ship\Parents\Task;
+use App\Ship\Abstraction\AbstractTask;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class CreateUserTask extends Task
+class CreateUserTask extends AbstractTask
 {
     protected $repository;
 

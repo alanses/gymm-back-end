@@ -3,10 +3,11 @@
 namespace App\Modules\Authentication\Actions;
 
 use App\Modules\Authentication\Tasks\CallOAuthServerTask;
+use App\Ship\Abstraction\AbstractAction;
 use App\Ship\Parents\Action;
 use Illuminate\Http\Request;
 
-class ApiLoginAction extends Action
+class ApiLoginAction extends AbstractAction
 {
 
     /**

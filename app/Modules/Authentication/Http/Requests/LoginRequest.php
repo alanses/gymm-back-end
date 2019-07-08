@@ -2,9 +2,9 @@
 
 namespace App\Modules\Authentication\Http\Requests;
 
-use App\Ship\Parents\Request;
+use App\Ship\Abstraction\AbstractRequest;
 
-class LoginRequest extends Request
+class LoginRequest extends AbstractRequest
 {
     protected $urlParameters = [];
 

@@ -2,8 +2,7 @@
 
 namespace App\Modules\User\Entities;
 
-use App\Modules\Category\Entities\Category;
-use App\Ship\Parents\Entity;
+use App\Ship\Abstraction\AbstractEntity;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -15,10 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Entity implements
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+class User extends AbstractEntity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
     use HasApiTokens, Notifiable;
@@ -47,11 +43,4 @@ class User extends Entity implements
         return "{$this->first_name} {$this->last_name}";
     }
 
-    /**
-     * @return HasMany
-     */
-    public function categories() : HasMany
-    {
-        return $this->hasMany(Category::class, 'user_id', 'id');
-    }
 }

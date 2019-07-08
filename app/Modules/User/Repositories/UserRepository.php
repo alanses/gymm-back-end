@@ -3,9 +3,9 @@
 namespace App\Modules\User\Repositories;
 
 use App\Modules\User\Entities\User;
-use App\Ship\Parents\Repository;
+use App\Ship\Abstraction\AbstractRepository;
 
-class UserRepository extends Repository
+class UserRepository extends AbstractRepository
 {
     protected $fieldSearchable = [];
 

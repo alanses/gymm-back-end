@@ -3,33 +3,25 @@
 namespace App\Modules\User\Actions;
 
 use App\Modules\User\Entities\User;
+use App\Modules\User\Http\Requests\CreateUserRequest;
 use App\Modules\User\Tasks\CreateUserTask;
 use App\Modules\User\Tasks\SendEmailTask;
-use App\Ship\Parents\Action;
-use App\Ship\Tasks\GetParamsWithRulesTask;
+use App\Ship\Abstraction\AbstractAction;
 use Illuminate\Http\Request;
 
-class CreateUserAction extends Action
+class CreateUserAction extends AbstractAction
 {
     /**
      * @param  Request  $request
      * @return User
      */
-    public function run(Request $request)
+    public function run(CreateUserRequest $request)
     {
         /** @var array $requestData */
-        $requestData = $this->call(GetParamsWithRulesTask::class, [$request->all(), $request->rules()]);
+        $requestData = $request->sanitizeInput(['name', 'email', 'password']);
 
         /** @var User $user */
         $user = $this->call(CreateUserTask::class, [$requestData]);
-
-        $this->call(SendEmailTask::class, [
-            collect([
-                'email' => $requestData['email'],
-                'password' => $requestData['password'],
-                'url_for_login' => env('APP_URL'). '/login'
-            ])
-        ]);
 
         return $user;
     }

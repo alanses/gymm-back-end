@@ -13,4 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('login', 'ApiController@login');
+Route::post('login', 'AuthenticationController@login');

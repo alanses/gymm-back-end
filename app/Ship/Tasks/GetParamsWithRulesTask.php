@@ -2,9 +2,9 @@
 
 namespace App\Ship\Tasks;
 
-use App\Ship\Parents\Task;
+use App\Ship\Abstraction\AbstractTask;
 
-class GetParamsWithRulesTask extends Task
+class GetParamsWithRulesTask extends AbstractTask
 {
     /**
      * @param  array  $data

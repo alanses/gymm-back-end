@@ -4,9 +4,10 @@ namespace App\Modules\User\Actions;
 
 use App\Modules\User\Entities\User;
 use App\Modules\User\Tasks\GetAllUsersTask;
+use App\Ship\Abstraction\AbstractSubAction;
 use App\Ship\Parents\SubAction;
 
-class FindUserByEmailSubAction extends SubAction
+class FindUserByEmailSubAction extends AbstractSubAction
 {
     public function run(string $email)
     {

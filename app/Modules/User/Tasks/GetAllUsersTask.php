@@ -3,11 +3,12 @@
 namespace App\Modules\User\Tasks;
 
 use App\Modules\User\Repositories\UserRepository;
+use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
 use App\Ship\Parents\Task;
 use Prettus\Repository\Exceptions\RepositoryException;
 
-class GetAllUsersTask extends Task
+class GetAllUsersTask extends AbstractTask
 {
     protected $repository;
 

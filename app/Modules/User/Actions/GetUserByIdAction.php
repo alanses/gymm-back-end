@@ -4,10 +4,10 @@ namespace App\Modules\User\Actions;
 
 use App\Modules\User\Entities\User;
 use App\Modules\User\Tasks\GetAllUsersTask;
-use App\Ship\Parents\Action;
+use App\Ship\Abstraction\AbstractAction;
 use Illuminate\Http\Request;
 
-class GetUserByIdAction extends Action
+class GetUserByIdAction extends AbstractAction
 {
     /**
      * @param  Request  $request

@@ -8,12 +8,12 @@
 
 namespace App\Modules\Authentication\Tasks;
 
-use App\Ship\Parents\Task;
+use App\Ship\Abstraction\AbstractTask;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Validation\ValidationException;
 
-class CallOAuthServerTask extends Task
+class CallOAuthServerTask extends AbstractTask
 {
     /**
      * @string
