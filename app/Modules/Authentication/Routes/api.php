@@ -14,3 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::post('login', 'AuthenticationController@login');
+
+Route::post('facebook', 'LoginViaSocialNetworkController@loginViaFacebook');

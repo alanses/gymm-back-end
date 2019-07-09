@@ -20,8 +20,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     use HasApiTokens, Notifiable;
 
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'email',
         'password'
     ];
@@ -34,13 +33,4 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     {
         $this->attributes['password'] = bcrypt($password);
     }
-
-    /**
-     * @return string
-     */
-    public function getNameAttribute()
-    {
-        return "{$this->first_name} {$this->last_name}";
-    }
-
 }

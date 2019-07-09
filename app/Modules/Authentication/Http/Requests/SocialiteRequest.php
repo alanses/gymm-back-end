@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\User\Http\Requests;
+namespace App\Modules\Authentication\Http\Requests;
 
 use App\Ship\Abstraction\AbstractRequest;
 
-class CreateUserRequest extends AbstractRequest
+class SocialiteRequest extends AbstractRequest
 {
     protected $urlParameters = [];
 
@@ -16,8 +16,7 @@ class CreateUserRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string',
+            'token' => 'string|required'
         ];
     }
 

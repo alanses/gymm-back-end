@@ -44,4 +44,19 @@ return [
         ],
     ],
 
+    'facebook' => [
+        'client_id' => env('FACEBOOK_KEY', '299811867565815'),
+        'client_secret' => env('FACEBOOK_SECRET', 'b6910f193022e4f789db8908478f85e8'),
+        'redirect' => env('FACEBOOK_REDIRECT_URI', '/')
+    ],
+
+    'instagram' => [
+        'client_id' => env('INSTAGRAM_KEY'),
+        'client_secret' => env('INSTAGRAM_SECRET'),
+        'redirect' => env('INSTAGRAM_REDIRECT_URI', '/')
+    ],
+
+
+
+
 ];

@@ -12,9 +12,13 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "5.8.*",
         "laravel/passport": "^7.2",
+        "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
         "nwidart/laravel-modules": "^5.0",
         "prettus/l5-repository": "^2.6",
+        "socialiteproviders/facebook": "dev-master",
+        "socialiteproviders/instagram": "^3.0",
+        "socialiteproviders/vkontakte": "^4.0",
         "spatie/laravel-fractal": "^5.5"
     },
     "require-dev": {

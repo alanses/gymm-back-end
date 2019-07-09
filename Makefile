@@ -12,3 +12,5 @@ seed:
 	sudo docker-compose exec php-fpm php artisan db:seed
 queue-work:
 	sudo docker-compose exec php-cli php artisan queue:work
+migrate-fresh:
+	sudo docker-compose exec php-fpm php artisan migrate:fresh
