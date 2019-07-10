@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class CreateUserTest extends TestCase
+class CreateGymTest extends TestCase
 {
     use WithFaker;
 
@@ -17,17 +17,30 @@ class CreateUserTest extends TestCase
      */
     public function testExample()
     {
+        $this->setUpFaker();
+
         $response = $this
             ->withHeaders([
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json'
             ])
-            ->json('POST', 'api/registration', [
-                'email' => $this->makeFaker()->email,
+            ->json('POST', 'api/registration/gym', [
+                'name' => $this->faker->name,
+                'email' => $this->faker->email,
                 'password' => 'secret'
             ]);
 
         $response
-            ->assertStatus(200);
+            ->assertStatus(200)
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'email',
+                    'name',
+                    'response-content',
+                    'created_at',
+                    'updated_at'
+                ]
+            ]);
     }
 }

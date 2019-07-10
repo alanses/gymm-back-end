@@ -3,8 +3,8 @@
 namespace App\Modules\Authentication\Tasks;
 
 use App\Ship\Abstraction\AbstractTask;
-use Laravel\Socialite\Two\User;
 use Laravel\Socialite\Facades\Socialite;
+use Laravel\Socialite\Two\User;
 
 class MakeLoginViaVkontacteTask extends AbstractTask
 {

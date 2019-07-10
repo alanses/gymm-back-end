@@ -2,10 +2,10 @@
 
 namespace App\Modules\User\Actions;
 
+use App\Modules\Authentication\Tasks\GenerateTokenDataForUserTask;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Http\Requests\CreateUserRequest;
 use App\Modules\User\Tasks\CreateUserTask;
-use App\Modules\User\Tasks\SendEmailTask;
 use App\Ship\Abstraction\AbstractAction;
 use Illuminate\Http\Request;
 
@@ -15,14 +15,23 @@ class CreateUserAction extends AbstractAction
      * @param  Request  $request
      * @return User
      */
-    public function run(CreateUserRequest $request)
+    public function run(CreateUserRequest $request, $userType)
     {
         /** @var array $requestData */
         $requestData = $request->sanitizeInput(['name', 'email', 'password']);
 
+        $this->setType($requestData, $userType);
+
         /** @var User $user */
         $user = $this->call(CreateUserTask::class, [$requestData]);
 
+        $user = $this->call(GenerateTokenDataForUserTask::class, [$user]);
+
         return $user;
+    }
+
+    public function setType(?array &$requestData, &$userType)
+    {
+        $requestData['user_type'] = $userType;
     }
 }

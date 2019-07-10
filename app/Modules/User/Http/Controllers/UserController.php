@@ -21,7 +21,20 @@ class UserController extends ApiController
     public function createUser(CreateUserRequest $request)
     {
         /** @var User $user */
-        $user = $this->call(CreateUserAction::class, [$request]);
+        $user = $this->call(CreateUserAction::class, [$request, User::$is_user]);
+
+        return $this->transform($user, UserTransformer::class);
+    }
+
+    /**
+     * @param  CreateUserRequest  $request
+     * @return mixed
+     * @throws ReflectionException
+     */
+
+    public function createGym(CreateUserRequest $request)
+    {
+        $user = $this->call(CreateUserAction::class, [$request, User::$is_gym]);
 
         return $this->transform($user, UserTransformer::class);
     }

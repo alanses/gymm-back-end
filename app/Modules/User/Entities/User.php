@@ -19,10 +19,15 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
     use HasApiTokens, Notifiable;
 
+    static public $is_supper_admin = 1;
+    static public $is_gym = 2;
+    static public $is_user = 3;
+
     protected $fillable = [
         'name',
         'email',
-        'password'
+        'password',
+        'user_type'
     ];
 
     /**
@@ -32,5 +37,25 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
+     * @param string $type
+     * @return int
+     */
+
+    public static function getUserType(string $type) :int
+    {
+        if($type == 'user') {
+            return self::$is_user;
+        }
+
+        if($type == 'gym') {
+            return self::$is_gym;
+        }
+
+        if($type == 'supper_admin') {
+            return self::$is_supper_admin;
+        }
     }
 }

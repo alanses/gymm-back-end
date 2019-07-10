@@ -56,7 +56,16 @@ return [
         'redirect' => env('INSTAGRAM_REDIRECT_URI', '/')
     ],
 
+    'google' => [
+        'client_id' => '116593240323',
+        'client_secret' => 'AAAAGyV_qQM:APA91bEAgwFyeiyW6Gyjd5jA1PorkLJdJJPT2blbI9O6TF7JaCY0ekxT3pOkqU7B9MWo2rFN3ibRb6JIHkqWViNT-_NNRnJdwFX4Fo9A0KhWAHNhpTLiNHkFoZcgPNa7gJE8IlWrc2-t',
+        'redirect' => '/',
+    ],
 
-
+    'vkontakte' => [
+        'client_id' => env('VKONTAKTE_KEY', '7027895'),
+        'client_secret' => env('VKONTAKTE_SECRET', '4da1d1404da1d1404da1d140234dcaedf744da14da1d14010aaaf8bf4b655cd3152d6d4'),
+        'redirect' => '/'
+    ],
 
 ];

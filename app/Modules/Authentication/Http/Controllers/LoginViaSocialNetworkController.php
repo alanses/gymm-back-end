@@ -31,7 +31,7 @@ class LoginViaSocialNetworkController extends ApiController
 
             return $this->transform($user, UserTransformer::class);
         } catch (\Exception $exception) {
-            throw new BadRequestHttpException('Invalid data for login');
+            throw new BadRequestHttpException($exception->getMessage());
         }
     }
 
@@ -42,7 +42,7 @@ class LoginViaSocialNetworkController extends ApiController
 
             return $this->transform($user, UserTransformer::class);
         } catch (\Exception $exception) {
-            throw new BadRequestHttpException('Invalid data for login');
+            throw new BadRequestHttpException($exception->getMessage());
         }
     }
 
@@ -53,7 +53,7 @@ class LoginViaSocialNetworkController extends ApiController
 
             return $this->transform($user, UserTransformer::class);
         } catch (\Exception $exception) {
-            throw new BadRequestHttpException('Invalid data for login');
+            throw new BadRequestHttpException($exception->getMessage());
         }
     }
 }

@@ -13,8 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('registration', 'UserController@createUser');
-
+Route::post('registration/user', 'UserController@createUser');
+Route::post('registration/gym', 'UserController@createGym');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('users/{id}', 'UserController@getUserById');

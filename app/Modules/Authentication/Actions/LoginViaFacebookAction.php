@@ -8,6 +8,7 @@ use App\Modules\Authentication\Tasks\MakeLoginViaFacebookTask;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Tasks\CreateUserTask;
 use App\Modules\User\Tasks\GetAllUsersTask;
+use App\Modules\User\Tasks\GetUserTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class LoginViaFacebookAction extends AbstractAction
@@ -16,28 +17,36 @@ class LoginViaFacebookAction extends AbstractAction
     {
         $facebookUser = $this->call(MakeLoginViaFacebookTask::class, [$request->token]);
 
-        $userFromDB = $this->call(GetAllUsersTask::class, [], [
-            ['findById' => ['email', $facebookUser->email]]
-        ])->first();
-
+        $userFromDB = $this->call(GetUserTask::class, [], [
+            ['getByField' => ['email', $facebookUser->email]]
+        ]);
 
         if(!$userFromDB) {
-            $userFromDB = $this->createUser($facebookUser);
+            $userFromDB = $this->createUser($facebookUser, $request->type);
         }
+
 
         $userFromDB = $this->call(GenerateTokenDataForUserTask::class, [$userFromDB]);
 
         return $userFromDB;
     }
 
+    /**
+     * @param $facebookUser
+     * @param string $user_type
+     * @return User
+     */
 
-    private function createUser($facebookUser)
+    private function createUser($facebookUser, string $user_type) :User
     {
         return $this->call(CreateUserTask::class, [
             [
                 'name' => $facebookUser->name,
-                'email' => $facebookUser->email
+                'email' => $facebookUser->email,
+                'user_type' => User::getUserType($user_type)
             ]
         ]);
     }
+
+
 }

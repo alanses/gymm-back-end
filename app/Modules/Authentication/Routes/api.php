@@ -15,4 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('login', 'AuthenticationController@login');
 
-Route::post('facebook', 'LoginViaSocialNetworkController@loginViaFacebook');
+Route::post('login/facebook', 'LoginViaSocialNetworkController@loginViaFacebook');
+Route::post('login/vkontakte', 'LoginViaSocialNetworkController@loginViaVkontacte');
+Route::post('login/instagram', 'LoginViaSocialNetworkController@loginViaInstagram');
+Route::post('login/google', 'LoginViaSocialNetworkController@loginViaGoogle');
