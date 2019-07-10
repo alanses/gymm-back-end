@@ -8,6 +8,7 @@ use App\Modules\Authentication\Tasks\MakeLoginViaVkontacteTask;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Tasks\CreateUserTask;
 use App\Modules\User\Tasks\GetAllUsersTask;
+use App\Modules\User\Tasks\GetUserTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class LoginViaVkontakteAction extends AbstractAction
@@ -16,10 +17,9 @@ class LoginViaVkontakteAction extends AbstractAction
     {
         $facebookUser = $this->call(MakeLoginViaVkontacteTask::class, [$request->token]);
 
-        $userFromDB = $this->call(GetAllUsersTask::class, [], [
-            ['findById' => ['email', $facebookUser->email]]
-        ])->first();
-
+        $userFromDB = $this->call(GetUserTask::class, [], [
+            ['getByField' => ['email', $facebookUser->email]]
+        ]);
 
         if(!$userFromDB) {
             $userFromDB = $this->createUser($facebookUser);
