@@ -15,15 +15,15 @@ class LoginViaGoogleAction extends AbstractAction
 {
     public function run(SocialiteRequest $request) :User
     {
-        $facebookUser = $this->call(MakeLoginViaGoogleTask::class, [$request->token]);
+        $googleUser = $this->call(MakeLoginViaGoogleTask::class, [$request->token]);
 
         $userFromDB = $this->call(GetUserTask::class, [], [
-            ['getByField' => ['email', $facebookUser->email]]
+            ['getByField' => ['email', $googleUser->email]]
         ]);
 
 
         if(!$userFromDB) {
-            $userFromDB = $this->createUser($facebookUser);
+            $userFromDB = $this->createUser($googleUser);
         }
 
         $userFromDB = $this->call(GenerateTokenDataForUserTask::class, [$userFromDB]);

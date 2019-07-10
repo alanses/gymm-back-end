@@ -15,15 +15,15 @@ class LoginViaInstagramAction extends AbstractAction
 {
     public function run(SocialiteRequest $request) :User
     {
-        $facebookUser = $this->call(MakeLoginViaInstagramTask::class, [$request->token]);
+        $instagramUser = $this->call(MakeLoginViaInstagramTask::class, [$request->token]);
 
         $userFromDB = $this->call(GetUserTask::class, [], [
-            ['getByField' => ['email', $facebookUser->email]]
+            ['getByField' => ['email', $instagramUser->email]]
         ]);
 
 
         if(!$userFromDB) {
-            $userFromDB = $this->createUser($facebookUser);
+            $userFromDB = $this->createUser($instagramUser);
         }
 
         $userFromDB = $this->call(GenerateTokenDataForUserTask::class, [$userFromDB]);

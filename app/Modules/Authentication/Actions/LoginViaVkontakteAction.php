@@ -15,14 +15,14 @@ class LoginViaVkontakteAction extends AbstractAction
 {
     public function run(SocialiteRequest $request) :User
     {
-        $facebookUser = $this->call(MakeLoginViaVkontacteTask::class, [$request->token]);
+        $vkUser = $this->call(MakeLoginViaVkontacteTask::class, [$request->token]);
 
         $userFromDB = $this->call(GetUserTask::class, [], [
-            ['getByField' => ['email', $facebookUser->email]]
+            ['getByField' => ['email', $vkUser->email]]
         ]);
 
         if(!$userFromDB) {
-            $userFromDB = $this->createUser($facebookUser);
+            $userFromDB = $this->createUser($vkUser);
         }
 
         $userFromDB = $this->call(GenerateTokenDataForUserTask::class, [$userFromDB]);
@@ -36,7 +36,7 @@ class LoginViaVkontakteAction extends AbstractAction
         return $this->call(CreateUserTask::class, [
             [
                 'name' => $facebookUser->name,
-                'email' => $facebookUser->email
+                'login' => $facebookUser->login
             ]
         ]);
     }
