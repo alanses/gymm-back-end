@@ -57,10 +57,11 @@ return [
     ],
 
     'google' => [
-        'client_id' => '116593240323',
-        'client_secret' => 'AAAAGyV_qQM:APA91bEAgwFyeiyW6Gyjd5jA1PorkLJdJJPT2blbI9O6TF7JaCY0ekxT3pOkqU7B9MWo2rFN3ibRb6JIHkqWViNT-_NNRnJdwFX4Fo9A0KhWAHNhpTLiNHkFoZcgPNa7gJE8IlWrc2-t',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
         'redirect' => '/',
     ],
+
 
     'vkontakte' => [
         'client_id' => env('VKONTAKTE_KEY', '7027895'),
