@@ -27,7 +27,6 @@ class CreateUserTask extends AbstractTask
      */
     public function run(array $data)
     {
-        dd($this->repository->create($data));
         /** @var User $user */
         return $this->repository->create($data);
     }

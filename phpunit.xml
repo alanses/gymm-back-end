@@ -22,6 +22,9 @@
         <testsuite name="AuthenticationModule">
             <directory suffix="Test.php">./app/Modules/Authentication/Tests</directory>
         </testsuite>
+        <testsuite name="LocationModule">
+            <directory suffix="Test.php">./app/Modules/Location/Tests</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

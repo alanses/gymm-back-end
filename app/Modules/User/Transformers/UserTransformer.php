@@ -31,7 +31,7 @@ class UserTransformer extends Transformer
     public function transform(AbstractEntity $entity)
     {
         $response = [
-            'id' => $entity->id,
+            'user_id' => $entity->id,
             'email' => $entity->email,
             'name' => $entity->name,
             'response-content' => $entity->response_content,

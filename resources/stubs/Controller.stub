@@ -2,9 +2,9 @@
 
 namespace App\Modules\{{moduleName}}\Http\Controllers;
 
-use App\Ship\Parents\ApiController as ApiParentController;
+use App\Ship\Parents\ApiController;
 
-class {{controllerName}}Controller extends ApiParentController
+class {{controllerName}}Controller extends ApiController
 {
     public function getAll{{objectName}}s()
     {

@@ -2,9 +2,9 @@
 
 namespace App\Modules\{{moduleName}}\Entities;
 
-use App\Ship\Parents\Entity;
+use App\Ship\Abstraction\AbstractEntity;
 
-class {{entityName}} extends Entity
+class {{entityName}} extends AbstractEntity
 {
     protected $fillable = [];
 }

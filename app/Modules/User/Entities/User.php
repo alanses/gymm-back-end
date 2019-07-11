@@ -58,4 +58,9 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
             return self::$is_supper_admin;
         }
     }
+
+    public static function getAdmin()
+    {
+        return self::find(1);
+    }
 }

@@ -3,9 +3,9 @@
 namespace App\Modules\{{moduleName}}\Repositories;
 
 use App\Modules\{{moduleName}}\Entities\{{modelName}};
-use App\Ship\Parents\Repository;
+use App\Ship\Abstraction\AbstractRepository;
 
-class {{repositoryName}}Repository extends Repository
+class {{repositoryName}}Repository extends AbstractRepository
 {
     protected $fieldSearchable = [];
 
