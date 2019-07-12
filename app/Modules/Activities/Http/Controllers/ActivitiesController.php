@@ -19,7 +19,7 @@ class ActivitiesController extends ApiController
 
     public function addActivitiesToUser(Request $request)
     {
-        $this->call(AddActivitiesToUserAction::class, [$request]);
+        $this->call(AddActivitiesToUserAction::class, [$request->user_id, $request->activities]);
 
         return $this->success('ok');
     }

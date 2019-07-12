@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Modules\{{moduleName}}\Http\Requests;
+namespace App\Modules\Authentication\Http\Requests;
 
 use App\Ship\Abstraction\AbstractRequest;
 
-class {{requestName}}Request extends AbstractRequest
+class ForgotPasswordRequest extends AbstractRequest
 {
     protected $urlParameters = [];
 
@@ -16,7 +16,7 @@ class {{requestName}}Request extends AbstractRequest
     public function rules()
     {
         return [
-
+            'email' => 'required|string'
         ];
     }
 

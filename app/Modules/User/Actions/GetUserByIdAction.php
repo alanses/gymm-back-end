@@ -13,11 +13,11 @@ class GetUserByIdAction extends AbstractAction
      * @param  Request  $request
      * @return User
      */
-    public function run(Request $request)
+    public function run($user_id)
     {
         /** @var User $user */
         $user = $this->call(GetAllUsersTask::class, [], [
-            ['findById' => [$request->id]]
+            ['getByField' => ['id', $user_id]]
         ])
         ->first();
 

@@ -34,12 +34,12 @@ class CreateGymTest extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'id',
-                    'email',
+                    'user_id',
                     'name',
-                    'response-content',
+                    'email',
                     'created_at',
-                    'updated_at'
+                    'updated_at',
+                    'user_id'
                 ]
             ]);
     }

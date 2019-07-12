@@ -2,10 +2,13 @@
 
 namespace App\Modules\User\Entities;
 
+use App\Modules\Activities\Entities\Activity;
+use App\Modules\UserProfile\Entities\UserSetting;
 use App\Ship\Abstraction\AbstractEntity;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -37,6 +40,19 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function activities() :BelongsToMany
+    {
+        return $this->belongsToMany(Activity::class, 'activities_users', 'user_id', 'activity_id');
+    }
+
+    public function userSetting()
+    {
+        return $this->hasOne(UserSetting::class, 'user_id', 'id');
     }
 
     /**

@@ -1,0 +1,14 @@
+{
+    "name": "UserProfile",
+    "alias": "userprofile",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\UserProfile\\Providers\\UserProfileServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

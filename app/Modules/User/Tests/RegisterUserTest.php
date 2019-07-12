@@ -34,7 +34,7 @@ class RegisterUserTest extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'id',
+                    'user_id',
                     'email',
                     'name',
                     'response-content',

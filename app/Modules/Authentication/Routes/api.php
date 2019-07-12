@@ -19,3 +19,5 @@ Route::post('login/facebook', 'LoginViaSocialNetworkController@loginViaFacebook'
 Route::post('login/vkontakte', 'LoginViaSocialNetworkController@loginViaVkontacte');
 Route::post('login/instagram', 'LoginViaSocialNetworkController@loginViaInstagram');
 Route::post('login/google', 'LoginViaSocialNetworkController@loginViaGoogle');
+
+Route::post('/forgot-password', 'AuthenticationController@forgotPassword');

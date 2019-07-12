@@ -16,6 +16,7 @@ class ActivitiesTransformer extends Resource
     {
         return [
             'id' => $this->id,
+            'name' => $this->name,
             'displayed_name' => $this->displayed_name,
         ];
     }

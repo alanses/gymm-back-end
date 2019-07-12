@@ -2,17 +2,15 @@
 
 namespace App\Modules\Activities\Actions;
 
+use App\Modules\Activities\Tasks\SyncUserWithActivitiesTask;
+use App\Modules\User\Entities\User;
 use App\Modules\User\Tasks\GetUserTask;
 use App\Ship\Abstraction\AbstractAction;
-use Illuminate\Http\Request;
 
 class AddActivitiesToUserAction extends AbstractAction
 {
-    public function run(Request $request)
+    public function run(User $user, array $list_activities)
     {
-        $user = $this->call(GetUserTask::class, [], [
-            'getByField' => ['id', $request->user_id]
-        ]);
-
+        return $this->call(SyncUserWithActivitiesTask::class, [$user, $list_activities]);
     }
 }
