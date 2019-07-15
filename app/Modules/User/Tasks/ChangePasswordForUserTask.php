@@ -11,7 +11,7 @@ class ChangePasswordForUserTask extends AbstractTask
     public function run(User $user, string $password)
     {
         $user->update([
-            'password' => Hash::make($password)
+            'password' => $password
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Modules\User\Actions;
 
 use App\Modules\Authentication\Tasks\GenerateTokenDataForUserTask;
+use App\Modules\Gym\Tasks\CreateGymTask;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Http\Requests\CreateUserRequest;
 use App\Modules\User\Tasks\CreateUserTask;
@@ -26,6 +27,12 @@ class CreateUserAction extends AbstractAction
         $user = $this->call(CreateUserTask::class, [$requestData]);
 
         $user = $this->call(GenerateTokenDataForUserTask::class, [$user]);
+
+        $this->call(CreateGymTask::class, [
+            [
+                'user_id' => $user->id
+            ]
+        ]);
 
         return $user;
     }

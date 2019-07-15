@@ -3,13 +3,16 @@
 namespace App\Modules\Authentication\Http\Controllers;
 
 use App\Modules\Authentication\Actions\ApiLoginAction;
+use App\Modules\Authentication\Actions\RestorePasswordAction;
 use App\Modules\Authentication\Actions\SendNewPasswordOnEmailAction;
 use App\Modules\Authentication\Http\Requests\ForgotPasswordRequest;
 use App\Modules\Authentication\Http\Requests\LoginRequest;
+use App\Modules\Authentication\Http\Requests\RestorePasswordRequest;
 use App\Modules\User\Actions\FindUserByEmailAction;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Transformers\UserTransformer;
 use App\Ship\Parents\ApiController;
+use Illuminate\Support\Facades\Auth;
 
 class AuthenticationController extends ApiController
 {
@@ -33,9 +36,28 @@ class AuthenticationController extends ApiController
         return $this->transform($user, UserTransformer::class);
     }
 
-    public function forgotPassword(ForgotPasswordRequest $request)
+    /**
+     * @param ForgotPasswordRequest $request
+     * @return array
+     */
+    public function sendNewPassword(ForgotPasswordRequest $request)
     {
         $this->call(SendNewPasswordOnEmailAction::class, [$request->email]);
+
+        return $this->success('ok');
+    }
+
+    /**
+     * @param RestorePasswordRequest $request
+     * @return array
+     */
+    public function restorePassword(RestorePasswordRequest $request)
+    {
+        $this->call(RestorePasswordAction::class, [
+            $request->old_password,
+            $request->new_password,
+            $request->user_id
+        ]);
 
         return $this->success('ok');
     }
