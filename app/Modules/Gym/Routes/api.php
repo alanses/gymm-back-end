@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/gym', function (Request $request) {
-    return $request->user();
-});
+Route::post('create/trainer', 'GymControllerController@addTrainer');
+Route::get('trainer/{id}', 'GymControllerController@getTrainerById');
+Route::get('list/trainers/select/by/user/id/{id}', 'GymControllerController@getListTrainersForSelect');

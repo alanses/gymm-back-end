@@ -8,11 +8,8 @@ use App\Modules\User\Repositories\UserRepository;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class SeedUsersTableTableSeeder extends Seeder
+class SeedGymsTableTableSeeder extends Seeder
 {
-    /**
-     * @var UserRepository
-     */
     private $userRepository;
     private $gymRepository;
 
@@ -26,18 +23,15 @@ class SeedUsersTableTableSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->userRepository->create([
-            'name' => 'admin',
-            'password' => 'admin',
-            'email' => 'SupperAdmin@gmail.com',
-            'user_type' => User::$is_supper_admin
+        $userGym = $this->userRepository->create([
+            'name' => 'TestGym',
+            'password' => '12345678',
+            'email' => 'TestGym@gmail.com',
+            'user_type' => User::$is_gym
         ]);
 
-        $this->userRepository->create([
-            'name' => 'TestUser',
-            'password' => '12345678',
-            'email' => 'TestUser@gmail.com',
-            'user_type' => User::$is_user
+        $this->gymRepository->create([
+            'user_id' => $userGym->id
         ]);
     }
 }
