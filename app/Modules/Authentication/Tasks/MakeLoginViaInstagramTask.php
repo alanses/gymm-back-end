@@ -14,6 +14,6 @@ class MakeLoginViaInstagramTask extends AbstractTask
      */
     public function run(string $token) :User
     {
-        return Socialite::driver('Instagram')->userFromToken($token);
+        return Socialite::driver('instagram')->userFromToken($token);
     }
 }

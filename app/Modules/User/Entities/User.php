@@ -29,6 +29,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     protected $fillable = [
         'name',
         'email',
+        'login',
         'password',
         'user_type'
     ];

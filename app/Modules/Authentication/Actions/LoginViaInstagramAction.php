@@ -18,7 +18,7 @@ class LoginViaInstagramAction extends AbstractAction
         $instagramUser = $this->call(MakeLoginViaInstagramTask::class, [$request->token]);
 
         $userFromDB = $this->call(GetUserTask::class, [], [
-            ['getByField' => ['email', $instagramUser->email]]
+            ['getByField' => ['login', $instagramUser->nickname]]
         ]);
 
 
@@ -32,12 +32,13 @@ class LoginViaInstagramAction extends AbstractAction
     }
 
 
-    private function createUser($facebookUser)
+    private function createUser($instagramUser)
     {
         return $this->call(CreateUserTask::class, [
             [
-                'name' => $facebookUser->name,
-                'email' => $facebookUser->email
+                'name' => $instagramUser->user['full_name'],
+                'login' => $instagramUser->user['username'],
+                'user_type' => User::$is_user
             ]
         ]);
     }

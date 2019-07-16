@@ -51,8 +51,8 @@ return [
     ],
 
     'instagram' => [
-        'client_id' => env('INSTAGRAM_KEY'),
-        'client_secret' => env('INSTAGRAM_SECRET'),
+        'client_id' => env('INSTAGRAM_KEY', '8b54a135420747b486ff896061edd854'),
+        'client_secret' => env('INSTAGRAM_SECRET', 'ca2c0d72387741cc9842f95301708c07'),
         'redirect' => env('INSTAGRAM_REDIRECT_URI', '/')
     ],
 
