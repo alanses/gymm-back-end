@@ -16,8 +16,8 @@ class SocialiteRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'token' => 'string|required',
-            'type' => 'string|required|in:user,gym,supper_admin'
+            'email' => 'string|required',
+            'name' => 'string|required'
         ];
     }
 

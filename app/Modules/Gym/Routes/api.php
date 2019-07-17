@@ -15,4 +15,4 @@ use Illuminate\Http\Request;
 
 Route::post('create/trainer', 'GymControllerController@addTrainer');
 Route::get('trainer/{id}', 'GymControllerController@getTrainerById');
-Route::get('list/trainers/select/by/user/id/{id}', 'GymControllerController@getListTrainersForSelect');
+Route::get('list/trainers/for/select', 'GymControllerController@getListTrainersForSelect');

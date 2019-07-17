@@ -9,6 +9,7 @@ use App\Modules\Gym\Http\Requests\AddTrainerRequest;
 use App\Modules\Gym\Transformers\TrainersForSelectTransformer;
 use App\Modules\Gym\Transformers\TrainerTransformer;
 use App\Ship\Parents\ApiController;
+use Illuminate\Http\Request;
 
 class GymControllerController extends ApiController
 {
@@ -34,14 +35,14 @@ class GymControllerController extends ApiController
         return new TrainerTransformer($trainer);
     }
 
+
     /**
-     * @param $id
+     * @param Request $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-
-    public function getListTrainersForSelect($id)
+    public function getListTrainersForSelect(Request $request)
     {
-        $trainers = $this->call(GetListTrainersForSelectAction::class, [$id]);
+        $trainers = $this->call(GetListTrainersForSelectAction::class, [$request->user_id]);
 
         return TrainersForSelectTransformer::collection($trainers);
     }

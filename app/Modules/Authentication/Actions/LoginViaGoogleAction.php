@@ -10,20 +10,21 @@ use App\Modules\User\Tasks\CreateUserTask;
 use App\Modules\User\Tasks\GetAllUsersTask;
 use App\Modules\User\Tasks\GetUserTask;
 use App\Ship\Abstraction\AbstractAction;
+use Illuminate\Http\Request;
 
 class LoginViaGoogleAction extends AbstractAction
 {
     public function run(SocialiteRequest $request) :User
     {
-        $googleUser = $this->call(MakeLoginViaGoogleTask::class, [$request->token]);
+//        $googleUser = $this->call(MakeLoginViaGoogleTask::class, [$request->token]);
 
         $userFromDB = $this->call(GetUserTask::class, [], [
-            ['getByField' => ['email', $googleUser->email]]
+            ['getByField' => ['email', $request->email]]
         ]);
 
 
         if(!$userFromDB) {
-            $userFromDB = $this->createUser($googleUser);
+            $userFromDB = $this->createUser($request);
         }
 
         $userFromDB = $this->call(GenerateTokenDataForUserTask::class, [$userFromDB]);
@@ -32,12 +33,12 @@ class LoginViaGoogleAction extends AbstractAction
     }
 
 
-    private function createUser($facebookUser)
+    private function createUser(SocialiteRequest $request)
     {
         return $this->call(CreateUserTask::class, [
             [
-                'name' => $facebookUser->name,
-                'email' => $facebookUser->email
+                'name' => $request->name,
+                'email' => $request->email
             ]
         ]);
     }
