@@ -38,7 +38,8 @@ class LoginViaGoogleAction extends AbstractAction
         return $this->call(CreateUserTask::class, [
             [
                 'name' => $request->name,
-                'email' => $request->email
+                'email' => $request->email,
+                'user_type' => User::$is_user
             ]
         ]);
     }
