@@ -9,6 +9,7 @@ use App\Modules\Authentication\Actions\LoginViaVkontakteAction;
 use App\Modules\Authentication\Http\Requests\SocialiteRequest;
 use App\Modules\User\Transformers\UserTransformer;
 use App\Ship\Parents\ApiController;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class LoginViaSocialNetworkController extends ApiController
@@ -46,7 +47,7 @@ class LoginViaSocialNetworkController extends ApiController
         }
     }
 
-    public function loginViaGoogle(SocialiteRequest $request)
+    public function loginViaGoogle(Request $request)
     {
         try {
             $user = $this->call(LoginViaGoogleAction::class, [$request]);

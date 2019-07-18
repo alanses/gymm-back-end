@@ -37,7 +37,7 @@ class RegisterUserTest extends TestCase
                     'user_id',
                     'email',
                     'name',
-                    'response-content',
+                    'content',
                     'created_at',
                     'updated_at'
                 ]

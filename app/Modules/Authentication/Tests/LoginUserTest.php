@@ -31,7 +31,7 @@ class LoginUserTest extends TestCase
                     'user_id',
                     'email',
                     'name',
-                    'response-content' => [
+                    'content' => [
                         'token_type',
                         'expires_in',
                         'access_token',
