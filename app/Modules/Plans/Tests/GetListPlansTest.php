@@ -25,12 +25,14 @@ class GetListPlansTest extends AbstractTestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'data' => [
-                    'plan_id',
-                    'name',
-                    'description',
-                    'count_credits',
-                    'payment_for_month',
-                    'count_class'
+                    [
+                        'plan_id',
+                        'name',
+                        'description',
+                        'count_credits',
+                        'payment_for_month',
+                        'count_class'
+                    ]
                 ]
             ]);
     }

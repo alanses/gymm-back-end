@@ -4,7 +4,7 @@ namespace App\Modules\{{moduleName}}\Http\Controllers;
 
 use App\Ship\Parents\ApiController;
 
-class {{controllerName}}Controller extends ApiController
+class {{controllerName}} extends ApiController
 {
     public function getAll{{objectName}}s()
     {

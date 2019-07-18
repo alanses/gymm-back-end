@@ -1,0 +1,14 @@
+{
+    "name": "GymClass",
+    "alias": "gymclass",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\GymClass\\Providers\\GymClassServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
