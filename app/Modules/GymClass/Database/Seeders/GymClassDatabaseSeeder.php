@@ -17,5 +17,6 @@ class GymClassDatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(SeedClassTypeTableTableSeeder::class);
+        $this->call(SeedRecurringTypeTableTableSeeder::class);
     }
 }

@@ -4,10 +4,10 @@ namespace App\Modules\GymClass\Entities;
 
 use App\Ship\Abstraction\AbstractEntity;
 
-class ClassType extends AbstractEntity
+class RecurringType extends AbstractEntity
 {
     protected $fillable = [
-        'name',
-        'displayed_name'
+        'displayed_name',
+        'recurring_type'
     ];
 }

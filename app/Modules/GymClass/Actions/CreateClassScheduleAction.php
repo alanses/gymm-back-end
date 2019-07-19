@@ -2,25 +2,14 @@
 
 namespace App\Modules\GymClass\Actions;
 
+use App\Modules\GymClass\Http\Requests\ClassScheduleRequest;
 use App\Modules\GymClass\Http\Service\ClassDateSchedule;
 use App\Ship\Abstraction\AbstractAction;
 
 class CreateClassScheduleAction extends AbstractAction
 {
-    /**
-     * @var ClassDateSchedule
-     */
-    private $classDateSchedule;
-
-    public function __construct(ClassDateSchedule $classDateSchedule)
+    public function run(ClassScheduleRequest $request)
     {
-        $this->classDateSchedule = $classDateSchedule;
-    }
-
-    public function run()
-    {
-        dd(
-            $this->classDateSchedule->GetYeardays(, $dateend);
-        );
+       return $this->call(CreateClassScheduleSubAction::class, [$request]);
     }
 }

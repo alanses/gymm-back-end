@@ -19,9 +19,15 @@ class CreateClassSchedulesTable extends Migration
             $table->unsignedBigInteger('activities_id')->nullable();
             $table->integer('level')->nullable();
             $table->integer('credits')->nullable();
-            $table->date('booking_date')->nullable();
-            $table->time('start_at')->nullable();
-            $table->time('end_at')->nullable();
+
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->timestamp('start_time')->nullable();
+            $table->timestamp('end_time')->nullable();
+
+            $table->char('is_full_day_event', '1')->nullable();
+            $table->char('is_recurring', '1')->nullable();
+
             $table->unsignedBigInteger('trainer_id')->nullable();
             $table->string('photo')->nullable();
             $table->timestamps();
@@ -41,8 +47,6 @@ class CreateClassSchedulesTable extends Migration
                 ->on('trainers')
                 ->onDelete('cascade');
 
-            $table->index(['start_at', 'end_at']);
-            $table->index(['booking_date', 'start_at', 'end_at']);
         });
     }
 
