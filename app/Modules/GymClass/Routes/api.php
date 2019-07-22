@@ -17,4 +17,6 @@ Route::middleware('auth:api')->get('/gymclass', function (Request $request) {
     return $request->user();
 });
 
-Route::post('create/class/schedule', 'GymClassController@createClassSchedule');
+Route::middleware('auth:api')->group(function () {
+    Route::post('create/class/schedule', 'GymClassController@createClassSchedule');
+});

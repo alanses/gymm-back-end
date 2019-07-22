@@ -2,10 +2,10 @@
 
 namespace App\Modules\GymClass\Repositories;
 
-use App\Modules\GymClass\Entities\GymClass;
+use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Ship\Abstraction\AbstractRepository;
 
-class GymClassRepository extends AbstractRepository
+class ClassScheduleRepository extends AbstractRepository
 {
     protected $fieldSearchable = [];
 
@@ -22,6 +22,6 @@ class GymClassRepository extends AbstractRepository
     */
     function model()
     {
-        return GymClass::class;
+        return ClassSchedule::class;
     }
 }

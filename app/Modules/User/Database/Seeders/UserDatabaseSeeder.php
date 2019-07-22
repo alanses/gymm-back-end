@@ -2,6 +2,7 @@
 
 namespace App\Modules\User\Database\Seeders;
 
+use App\Modules\Gym\Database\Seeders\SeedTrainersTableSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,5 +19,6 @@ class UserDatabaseSeeder extends Seeder
 
         $this->call(SeedUsersTableTableSeeder::class);
         $this->call(SeedGymsTableTableSeeder::class);
+        $this->call(SeedTrainersTableSeeder::class);
     }
 }

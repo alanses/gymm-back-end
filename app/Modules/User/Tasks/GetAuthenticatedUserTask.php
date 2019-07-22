@@ -2,17 +2,27 @@
 
 namespace App\Modules\User\Tasks;
 
-use App\Ship\Parents\Task;
+use App\Ship\Abstraction\AbstractTask;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Support\Facades\Auth;
 
-class GetAuthenticatedUserTask extends Task
+class GetAuthenticatedUserTask extends AbstractTask
 {
+    /**
+     * @var Guard
+     */
+    private $guard;
+
+    public function __construct(Guard $guard)
+    {
+        $this->guard = $guard;
+    }
+
     /**
      * @return Authenticatable|null
      */
-    public function run()
+    public function run() :?Authenticatable
     {
-        return Auth::user();
+        return $this->guard->user();
     }
 }

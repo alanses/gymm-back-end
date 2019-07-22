@@ -29,7 +29,6 @@ class CreateClassSchedulesTable extends Migration
             $table->char('is_recurring', '1')->nullable();
 
             $table->unsignedBigInteger('trainer_id')->nullable();
-            $table->string('photo')->nullable();
             $table->timestamps();
 
             $table->foreign('class_type_id')

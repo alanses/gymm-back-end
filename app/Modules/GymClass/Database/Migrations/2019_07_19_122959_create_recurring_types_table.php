@@ -15,7 +15,7 @@ class CreateRecurringTypesTable extends Migration
     {
         Schema::create('recurring_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('disable_name')->nullable();
+            $table->string('displayed_name')->nullable();
             $table->string('recurring_type')->nullable();
             $table->timestamps();
         });

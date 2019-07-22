@@ -3,13 +3,33 @@
 namespace App\Modules\GymClass\Actions;
 
 use App\Modules\GymClass\Http\Requests\ClassScheduleRequest;
-use App\Modules\GymClass\Http\Service\ClassDateSchedule;
+use App\Modules\GymClass\Tasks\CreateClassScheduleTask;
+use App\Modules\GymClass\Tasks\CreateRecurringPatternTask;
+use App\Modules\GymClass\Tasks\UploadImageTask;
+use App\Modules\Photos\Entities\Photo;
+use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class CreateClassScheduleAction extends AbstractAction
 {
     public function run(ClassScheduleRequest $request)
     {
-       return $this->call(CreateClassScheduleSubAction::class, [$request]);
+        $user = $this->call(GetAuthenticatedUserTask::class);
+
+        $classSchedule = $this->call(CreateClassScheduleTask::class, [
+            $request
+        ]);
+
+        if($request->has('photo')) {
+            $this->call(UploadImageTask::class, [
+                $request->photo,
+                $classSchedule,
+                $user->id,
+                Photo::getBasePathForSchedule()
+            ]);
+        }
+
+
+        $this->call(CreateRecurringPatternTask::class);
     }
 }

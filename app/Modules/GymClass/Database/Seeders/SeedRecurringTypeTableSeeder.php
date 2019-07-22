@@ -6,7 +6,7 @@ use App\Modules\GymClass\Repositories\RecurringTypeRepository;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class SeedRecurringTypeTableTableSeeder extends Seeder
+class SeedRecurringTypeTableSeeder extends Seeder
 {
     /**
      * @var RecurringTypeRepository

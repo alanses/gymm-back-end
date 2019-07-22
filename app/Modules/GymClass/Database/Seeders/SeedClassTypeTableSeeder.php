@@ -6,7 +6,7 @@ use App\Modules\GymClass\Repositories\ClassTypeRepository;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class SeedClassTypeTableTableSeeder extends Seeder
+class SeedClassTypeTableSeeder extends Seeder
 {
     /**
      * @var ClassTypeRepository
