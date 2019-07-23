@@ -73,8 +73,8 @@ class ClassSchedulesCollection extends Resource
 
     private function getPhoto()
     {
-        $url = env('APP_URL');
-
-        return $url . Storage::url(Photo::getBasePathForSchedule() .  $this->photo->file_name);
+        if($this->photo) {
+            return env('APP_URL') . Storage::url(Photo::getBasePathForSchedule() .  $this->photo->file_name);
+        }
     }
 }

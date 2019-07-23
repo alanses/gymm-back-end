@@ -3,6 +3,7 @@
 namespace App\Modules\User\Entities;
 
 use App\Modules\Activities\Entities\Activity;
+use App\Modules\Gym\Entities\Gym;
 use App\Modules\UserProfile\Entities\UserSetting;
 use App\Ship\Abstraction\AbstractEntity;
 use Illuminate\Auth\Authenticatable;
@@ -54,6 +55,11 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     public function userSetting()
     {
         return $this->hasOne(UserSetting::class, 'user_id', 'id');
+    }
+
+    public function gym()
+    {
+        return $this->hasOne(Gym::class, 'user_id', 'id');
     }
 
     /**

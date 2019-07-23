@@ -27,5 +27,10 @@ class SeedClassTypeTableSeeder extends Seeder
             'name' => 'Group',
             'displayed_name' => 'group'
         ]);
+
+        $this->classTypeRepository->create([
+            'name' => 'Personal',
+            'displayed_name' => 'personal'
+        ]);
     }
 }

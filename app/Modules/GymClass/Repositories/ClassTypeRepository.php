@@ -4,9 +4,12 @@ namespace App\Modules\GymClass\Repositories;
 
 use App\Modules\GymClass\Entities\ClassType;
 use App\Ship\Abstraction\AbstractRepository;
+use App\Ship\Traits\DataForSelect;
 
 class ClassTypeRepository extends AbstractRepository
 {
+    use DataForSelect;
+
     protected $fieldSearchable = [];
 
     /**
