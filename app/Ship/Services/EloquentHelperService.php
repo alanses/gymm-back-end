@@ -3,11 +3,8 @@
 
 namespace App\Ship\Services;
 
-use App\Modules\Test\Entities\Test;
-use App\Ship\Interfaces\EntityInterface;
-use App\Ship\Parents\Entity;
-use App\Ship\Parents\Service;
+use App\Ship\Abstraction\AbstractService;
 
-class EloquentHelperService extends Service
+class EloquentHelperService extends AbstractService
 {
 }

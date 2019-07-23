@@ -13,7 +13,7 @@ class Photo extends AbstractEntity
         'type'
     ];
 
-    protected static $pathForGym = "Gym/Schedule";
+    protected static $pathForGym = "Gym/Schedule/";
 
     public static function getBasePathForSchedule()
     {

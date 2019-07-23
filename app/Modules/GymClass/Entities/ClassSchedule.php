@@ -2,9 +2,13 @@
 
 namespace App\Modules\GymClass\Entities;
 
-use App\Modules\Photos\Entities\Photo;
+use App\Modules\Activities\Entities\Activity;
+use App\Modules\Gym\Entities\Trainer;
+use App\Modules\Photos\Entities\ClassSchedulePhoto;
 use App\Ship\Abstraction\AbstractEntity;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ClassSchedule extends AbstractEntity
 {
@@ -20,7 +24,6 @@ class ClassSchedule extends AbstractEntity
         'is_full_day_event',
         'is_recurring',
         'trainer_id',
-        'photo'
     ];
 
     public function setFirstNameAttribute($value)
@@ -38,8 +41,43 @@ class ClassSchedule extends AbstractEntity
         $this->attributes['end_time'] = Carbon::parse($value)->format('Y-m-d H:i:s');
     }
 
-    public function photos()
+    /**
+     * @return HasOne
+     */
+    public function photo() :HasOne
     {
-        return $this->morphMany(Photo::class, 'model');
+        return $this->hasOne(ClassSchedulePhoto::class, 'class_schedule_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function activityType() :BelongsTo
+    {
+        return $this->belongsTo(Activity::class, 'activities_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function classType() :BelongsTo
+    {
+        return $this->belongsTo(ClassType::class, 'class_type_id', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function recurringPattern() :HasOne
+    {
+        return $this->hasOne(RecurringPattern::class, 'class_schedule_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function trainer() :BelongsTo
+    {
+        return $this->belongsTo(Trainer::class, 'trainer_id', 'id');
     }
 }

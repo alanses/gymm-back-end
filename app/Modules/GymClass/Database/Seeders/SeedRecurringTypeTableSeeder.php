@@ -23,17 +23,17 @@ class SeedRecurringTypeTableSeeder extends Seeder
         Model::unguard();
 
         $this->repository->create([
-            'displayed_name' => 'Daily',
+            'displayed_name' => 'Every day',
             'recurring_type' => 'daily'
         ]);
 
         $this->repository->create([
-            'displayed_name' => 'Weekly',
+            'displayed_name' => 'Every week',
             'recurring_type' => 'weekly'
         ]);
 
         $this->repository->create([
-            'displayed_name' => 'Monthly',
+            'displayed_name' => 'Every month',
             'recurring_type' => 'monthly'
         ]);
 

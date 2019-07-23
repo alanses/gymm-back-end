@@ -28,6 +28,6 @@ migrate-and-seed:
 	php artisan migrate
 	php artisan module:seed
 passport-install:
-	php artisan passport:install
+	sudo docker-compose exec php-fpm php artisan passport:install
 run-test:
 	sudo docker-compose exec php-fpm ./vendor/bin/phpunit

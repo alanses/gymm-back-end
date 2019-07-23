@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\GymClass\Tasks;
+namespace App\Modules\Photos\Tasks;
 
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Interfaces\EntityInterface;
@@ -9,9 +9,8 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Filesystem\Factory as FilesystemManager;
 
-class UploadImageTask extends AbstractTask
+class UploadPhotoToClassScheduleTask extends AbstractTask
 {
-
     private $filesystem;
     private $path;
     private $filesystemManager;
@@ -48,7 +47,7 @@ class UploadImageTask extends AbstractTask
 
         $this->filesystemManager->disk('public')->put("{$this->path}/{$filename}", $file->get());
 
-        $photo = $model->photos()->create(
+        $photo = $model->photo()->create(
             [
                 'user_id' => $userId,
                 'file_name' => "{$filename}",

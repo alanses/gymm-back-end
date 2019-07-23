@@ -14,4 +14,9 @@ class RecurringPattern extends AbstractEntity
         'day_of_month',
         'month_of_year',
     ];
+
+    public function recurringType()
+    {
+        return $this->belongsTo(RecurringType::class,'recurring_type_id', 'id');
+    }
 }

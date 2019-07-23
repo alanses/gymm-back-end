@@ -11,22 +11,22 @@ class RecurringType extends AbstractEntity
         'recurring_type'
     ];
 
-    protected static $daily = 1;
-    protected static $weekly = 2;
-    protected static $monthly = 3;
+    public static $daily = 1;
+    public static $weekly = 2;
+    public static $monthly = 3;
 
     public function getRecurringTypes(string $type)
     {
-        if($type == 'every_week') {
-            return self::$weekly;
+        if($type == 'every_daily') {
+            return static::$daily;
         }
 
         if($type == 'every_week') {
-            return self::$weekly;
+            return static::$weekly;
         }
 
-        if($type == 'every_week') {
-            return self::$weekly;
+        if($type == 'every_monthly') {
+            return static::$monthly;
         }
     }
 }
