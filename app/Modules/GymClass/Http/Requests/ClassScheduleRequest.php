@@ -23,7 +23,7 @@ class ClassScheduleRequest extends AbstractRequest
             'booking_date' => 'nullable|date',
             'start_at' => 'nullable|date_format:H:i:s',
             'end_at' => 'nullable|date_format:H:i:s',
-            'trainer_id' => 'nullable|integer|exists:trainers,id',
+            'trainer_id' => 'required|integer|exists:trainers,id',
             'photo' => 'nullable|file',
             'repeat' => 'nullable|string|in:every_week,every_day,every_month'
         ];

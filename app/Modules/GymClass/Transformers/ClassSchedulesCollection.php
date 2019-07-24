@@ -63,7 +63,9 @@ class ClassSchedulesCollection extends Resource
 
     private function getRepeat()
     {
-        return optional($this->recurringPattern->recurringType)->displayed_name;
+        if($recurringPattern = $this->recurringPattern) {
+            return $recurringPattern->recurringType->displayed_name;
+        }
     }
 
     private function getTrainerName()

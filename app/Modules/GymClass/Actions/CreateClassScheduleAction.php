@@ -20,14 +20,14 @@ class CreateClassScheduleAction extends AbstractAction
             $request
         ]);
 
-        if($request->has('repeat')) {
+        if($request->repeat) {
             $this->call(CreateRecurringPatternTask::class, [
                 $classSchedule,
                 $request,
             ]);
         }
 
-        if($request->has('photo')) {
+        if($request->photo) {
             $this->call(UploadPhotoToClassScheduleTask::class, [
                 $request->photo,
                 $classSchedule,
