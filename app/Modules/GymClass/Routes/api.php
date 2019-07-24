@@ -16,4 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(function () {
     Route::get('gym-class/{id}', 'GymClassController@getClassSchedule');
     Route::get('data/for/create/gym-class', 'GymClassController@getDataForCreateGymClass');
+    Route::post('create/class/schedule', 'GymClassController@createClassSchedule');
 });
