@@ -16,7 +16,7 @@ class TrainerTransformer extends Resource
     {
         return [
             'trainer_id' => $this->id,
-            'displayed_name' => $this->trainer_name,
+            'trainer_name' => $this->trainer_name,
             'level' => $this->level,
             'cretits_from' => $this->cretits_from,
             'cretits_to' => $this->cretits_to,
