@@ -16,7 +16,7 @@ class TrainersForSelectTransformer extends Resource
     {
         return [
             'id' => $this->id,
-            'trainer_name' => $this->trainer_name,
+            'displayed_name' => $this->trainer_name,
         ];
     }
 }
