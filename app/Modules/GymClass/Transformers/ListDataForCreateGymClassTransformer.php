@@ -17,7 +17,7 @@ class ListDataForCreateGymClassTransformer extends Resource
         return [
             'trainers' => [
                 'id' => $this->trainers->id,
-                'trainer_name' => $this->trainers->trainer_name
+                'displayed_name' => $this->trainers->trainer_name
             ],
             'activities' => [
                 'id' => $this->activities->id,
