@@ -27,7 +27,7 @@ class ClassSchedulesCollection extends Resource
             'end_time' => Carbon::parse($this->end_time)->format('H:i'),
             'lesson_time' => $this->getLessonTime(),
             'repeat' => $this->getRepeat(),
-            'displayed_name' => $this->getTrainerName(),
+            'trainer' => $this->getTrainerName(),
             'photo' => $this->getPhoto()
         ];
     }

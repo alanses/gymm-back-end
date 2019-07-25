@@ -20,7 +20,11 @@ class GetTrainersForSelectTask extends AbstractTask
 
     public function run()
     {
-        return $this->trainerRepository->all();
+        return $this->trainerRepository
+            ->get([
+                'id',
+                'trainer_name as displayed_name'
+            ]);
     }
 
     public function getByField(string $fieldName, string $value)
