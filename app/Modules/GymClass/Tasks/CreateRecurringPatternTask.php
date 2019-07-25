@@ -11,7 +11,7 @@ use App\Ship\Services\StringService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class CreateRecurringPatternTask extends AbstractTask
+class   CreateRecurringPatternTask extends AbstractTask
 {
     /**
      * @var StringService
@@ -44,7 +44,14 @@ class CreateRecurringPatternTask extends AbstractTask
 
     public function run(ClassSchedule $classSchedule, Request $request)
     {
-        $methodName = $this->stringService->convertStringForCallableMethod($request->repeat);
+        $repeat = $this->call(GetRepeatsTask::class, [], [
+            [
+                'setSelectedFields' => [['id', 'displayed_name', 'recurring_type']],
+                'getByField' => ['id', $request->repeat]
+            ]
+        ])->first();
+
+        $methodName = $this->stringService->convertStringForCallableMethod($repeat->recurring_type);
 
         return ReflectionApiService::initService()
             ->initReflectionMethod($this, $methodName)

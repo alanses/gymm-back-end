@@ -24,17 +24,17 @@ class SeedRecurringTypeTableSeeder extends Seeder
 
         $this->repository->create([
             'displayed_name' => 'Every day',
-            'recurring_type' => 'daily'
+            'recurring_type' => 'every_day'
         ]);
 
         $this->repository->create([
             'displayed_name' => 'Every week',
-            'recurring_type' => 'weekly'
+            'recurring_type' => 'every_week'
         ]);
 
         $this->repository->create([
             'displayed_name' => 'Every month',
-            'recurring_type' => 'monthly'
+            'recurring_type' => 'every_month'
         ]);
 
     }
