@@ -26,7 +26,7 @@ class ClassScheduleRequest extends AbstractRequest
             'trainer_id' => 'required|integer|exists:trainers,id',
             'photo' => 'nullable|file',
             'repeat' => 'nullable|string|exists:recurring_types,id',
-            'count_persons' => 'required|integer'
+            'count_persons' => 'nullable|integer'
         ];
     }
 
