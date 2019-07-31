@@ -4,9 +4,9 @@ namespace App\Modules\Gym\Actions;
 
 use App\Modules\Gym\Entities\Gym;
 use App\Modules\Gym\Http\Requests\AddTrainerRequest;
-use App\Modules\Gym\Tasks\CreateTrainerTask;
 use App\Modules\Gym\Tasks\FindGymTask;
-use App\Modules\Gym\Tasks\SyncTrainerWithActivitiesTask;
+use App\Modules\Gym\Tasks\Trainers\CreateTrainerTask;
+use App\Modules\Gym\Tasks\Trainers\SyncTrainerWithActivitiesTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class CreateTrainerAction extends AbstractAction

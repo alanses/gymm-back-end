@@ -9,4 +9,9 @@ class Gym extends AbstractEntity
     protected $fillable = [
         'user_id'
     ];
+
+    public function trainers()
+    {
+        return $this->hasMany(Trainer::class, 'gym_id', 'id');
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Gym\Actions;
 
-use App\Modules\Gym\Tasks\FindTrainerTask;
+use App\Modules\Gym\Tasks\Trainers\FindTrainerTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class FindTrainerByIdAction extends AbstractAction

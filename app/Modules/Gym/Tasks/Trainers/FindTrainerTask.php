@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Gym\Tasks;
+namespace App\Modules\Gym\Tasks\Trainers;
 
 use App\Modules\Gym\Repositories\TrainerRepository;
 use App\Ship\Abstraction\AbstractTask;

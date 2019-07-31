@@ -14,9 +14,5 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('create/trainer', 'TrainerController@addTrainer');
-    Route::get('trainer/{id}', 'TrainerController@getTrainerById');
-    Route::get('list/trainers/for/select', 'TrainerController@getListTrainersForSelect');
-    Route::get('gym/trainers', 'TrainerController@getListTrainerForProfile');
-    Route::delete('trainer/{id}', 'TrainerController@deleteTrainer');
+    Route::get('gym/profile/statistic', 'GymStatisticController@getProfileStatistic');
 });

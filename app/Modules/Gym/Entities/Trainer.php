@@ -21,4 +21,30 @@ class Trainer extends AbstractEntity
         return $this->belongsToMany(Activity::class, 'activities_trainers', 'trainer_id', 'activity_id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ratings()
+    {
+        return $this->hasMany(RatingForTrainer::class, 'trainer_id','id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany|\Illuminate\Database\Query\Builder
+     */
+
+    public function avgRating()
+    {
+        return $this
+            ->ratings()
+            ->selectRaw('avg(rating_value) as aggregate, trainer_id, COUNT(rating_value) as count')
+            ->groupBy('trainer_id');
+    }
+
+    public static function getLastRecord()
+    {
+        return self::latest()
+            ->first()
+            ->id;
+    }
 }

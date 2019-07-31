@@ -28,6 +28,9 @@
         <testsuite name="PlansModule">
             <directory suffix="Test.php">./app/Modules/Plans/Tests</directory>
         </testsuite>
+        <testsuite name="GymModule">
+            <directory suffix="Test.php">./app/Modules/Gym/Tests</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

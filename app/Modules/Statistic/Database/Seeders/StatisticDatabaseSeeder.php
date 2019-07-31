@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Modules\Gym\Database\Seeders;
+namespace App\Modules\Statistic\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class GymDatabaseSeeder extends Seeder
+class StatisticDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class GymDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(SeedRatingForTrainersTableSeeder::class);
+        // $this->call("OthersTableSeeder");
     }
 }
