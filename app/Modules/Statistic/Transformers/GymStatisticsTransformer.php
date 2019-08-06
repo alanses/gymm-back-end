@@ -15,10 +15,10 @@ class GymStatisticsTransformer extends Resource
     public function toArray($request)
     {
         return [
-            'classes_count' => $this->count_trainers,
-            'client_count' => null,
-            'reviews' => null,
-            'trainers' => null
+            'classes_count' => $this->resource['count_classes'],
+            'client_count' => $this->resource['count_clients'],
+            'reviews' => $this->resource['count_reviews'],
+            'trainers' => $this->resource['count_trainers']
         ];
     }
 }

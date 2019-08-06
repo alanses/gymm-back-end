@@ -10,8 +10,8 @@ class GymStatisticController extends ApiController
 {
     public function getProfileStatistic()
     {
-        return $this->call(GetGymProfileStatisticSubAction::class);
+        $statistic = $this->call(GetGymProfileStatisticSubAction::class);
 
-        return new GymStatisticsTransformer(collect($statistic));
+        return new GymStatisticsTransformer($statistic);
     }
 }

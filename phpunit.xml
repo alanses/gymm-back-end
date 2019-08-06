@@ -31,6 +31,9 @@
         <testsuite name="GymModule">
             <directory suffix="Test.php">./app/Modules/Gym/Tests</directory>
         </testsuite>
+        <testsuite name="StatisticModule">
+            <directory suffix="Test.php">./app/Modules/Statistic/Tests</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">

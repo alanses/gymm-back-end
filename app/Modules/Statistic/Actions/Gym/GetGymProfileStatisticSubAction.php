@@ -10,6 +10,9 @@ class GetGymProfileStatisticSubAction extends AbstractAction
     {
         $data = [];
 
+        $data['count_classes'] = $this->call(GetCountClassesAction::class);
+        $data['count_clients'] = $this->call(GetCountClientsAction::class);
+        $data['count_reviews'] = $this->call(GetCountReviewsAction::class);
         $data['count_trainers'] = $this->call(GetCountTrainersAction::class);
 
         return $data;
