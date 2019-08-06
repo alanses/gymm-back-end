@@ -30,6 +30,7 @@ class CreateClassSchedulesTable extends Migration
 
             $table->unsignedBigInteger('trainer_id')->nullable();
             $table->integer('count_persons')->nullable();
+            $table->integer('max_count_persons')->nullable();
 
             $table->timestamps();
 

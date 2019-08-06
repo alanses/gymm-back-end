@@ -45,10 +45,8 @@ class   CreateRecurringPatternTask extends AbstractTask
     public function run(ClassSchedule $classSchedule, Request $request)
     {
         $repeat = $this->call(GetRepeatsTask::class, [], [
-            [
-                'setSelectedFields' => [['id', 'displayed_name', 'recurring_type']],
-                'getByField' => ['id', $request->repeat]
-            ]
+                ['setSelectedFields' => [['id', 'displayed_name', 'recurring_type']]],
+                ['getByField' => ['id', $request->repeat]]
         ])->first();
 
         $methodName = $this->stringService->convertStringForCallableMethod($repeat->recurring_type);

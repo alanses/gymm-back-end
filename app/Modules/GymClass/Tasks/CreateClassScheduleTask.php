@@ -32,7 +32,7 @@ class CreateClassScheduleTask extends AbstractTask
             'trainer_id' => $request->trainer_id,
             'end_time' => $request->end_time,
             'is_recurring' => $this->getIsRecurring($request),
-            'count_persons' => $request->count_persons
+            'max_count_persons' => $request->count_persons
         ]);
     }
 

@@ -24,7 +24,8 @@ class ClassSchedule extends AbstractEntity
         'is_full_day_event',
         'is_recurring',
         'trainer_id',
-        'count_persons'
+        'count_persons',
+        'max_count_persons'
     ];
 
     public function setFirstNameAttribute($value)

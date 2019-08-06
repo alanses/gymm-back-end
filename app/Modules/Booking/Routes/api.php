@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/booking', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::get('classes/schedule', 'BookingController@getClassSchedules');
+    Route::post('classes/schedule/create', 'BookingController@createBooking');
 });

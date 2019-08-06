@@ -15,6 +15,13 @@ class RecurringPattern extends AbstractEntity
         'month_of_year',
     ];
 
+    protected static $IS_Daily = 1;
+
+    public static function getDailyType()
+    {
+        return static::$IS_Daily;
+    }
+
     public function recurringType()
     {
         return $this->belongsTo(RecurringType::class,'recurring_type_id', 'id');

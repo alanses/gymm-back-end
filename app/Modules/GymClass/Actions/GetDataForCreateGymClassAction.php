@@ -3,7 +3,7 @@
 namespace App\Modules\GymClass\Actions;
 
 use App\Modules\Activities\Tasks\GetActivitiesTask;
-use App\Modules\Gym\Tasks\GetTrainersForSelectTask;
+use App\Modules\Gym\Tasks\Trainers\GetTrainersForSelectTask;
 use App\Modules\GymClass\Tasks\GetClassTypesTask;
 use App\Modules\GymClass\Tasks\GetRepeatsTask;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
