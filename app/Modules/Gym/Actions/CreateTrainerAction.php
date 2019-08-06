@@ -6,7 +6,11 @@ use App\Modules\Gym\Entities\Gym;
 use App\Modules\Gym\Http\Requests\AddTrainerRequest;
 use App\Modules\Gym\Tasks\FindGymTask;
 use App\Modules\Gym\Tasks\Trainers\CreateTrainerTask;
+use App\Modules\Gym\Tasks\Trainers\SaveTrainerPhotoTask;
 use App\Modules\Gym\Tasks\Trainers\SyncTrainerWithActivitiesTask;
+use App\Modules\Photos\Entities\Photo;
+use App\Modules\Photos\Entities\TrainerPhoto;
+use App\Modules\Photos\Tasks\UploadPhotoToClassScheduleTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class CreateTrainerAction extends AbstractAction
@@ -28,6 +32,15 @@ class CreateTrainerAction extends AbstractAction
         ]);
 
         $this->call(SyncTrainerWithActivitiesTask::class, [$trainer, $request->activities]);
+
+        if($request->photo) {
+            $this->call(UploadPhotoToClassScheduleTask::class, [
+                $request->photo,
+                $trainer,
+                $request->user_id,
+                TrainerPhoto::getBasePathForTrainerPhotos()
+            ]);
+        }
 
         return $trainer->load('activities');
     }

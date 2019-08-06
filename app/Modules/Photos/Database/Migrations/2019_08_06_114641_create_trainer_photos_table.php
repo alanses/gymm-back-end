@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTrainerPhotosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('trainer_photos', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('trainer_id')->nullable();
+            $table->string('file_name')->nullable();
+            $table->string('origin_name')->nullable();
+            $table->timestamps();
+
+            $table->foreign('trainer_id')
+                ->references('id')
+                ->on('trainers')
+                ->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('trainer_photos');
+    }
+}

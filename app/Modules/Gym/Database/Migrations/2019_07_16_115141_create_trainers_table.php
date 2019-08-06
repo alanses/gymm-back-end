@@ -20,6 +20,7 @@ class CreateTrainersTable extends Migration
             $table->integer('level')->nullable();
             $table->integer('cretits_from')->nullable();
             $table->integer('cretits_to')->nullable();
+            $table->string('avatar')->nullable();
             $table->timestamps();
 
             $table->foreign('gym_id')

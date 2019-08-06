@@ -31,10 +31,6 @@ class UploadPhotoToClassScheduleTask extends AbstractTask
     {
         $this->setPath($basePath);
 
-        if (!$this->filesystem->exists($this->path)) {
-            $this->filesystem->makeDirectory($this->path, $mode = 0777, true, true);
-        }
-
         $random_string = md5(Str::random(8));
 
         $originalFilename = $file->getClientOriginalName();

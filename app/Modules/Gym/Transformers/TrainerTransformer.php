@@ -2,7 +2,9 @@
 
 namespace App\Modules\Gym\Transformers;
 
+use App\Modules\Photos\Entities\TrainerPhoto;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\Storage;
 
 class TrainerTransformer extends Resource
 {
@@ -21,7 +23,15 @@ class TrainerTransformer extends Resource
             'cretits_from' => $this->cretits_from,
             'cretits_to' => $this->cretits_to,
             'activities' => $this->includeActivities(),
+            'photo' => $this->getPhoto()
         ];
+    }
+
+    private function getPhoto()
+    {
+        if($photo = $this->photo) {
+            return env('APP_URL') . Storage::url(TrainerPhoto::getBasePathForTrainerPhotos() .  $photo->file_name);
+        }
     }
 
     public function includeActivities()
