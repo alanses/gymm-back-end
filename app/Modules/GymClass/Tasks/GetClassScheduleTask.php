@@ -5,6 +5,7 @@ namespace App\Modules\GymClass\Tasks;
 use App\Modules\GymClass\Repositories\ClassScheduleRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
+use Illuminate\Support\Collection;
 
 class GetClassScheduleTask extends AbstractTask
 {
@@ -18,7 +19,7 @@ class GetClassScheduleTask extends AbstractTask
         $this->repository = $repository;
     }
 
-    public function run()
+    public function run() :Collection
     {
         return $this->repository->get();
     }

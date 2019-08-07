@@ -24,6 +24,12 @@ class CreateBookingsClassTable extends Migration
                 ->on('class_schedules')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('class_schedules')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

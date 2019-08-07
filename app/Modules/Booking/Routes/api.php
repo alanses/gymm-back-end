@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('classes/schedule', 'BookingController@getClassSchedules');
+    Route::get('classes/schedule/gym', 'BookingController@getClassSchedulesForGym');
+    Route::get('classes/schedule/user', 'BookingController@getClassSchedulesForUser');
     Route::post('classes/schedule/create', 'BookingController@createBooking');
 });

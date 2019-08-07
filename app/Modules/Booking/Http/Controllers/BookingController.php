@@ -2,19 +2,30 @@
 
 namespace App\Modules\Booking\Http\Controllers;
 
-use App\Modules\Booking\Actions\GetListClassSchedulesAction;
+use App\Modules\Booking\Actions\GetListClassSchedulesForGymAction;
+use App\Modules\Booking\Actions\GetListClassSchedulesForUserAction;
 use App\Modules\Booking\Actions\SaveBookingAction;
-use App\Modules\Booking\Transformers\ListClassSchedulesTransformer;
+use App\Modules\Booking\Http\Requests\GetClassSchedulesRequest;
+use App\Modules\Booking\Http\Requests\GetClassScheduleUserRequest;
+use App\Modules\Booking\Transformers\ListClassSchedulesForGymTransformer;
+use App\Modules\Booking\Transformers\ListClassSchedulesForUserTransformer;
 use App\Ship\Parents\ApiController;
 use Illuminate\Http\Request;
 
 class BookingController extends ApiController
 {
-    public function getClassSchedules(Request $request)
+    public function getClassSchedulesForGym(GetClassSchedulesRequest $request)
     {
-        $listClassSchedules = $this->call(GetListClassSchedulesAction::class, [$request]);
+        $listClassSchedules = $this->call(GetListClassSchedulesForGymAction::class, [$request]);
 
-        return ListClassSchedulesTransformer::collection($listClassSchedules);
+        return ListClassSchedulesForGymTransformer::collection($listClassSchedules);
+    }
+
+    public function getClassSchedulesForUser(GetClassScheduleUserRequest $request)
+    {
+        $listClassSchedules = $this->call(GetListClassSchedulesForUserAction::class, [$request]);
+
+        return ListClassSchedulesForUserTransformer::collection($listClassSchedules);
     }
 
     public function createBooking(Request $request)

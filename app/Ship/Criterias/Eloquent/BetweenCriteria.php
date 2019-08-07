@@ -8,7 +8,7 @@ use Prettus\Repository\Contracts\RepositoryInterface as PrettusRepositoryInterfa
 /**
  * Class BetweenDatesCriteria
  */
-class BetweenDatesCriteria extends Criteria
+class BetweenCriteria extends Criteria
 {
     private $start;
     private $end;

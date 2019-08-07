@@ -24,4 +24,9 @@ class ClassScheduleRepository extends AbstractRepository
     {
         return ClassSchedule::class;
     }
+
+    public function whereSpots($value)
+    {
+        return $this->model->whereRaw('class_schedules.count_persons <= class_schedules.max_count_persons - 1');
+    }
 }

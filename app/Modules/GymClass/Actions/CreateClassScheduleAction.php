@@ -2,6 +2,7 @@
 
 namespace App\Modules\GymClass\Actions;
 
+use App\Modules\Gym\Tasks\GetGymFromUserTask;
 use App\Modules\GymClass\Http\Requests\ClassScheduleRequest;
 use App\Modules\GymClass\Tasks\CreateClassScheduleTask;
 use App\Modules\GymClass\Tasks\CreateRecurringPatternTask;
@@ -15,9 +16,11 @@ class CreateClassScheduleAction extends AbstractAction
     public function run(ClassScheduleRequest $request)
     {
         $user = $this->call(GetAuthenticatedUserTask::class);
+        $gym = $this->call(GetGymFromUserTask::class, [$user]);
 
         $classSchedule = $this->call(CreateClassScheduleTask::class, [
-            $request
+            $request,
+            $gym
         ]);
 
         if($request->repeat) {

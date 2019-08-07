@@ -18,9 +18,4 @@ class UserSetting extends AbstractEntity
         'cretits_from',
         'cretits_to'
     ];
-
-    public function activities()
-    {
-        return $this->hasMany();
-    }
 }

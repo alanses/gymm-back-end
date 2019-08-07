@@ -2,6 +2,7 @@
 
 namespace App\Modules\GymClass\Tasks;
 
+use App\Modules\Gym\Entities\Gym;
 use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\GymClass\Http\Requests\ClassScheduleRequest;
 use App\Modules\GymClass\Repositories\ClassScheduleRepository;
@@ -19,7 +20,7 @@ class CreateClassScheduleTask extends AbstractTask
         $this->classRepository = $classRepository;
     }
 
-    public function run(ClassScheduleRequest $request) : ClassSchedule
+    public function run(ClassScheduleRequest $request, Gym $gym) : ClassSchedule
     {
         return $this->classRepository->create([
             'class_type_id' => $request->class_type_id,
@@ -32,7 +33,8 @@ class CreateClassScheduleTask extends AbstractTask
             'trainer_id' => $request->trainer_id,
             'end_time' => $request->end_time,
             'is_recurring' => $this->getIsRecurring($request),
-            'max_count_persons' => $request->count_persons
+            'max_count_persons' => $request->count_persons,
+            'gym_id' => $gym->id
         ]);
     }
 

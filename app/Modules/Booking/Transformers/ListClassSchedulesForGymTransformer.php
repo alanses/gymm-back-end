@@ -4,7 +4,7 @@ namespace App\Modules\Booking\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class ListClassSchedulesTransformer extends Resource
+class ListClassSchedulesForGymTransformer extends Resource
 {
     /**
      * Transform the resource into an array.

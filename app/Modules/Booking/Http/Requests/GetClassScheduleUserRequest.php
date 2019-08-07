@@ -4,10 +4,9 @@ namespace App\Modules\Booking\Http\Requests;
 
 use App\Ship\Abstraction\AbstractRequest;
 
-class GetClassSchedulesRequest extends AbstractRequest
+class GetClassScheduleUserRequest extends AbstractRequest
 {
-    protected $urlParameters = [
-    ];
+    protected $urlParameters = [];
 
     /**
      * Get the validation rules that apply to the request.
@@ -17,7 +16,7 @@ class GetClassSchedulesRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'booking_date' => 'required|date'
+
         ];
     }
 

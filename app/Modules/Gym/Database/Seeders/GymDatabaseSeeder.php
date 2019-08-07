@@ -16,6 +16,5 @@ class GymDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(SeedRatingForTrainersTableSeeder::class);
     }
 }
