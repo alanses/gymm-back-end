@@ -32,6 +32,6 @@ class GetListClassSchedulesForGymAction extends AbstractAction
         return $this->call(GetListClassSchedulesTask::class, [$dayOfMouth, $dayOfWeek], [
             ['whereGymIs' => [$gym->id]]
         ])
-            ->load(['trainer']);
+            ->load(['trainer', 'classType']);
     }
 }
