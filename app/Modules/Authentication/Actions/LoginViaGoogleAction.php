@@ -14,10 +14,8 @@ use Illuminate\Http\Request;
 
 class LoginViaGoogleAction extends AbstractAction
 {
-    public function run(SocialiteRequest $request) :User
+    public function run(Request $request) :User
     {
-//        $googleUser = $this->call(MakeLoginViaGoogleTask::class, [$request->token]);
-
         $userFromDB = $this->call(GetUserTask::class, [], [
             ['getByField' => ['email', $request->email]]
         ]);
