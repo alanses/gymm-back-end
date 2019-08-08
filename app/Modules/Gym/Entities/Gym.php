@@ -7,7 +7,8 @@ use App\Ship\Abstraction\AbstractEntity;
 class Gym extends AbstractEntity
 {
     protected $fillable = [
-        'user_id'
+        'user_id',
+        'address'
     ];
 
     public function trainers()

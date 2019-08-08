@@ -5,12 +5,14 @@ namespace App\Ship\Abstraction;
 
 use App\Ship\Interfaces\ParentInterface;
 use App\Ship\Interfaces\RequestInterface;
+use App\Ship\Traits\CallableTrait;
 use App\Ship\Traits\SanitizerTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 abstract class AbstractRequest extends FormRequest implements RequestInterface, ParentInterface
 {
     use SanitizerTrait;
+    use CallableTrait;
 
     protected $urlParameters = [];
 

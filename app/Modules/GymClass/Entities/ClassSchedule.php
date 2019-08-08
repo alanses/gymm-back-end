@@ -3,6 +3,7 @@
 namespace App\Modules\GymClass\Entities;
 
 use App\Modules\Activities\Entities\Activity;
+use App\Modules\Gym\Entities\Gym;
 use App\Modules\Gym\Entities\Trainer;
 use App\Modules\Photos\Entities\ClassSchedulePhoto;
 use App\Ship\Abstraction\AbstractEntity;
@@ -82,5 +83,13 @@ class ClassSchedule extends AbstractEntity
     public function trainer() :BelongsTo
     {
         return $this->belongsTo(Trainer::class, 'trainer_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function gym() :BelongsTo
+    {
+        return $this->belongsTo(Gym::class, 'gym_id', 'id');
     }
 }

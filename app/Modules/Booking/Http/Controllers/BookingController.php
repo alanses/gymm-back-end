@@ -2,36 +2,36 @@
 
 namespace App\Modules\Booking\Http\Controllers;
 
-use App\Modules\Booking\Actions\GetListClassSchedulesForGymAction;
-use App\Modules\Booking\Actions\GetListClassSchedulesForUserAction;
+use App\Modules\Booking\Actions\ConfirmBookingAction;
+use App\Modules\Booking\Actions\GetListBookingForCalendarAction;
 use App\Modules\Booking\Actions\SaveBookingAction;
-use App\Modules\Booking\Http\Requests\GetClassSchedulesRequest;
-use App\Modules\Booking\Http\Requests\GetClassScheduleUserRequest;
-use App\Modules\Booking\Transformers\ListClassSchedulesForGymTransformer;
-use App\Modules\Booking\Transformers\ListClassSchedulesForUserTransformer;
+use App\Modules\Booking\Http\Requests\BookingRequest;
+use App\Modules\Booking\Http\Requests\ConfirmBookingRequest;
+use App\Modules\Booking\Http\Requests\ListBookingForCalendarRequest;
+use App\Modules\Booking\Transformers\BookingsForUserCalendar;
+use App\Modules\Booking\Transformers\BookingTransformer;
 use App\Ship\Parents\ApiController;
-use Illuminate\Http\Request;
 
 class BookingController extends ApiController
 {
-    public function getClassSchedulesForGym(GetClassSchedulesRequest $request)
-    {
-        $listClassSchedules = $this->call(GetListClassSchedulesForGymAction::class, [$request]);
-
-        return ListClassSchedulesForGymTransformer::collection($listClassSchedules);
-    }
-
-    public function getClassSchedulesForUser(GetClassScheduleUserRequest $request)
-    {
-        $listClassSchedules = $this->call(GetListClassSchedulesForUserAction::class, [$request]);
-
-        return ListClassSchedulesForUserTransformer::collection($listClassSchedules);
-    }
-
-    public function createBooking(Request $request)
+    public function createBooking(BookingRequest $request)
     {
         $booking = $this->call(SaveBookingAction::class, [$request]);
 
-        return $booking;
+        return new BookingTransformer($booking);
+    }
+
+    public function confirmBooking(ConfirmBookingRequest $request)
+    {
+        $this->call(ConfirmBookingAction::class, [$request]);
+
+        return $this->success('ok');
+    }
+
+    public function getListBookingForUserCalendar(ListBookingForCalendarRequest $request)
+    {
+        $bookigs = $this->call(GetListBookingForCalendarAction::class, [$request]);
+
+        return BookingsForUserCalendar::collection($bookigs);
     }
 }

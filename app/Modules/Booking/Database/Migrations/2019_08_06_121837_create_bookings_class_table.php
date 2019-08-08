@@ -17,6 +17,7 @@ class CreateBookingsClassTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('event_id')->nullable();
+            $table->smallInteger('confirm')->default(0);
             $table->timestamps();
 
             $table->foreign('event_id')
@@ -27,9 +28,11 @@ class CreateBookingsClassTable extends Migration
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on('class_schedules')
+                ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+
+            $table->unique(['user_id', 'event_id']);
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Modules\User\Entities;
 
 use App\Modules\Activities\Entities\Activity;
+use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Gym\Entities\Gym;
 use App\Modules\UserProfile\Entities\UserSetting;
 use App\Ship\Abstraction\AbstractEntity;
@@ -11,6 +12,7 @@ use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -52,14 +54,27 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         return $this->belongsToMany(Activity::class, 'activities_users', 'user_id', 'activity_id');
     }
 
-    public function userSetting()
+    /**
+     * @return HasOne
+     */
+    
+    public function userSetting() :HasOne
     {
         return $this->hasOne(UserSetting::class, 'user_id', 'id');
     }
 
-    public function gym()
+    /**
+     * @return HasOne
+     */
+
+    public function gym() :HasOne
     {
         return $this->hasOne(Gym::class, 'user_id', 'id');
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(BookingClass::class, 'user_id', 'id');
     }
 
     /**

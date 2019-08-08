@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,7 +12,10 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('classes/schedule/gym', 'BookingController@getClassSchedulesForGym');
-    Route::get('classes/schedule/user', 'BookingController@getClassSchedulesForUser');
+    Route::get('classes/schedule/gym', 'ClassScheduleController@getClassSchedulesForGym');
+    Route::get('classes/schedule/user', 'ClassScheduleController@getClassSchedulesForUser');
+    Route::get('classes/schedule/calendar', 'BookingController@getListBookingForUserCalendar');
+
     Route::post('classes/schedule/create', 'BookingController@createBooking');
+    Route::post('classes/schedule/confirm', 'BookingController@confirmBooking');
 });
