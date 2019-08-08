@@ -66,6 +66,7 @@ class SaveBookingAction extends AbstractAction
         $events = $this->call(GetClassBookingTask::class, [], [
             ['whereUserIs' => [$user->id]],
             ['whereEventIs' => [$request->event_id]],
+            ['whereIsConfirmed' => []]
         ]);
 
         if($events) {

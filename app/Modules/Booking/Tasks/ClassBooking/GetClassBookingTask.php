@@ -2,6 +2,7 @@
 
 namespace App\Modules\Booking\Tasks\ClassBooking;
 
+use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Booking\Repositories\BookingClassRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
@@ -37,5 +38,10 @@ class GetClassBookingTask extends AbstractTask
     public function whereEventIs($value)
     {
         $this->repository->pushCriteria(new ThisEqualThatCriteria('event_id', $value));
+    }
+
+    public function whereIsConfirmed()
+    {
+        $this->repository->pushCriteria(new ThisEqualThatCriteria('confirm', BookingClass::$IS_CONFIRM));
     }
 }
