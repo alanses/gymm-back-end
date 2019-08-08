@@ -31,7 +31,7 @@ class LoginViaGoogleAction extends AbstractAction
     }
 
 
-    private function createUser(SocialiteRequest $request)
+    private function createUser(Request $request)
     {
         return $this->call(CreateUserTask::class, [
             [
