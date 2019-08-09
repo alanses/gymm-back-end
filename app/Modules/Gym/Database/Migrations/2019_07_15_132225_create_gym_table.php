@@ -17,6 +17,13 @@ class CreateGymTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable()->unique();
             $table->string('address')->nullable();
+            $table->text('description')->nullable();
+            $table->timestamp('available_from')->nullable();
+            $table->timestamp('available_to')->nullable();
+
+            $table->float('lat')->nullable();
+            $table->float('lng')->nullable();
+
             $table->timestamps();
 
             $table->foreign('user_id')

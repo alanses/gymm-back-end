@@ -8,7 +8,11 @@ class Gym extends AbstractEntity
 {
     protected $fillable = [
         'user_id',
-        'address'
+        'address',
+        'available_from',
+        'available_to',
+        'lat',
+        'lng'
     ];
 
     public function trainers()

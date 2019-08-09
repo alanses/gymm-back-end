@@ -22,7 +22,7 @@ class ListClassSchedulesForUserTransformer extends Resource
             'end_time' => Carbon::parse($this->end_time)->format('H:i'),
             'lesson_time' => $this->getLessonTime(),
             'avg_rating' => $this->getAvgRating(),
-            'max_count_persons' => $this->max_count_persons,
+            'credits' => $this->credits,
             'address' => null
         ];
     }

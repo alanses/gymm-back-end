@@ -17,4 +17,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('gym-class/{id}', 'GymClassController@getClassSchedule');
     Route::get('data/for/create/gym-class', 'GymClassController@getDataForCreateGymClass');
     Route::post('create/class/schedule', 'GymClassController@createClassSchedule');
+
+    Route::get('list/classes/by/gym/{gym_id}', 'GymClassController@getClassesAttachedToGym');
+    Route::get('list/classes', 'GymClassController@getListClasses');
 });

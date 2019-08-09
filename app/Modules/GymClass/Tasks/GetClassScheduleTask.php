@@ -2,30 +2,55 @@
 
 namespace App\Modules\GymClass\Tasks;
 
+use App\Modules\GymClass\Entities\RecurringPattern;
 use App\Modules\GymClass\Repositories\ClassScheduleRepository;
 use App\Ship\Abstraction\AbstractTask;
+use App\Ship\Criterias\Eloquent\BetweenCriteria;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
-use Illuminate\Support\Collection;
+use App\Modules\Booking\Criterias\ThisLessOrGreaterColumnThatCriteria;
+use App\Ship\Criterias\Eloquent\WhereInCriteria;
 
 class GetClassScheduleTask extends AbstractTask
 {
     /**
      * @var ClassScheduleRepository
      */
-    private $repository;
+    private $classScheduleRepository;
 
-    public function __construct(ClassScheduleRepository $repository)
+    public function __construct(ClassScheduleRepository $classScheduleRepository)
     {
-        $this->repository = $repository;
+        $this->classScheduleRepository = $classScheduleRepository;
     }
 
-    public function run() :Collection
+    public function run()
     {
-        return $this->repository->get();
+        return $this->classScheduleRepository
+            ->get();
     }
 
-    public function getByField(string $fieldName, string $value)
+    public function whereGymIs($value)
     {
-        $this->repository->pushCriteria(new ThisEqualThatCriteria($fieldName, $value));
+        $this->classScheduleRepository->pushCriteria(new ThisEqualThatCriteria('gym_id', $value));
+    }
+
+    public function whereActivitiesIs(array $activities)
+    {
+        $this->classScheduleRepository->pushCriteria(new WhereInCriteria('activities_id', $activities));
+    }
+
+    public function whereLevelIs($value)
+    {
+        $this->classScheduleRepository->pushCriteria(new ThisEqualThatCriteria('level', $value));
+    }
+
+    public function wherePoints($from, $to)
+    {
+        $this->classScheduleRepository->pushCriteria(new BetweenCriteria('credits', $from, $to));
+    }
+
+    public function whereSpots($countSpots)
+    {
+        $this->classScheduleRepository
+            ->pushCriteria(new ThisLessOrGreaterColumnThatCriteria($countSpots));
     }
 }
