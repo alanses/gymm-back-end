@@ -22,15 +22,20 @@ class GetListClassSchedulesTask extends AbstractTask
         $this->classScheduleRepository = $classScheduleRepository;
     }
 
-    public function run($dayOfMouth, $dayOfWeek)
+    public function run()
     {
         return $this->classScheduleRepository
+            ->get();
+    }
+
+    public function whereDateRecurringPatternIs($dayOfMouth, $dayOfWeek)
+    {
+        $this->classScheduleRepository
             ->whereHas('recurringPattern', function ($query) use ($dayOfMouth, $dayOfWeek) {
                 return $query->where('recurring_type_id', '=', RecurringPattern::getDailyType())
-                        ->orWhere('day_of_month', '=', $dayOfMouth)
-                        ->orWhere('day_of_week', '=', $dayOfWeek);
-            })
-            ->get();
+                    ->orWhere('day_of_month', '=', $dayOfMouth)
+                    ->orWhere('day_of_week', '=', $dayOfWeek);
+        });
     }
 
     public function whereGymIs($value)

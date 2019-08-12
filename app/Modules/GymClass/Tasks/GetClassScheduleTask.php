@@ -53,4 +53,9 @@ class GetClassScheduleTask extends AbstractTask
         $this->classScheduleRepository
             ->pushCriteria(new ThisLessOrGreaterColumnThatCriteria($countSpots));
     }
+
+    public function findByField($field, $value)
+    {
+        $this->classScheduleRepository->pushCriteria(new ThisEqualThatCriteria($field, $value));
+    }
 }

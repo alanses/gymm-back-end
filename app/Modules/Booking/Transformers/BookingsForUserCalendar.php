@@ -17,6 +17,7 @@ class BookingsForUserCalendar extends Resource
     {
         return [
             'id' => $this->id,
+            'schedule_id' => $this->getSchedule(),
             'address' => $this->getAddress(),
             'activity_type' => $this->getActivityType(),
             'trainer' => $this->getTrainer(),
@@ -28,11 +29,9 @@ class BookingsForUserCalendar extends Resource
         ];
     }
 
-    private function getCountPersons()
+    public function getSchedule()
     {
-        if($classSchedule = $this->classSchedule) {
-            return $classSchedule->max_count_persons;
-        }
+        return optional($this->classSchedule)->id;
     }
 
     private function getAvgRating()

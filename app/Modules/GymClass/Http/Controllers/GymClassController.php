@@ -3,16 +3,12 @@
 namespace App\Modules\GymClass\Http\Controllers;
 
 use App\Modules\GymClass\Actions\CreateClassScheduleAction;
-use App\Modules\GymClass\Actions\GetClassAttachedToGymAction;
-use App\Modules\GymClass\Actions\GetClassesListAction;
 use App\Modules\GymClass\Actions\GetClassScheduleAction;
 use App\Modules\GymClass\Actions\GetDataForCreateGymClassAction;
-use App\Modules\GymClass\Actions\GetListClassesWithUserFilterAction;
-use App\Modules\GymClass\Http\Requests\ClassesAttachedToGymRequest;
+use App\Modules\GymClass\Actions\GetListClassSchedulesWithUserFilterAction;
 use App\Modules\GymClass\Http\Requests\ClassScheduleRequest;
 use App\Modules\GymClass\Transformers\ClassSchedulesCollection;
-use App\Modules\GymClass\Transformers\ListClassesTransformer;
-use App\Modules\GymClass\Transformers\ListClassSchedulesTransformer;
+use App\Modules\GymClass\Transformers\ClassSchedulesWithUserFilterTransformer;
 use App\Ship\Parents\ApiController;
 
 class GymClassController extends ApiController
@@ -46,19 +42,10 @@ class GymClassController extends ApiController
         return $dataForCreateCourse;
     }
 
-    public function getClassesAttachedToGym(ClassesAttachedToGymRequest $classesAttachedToGymRequest)
+    public function getClassScheduleWithUserFilter()
     {
-        $classSchedules = $this->call(GetClassAttachedToGymAction::class, [
-            $classesAttachedToGymRequest->gym_id
-        ]);
+        $classSchedules = $this->call(GetListClassSchedulesWithUserFilterAction::class);
 
-        return ListClassSchedulesTransformer::collection($classSchedules);
-    }
-
-    public function getListClasses()
-    {
-        $classSchedules = $this->call(GetClassesListAction::class);
-
-        return ListClassesTransformer::collection($classSchedules);
+        return ClassSchedulesWithUserFilterTransformer::collection($classSchedules);
     }
 }

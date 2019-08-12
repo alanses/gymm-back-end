@@ -11,7 +11,7 @@ use App\Modules\UserProfile\Entities\UserSetting;
 use App\Ship\Abstraction\AbstractAction;
 use Carbon\Carbon;
 
-class GetListClassSchedulesForUserAction extends AbstractAction
+class GetListClassSchedulesForUserBookingAction extends AbstractAction
 {
     /**
      * @var Carbon
@@ -35,7 +35,8 @@ class GetListClassSchedulesForUserAction extends AbstractAction
         $dayOfMouth = $this->carbon->parse($request->booking_date)->format('d');
         $dayOfWeek = $this->carbon->parse($request->booking_date)->dayOfWeek;
 
-        return $this->call(GetListClassSchedulesTask::class, [$dayOfMouth, $dayOfWeek], [
+        return $this->call(GetListClassSchedulesTask::class, [], [
+            ['whereDateRecurringPatternIs' => [$dayOfMouth, $dayOfWeek]],
             ['whereActivitiesIs' => [$this->getActivitiesIds($this->user)]],
             ['whereLevelIs' => [$this->getUserLevel($this->userSetting)]],
             ['wherePoints' => [

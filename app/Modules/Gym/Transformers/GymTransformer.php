@@ -21,6 +21,8 @@ class GymTransformer extends Resource
             'gym_id' => $this->id,
             'address' => $this->address,
             'description' => $this->description,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
             'available_from' => $this->getAvailableFrom(),
             'available_to' => $this->getAvailableTo(),
             'trainers' => $this->includeTrainers()

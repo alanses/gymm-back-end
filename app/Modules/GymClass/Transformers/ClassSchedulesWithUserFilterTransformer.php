@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Modules\Booking\Transformers;
+namespace App\Modules\GymClass\Transformers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
 
-class ListClassSchedulesForUserTransformer extends Resource
+class ClassSchedulesWithUserFilterTransformer extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -17,22 +16,18 @@ class ListClassSchedulesForUserTransformer extends Resource
     {
         return [
             'schedule_id' => $this->id,
-            'trainer' => $this->getTrainerName(),
-            'start_time' => Carbon::parse($this->start_time)->format('H:i'),
-            'end_time' => Carbon::parse($this->end_time)->format('H:i'),
-            'lesson_time' => $this->getLessonTime(),
-            'avg_rating' => $this->getAvgRating(),
             'credits' => $this->credits,
-            'address' => null
+            'activity' => $this->getActivity(),
+            'distance' => null,
+            'trainer' => $this->getTrainerName(),
+            'avg_rating' => $this->getAvgRating()
         ];
     }
 
-    private function getLessonTime()
+    private function getActivity()
     {
-        $start_time = Carbon::createFromFormat('Y-m-d H:i:s', $this->start_time);
-        $end_time = Carbon::createFromFormat('Y-m-d H:i:s', $this->end_time);
-
-        return $start_time->diffInMinutes($end_time);
+        return optional($this->activityType)
+            ->displayed_name;
     }
 
     private function getTrainerName()

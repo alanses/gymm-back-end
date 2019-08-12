@@ -17,7 +17,7 @@ class ListClassSchedulesForGymTransformer extends Resource
     {
         return [
             'type' => optional($this->classType)->displayed_name,
-            'event_id' => $this->id,
+            'schedule_id' => $this->id,
             'trainer' => $this->getTrainerName(),
             'start_time' => Carbon::parse($this->start_time)->format('H:i'),
             'end_time' => Carbon::parse($this->end_time)->format('H:i'),

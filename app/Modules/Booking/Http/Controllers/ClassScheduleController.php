@@ -4,7 +4,7 @@ namespace App\Modules\Booking\Http\Controllers;
 
 use App\Ship\Parents\ApiController;
 use App\Modules\Booking\Actions\GetListClassSchedulesForGymAction;
-use App\Modules\Booking\Actions\GetListClassSchedulesForUserAction;
+use App\Modules\Booking\Actions\GetListClassSchedulesForUserBookingAction;
 use App\Modules\Booking\Http\Requests\GetClassSchedulesRequest;
 use App\Modules\Booking\Http\Requests\GetClassScheduleUserRequest;
 use App\Modules\Booking\Transformers\ListClassSchedulesForGymTransformer;
@@ -19,9 +19,9 @@ class ClassScheduleController extends ApiController
         return ListClassSchedulesForGymTransformer::collection($listClassSchedules);
     }
 
-    public function getClassSchedulesForUser(GetClassScheduleUserRequest $request)
+    public function getClassSchedulesForBooking(GetClassScheduleUserRequest $request)
     {
-        $listClassSchedules = $this->call(GetListClassSchedulesForUserAction::class, [$request]);
+        $listClassSchedules = $this->call(GetListClassSchedulesForUserBookingAction::class, [$request]);
 
         return ListClassSchedulesForUserTransformer::collection($listClassSchedules);
     }

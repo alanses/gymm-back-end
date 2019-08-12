@@ -2,13 +2,9 @@
 
 namespace App\Modules\Booking\Http\Requests;
 
-use App\Modules\Booking\Tasks\ClassBooking\GetClassBookingTask;
-use App\Modules\GymClass\Tasks\GetClassScheduleTask;
-use App\Modules\User\Entities\User;
 use App\Ship\Abstraction\AbstractRequest;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class BookingRequest extends AbstractRequest
+class SaveRateToClassRequest extends AbstractRequest
 {
     protected $urlParameters = [];
 
@@ -20,11 +16,10 @@ class BookingRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'schedule_id' => [
-                'required',
-                'integer',
-                'exists:class_schedules,id',
-            ]
+            'schedule_id' => 'required|exists:class_schedules,id',
+            'full_class_type_id' => 'nullable|exists:full_class_types,id',
+            'rate' => 'nullable|in:1,2,3,4,5',
+            'description' => 'nullable|string'
         ];
     }
 

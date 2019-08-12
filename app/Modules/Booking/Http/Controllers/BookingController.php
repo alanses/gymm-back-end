@@ -4,10 +4,12 @@ namespace App\Modules\Booking\Http\Controllers;
 
 use App\Modules\Booking\Actions\ConfirmBookingAction;
 use App\Modules\Booking\Actions\GetListBookingForCalendarAction;
+use App\Modules\Booking\Actions\RemoveBookingAction;
 use App\Modules\Booking\Actions\SaveBookingAction;
 use App\Modules\Booking\Http\Requests\BookingRequest;
 use App\Modules\Booking\Http\Requests\ConfirmBookingRequest;
 use App\Modules\Booking\Http\Requests\ListBookingForCalendarRequest;
+use App\Modules\Booking\Http\Requests\RemoveBookingRequest;
 use App\Modules\Booking\Transformers\BookingsForUserCalendar;
 use App\Modules\Booking\Transformers\BookingTransformer;
 use App\Ship\Parents\ApiController;
@@ -26,6 +28,13 @@ class BookingController extends ApiController
         $this->call(ConfirmBookingAction::class, [$request]);
 
         return $this->success('ok');
+    }
+
+    public function removeBooking(RemoveBookingRequest $request)
+    {
+        $this->call(RemoveBookingAction::class, [$request]);
+
+        return $this->success();
     }
 
     public function getListBookingForUserCalendar(ListBookingForCalendarRequest $request)

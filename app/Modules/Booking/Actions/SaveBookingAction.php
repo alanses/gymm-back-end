@@ -25,7 +25,7 @@ class SaveBookingAction extends AbstractAction
 
             $gymClass = $this->call(GetClassScheduleTask::class, [], [
                     [
-                        'getByField' => ['id', $request->event_id]
+                        'getByField' => ['id', $request->schedule_id]
                     ]
             ])->first();
 
@@ -44,7 +44,7 @@ class SaveBookingAction extends AbstractAction
     private function getDataForCreateBooking(Request $request, User $user) :array
     {
         return [
-            'event_id' => $request->event_id,
+            'event_id' => $request->schedule_id,
             'user_id' => $user->id,
             'confirm' => BookingClass::$IS_NOT_CONFIRM
         ];
@@ -65,7 +65,7 @@ class SaveBookingAction extends AbstractAction
     {
         $events = $this->call(GetClassBookingTask::class, [], [
             ['whereUserIs' => [$user->id]],
-            ['whereEventIs' => [$request->event_id]],
+            ['whereEventIs' => [$request->schedule_id]],
             ['whereIsConfirmed' => []]
         ]);
 
@@ -77,7 +77,7 @@ class SaveBookingAction extends AbstractAction
     private function checkMaxBookingCount(Request $request)
     {
         $classSchedule = $this->call(GetClassScheduleTask::class, [], [
-            ['getByField' => ['id', $request->event_id]]
+            ['getByField' => ['id', $request->schedule_id]]
         ])->first();
 
         if($classSchedule->count_persons >= $classSchedule->max_count_persons) {
