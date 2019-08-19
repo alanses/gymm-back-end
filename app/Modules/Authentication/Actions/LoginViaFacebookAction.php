@@ -6,6 +6,7 @@ use App\Modules\Authentication\Http\Requests\SocialiteRequest;
 use App\Modules\Authentication\Tasks\GenerateTokenDataForUserTask;
 use App\Modules\Authentication\Tasks\MakeLoginViaFacebookTask;
 use App\Modules\User\Entities\User;
+use App\Modules\User\Tasks\CreateUserDetailTask;
 use App\Modules\User\Tasks\CreateUserTask;
 use App\Modules\User\Tasks\GetAllUsersTask;
 use App\Modules\User\Tasks\GetUserTask;
@@ -23,6 +24,7 @@ class LoginViaFacebookAction extends AbstractAction
 
         if(!$userFromDB) {
             $userFromDB = $this->createUser($facebookUser, $request->type);
+            $this->createUserDetail($userFromDB);
         }
 
 
@@ -48,5 +50,12 @@ class LoginViaFacebookAction extends AbstractAction
         ]);
     }
 
-
+    private function createUserDetail(User $user)
+    {
+        $this->call(CreateUserDetailTask::class, [
+            [
+                'user_id' => $user->id
+            ]
+        ]);
+    }
 }

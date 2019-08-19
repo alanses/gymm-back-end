@@ -16,6 +16,7 @@ class CreateClassScheduleDescriptionTable extends Migration
         Schema::create('class_schedule_description', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('class_schedule_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('full_class_type_id')->nullable();
             $table->timestamps();
@@ -28,6 +29,11 @@ class CreateClassScheduleDescriptionTable extends Migration
             $table->foreign('full_class_type_id')
                 ->references('id')
                 ->on('full_class_types')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
                 ->onDelete('cascade');
         });
     }

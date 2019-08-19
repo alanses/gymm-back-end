@@ -3,6 +3,7 @@
 namespace App\Modules\UserProfile\Entities;
 
 use App\Modules\Activities\Entities\Activity;
+use App\Modules\Plans\Entities\Plan;
 use App\Ship\Abstraction\AbstractEntity;
 
 class UserSetting extends AbstractEntity
@@ -16,6 +17,14 @@ class UserSetting extends AbstractEntity
         'level',
         'distance',
         'cretits_from',
-        'cretits_to'
+        'cretits_to',
+        'count_credits',
+        'plan_id',
+        'photo_id'
     ];
+
+    public function userPlan()
+    {
+        return $this->belongsTo(Plan::class, 'plan_id', 'id');
+    }
 }

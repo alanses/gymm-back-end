@@ -6,6 +6,7 @@ use App\Modules\Authentication\Http\Requests\SocialiteRequest;
 use App\Modules\Authentication\Tasks\GenerateTokenDataForUserTask;
 use App\Modules\Authentication\Tasks\MakeLoginViaVkontacteTask;
 use App\Modules\User\Entities\User;
+use App\Modules\User\Tasks\CreateUserDetailTask;
 use App\Modules\User\Tasks\CreateUserTask;
 use App\Modules\User\Tasks\GetAllUsersTask;
 use App\Modules\User\Tasks\GetUserTask;
@@ -23,6 +24,7 @@ class LoginViaVkontakteAction extends AbstractAction
 
         if(!$userFromDB) {
             $userFromDB = $this->createUser($vkUser);
+            $this->createUserDetail($userFromDB);
         }
 
         $userFromDB = $this->call(GenerateTokenDataForUserTask::class, [$userFromDB]);
@@ -37,6 +39,15 @@ class LoginViaVkontakteAction extends AbstractAction
             [
                 'name' => $facebookUser->name,
                 'login' => $facebookUser->login
+            ]
+        ]);
+    }
+
+    private function createUserDetail(User $user)
+    {
+        $this->call(CreateUserDetailTask::class, [
+            [
+                'user_id' => $user->id
             ]
         ]);
     }

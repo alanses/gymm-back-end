@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserDetailTable extends Migration
+class CreatePlanAssignToUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateUserDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_detail', function (Blueprint $table) {
+        Schema::create('plan_assign_to_user', function (Blueprint $table) {
             $table->bigIncrements('id');
-
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
+
+
         });
     }
 
@@ -27,6 +29,6 @@ class CreateUserDetailTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_detail');
+        Schema::dropIfExists('plan_assign_to_user');
     }
 }

@@ -6,6 +6,7 @@ use App\Modules\Authentication\Http\Requests\SocialiteRequest;
 use App\Modules\Authentication\Tasks\GenerateTokenDataForUserTask;
 use App\Modules\Authentication\Tasks\MakeLoginViaInstagramTask;
 use App\Modules\User\Entities\User;
+use App\Modules\User\Tasks\CreateUserDetailTask;
 use App\Modules\User\Tasks\CreateUserTask;
 use App\Modules\User\Tasks\GetAllUsersTask;
 use App\Modules\User\Tasks\GetUserTask;
@@ -24,6 +25,7 @@ class LoginViaInstagramAction extends AbstractAction
 
         if(!$userFromDB) {
             $userFromDB = $this->createUser($instagramUser);
+            $this->createUserDetail($userFromDB);
         }
 
         $userFromDB = $this->call(GenerateTokenDataForUserTask::class, [$userFromDB]);
@@ -39,6 +41,15 @@ class LoginViaInstagramAction extends AbstractAction
                 'name' => $instagramUser->user['full_name'],
                 'login' => $instagramUser->user['username'],
                 'user_type' => User::$is_user
+            ]
+        ]);
+    }
+
+    private function createUserDetail(User $user)
+    {
+        $this->call(CreateUserDetailTask::class, [
+            [
+                'user_id' => $user->id
             ]
         ]);
     }

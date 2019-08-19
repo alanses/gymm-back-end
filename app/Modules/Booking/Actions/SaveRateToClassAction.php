@@ -31,15 +31,16 @@ class SaveRateToClassAction extends AbstractAction
         ]);
 
         $this->call(SaveClassScheduleDescriptionTask::class, [
-            $this->getDataForCreateClassScheduleDescription($classSchedule, $saveRateToClassRequest)
+            $this->getDataForCreateClassScheduleDescription($user, $classSchedule, $saveRateToClassRequest)
         ]);
 
         return $classSchedule;
     }
 
-    private function getDataForCreateClassScheduleDescription(ClassSchedule $classSchedule, Request $request)
+    private function getDataForCreateClassScheduleDescription(User $user,ClassSchedule $classSchedule, Request $request)
     {
         return [
+            'user_id' => $user->id,
             'description' => $request->description,
             'full_class_type_id' => $request->full_class_type_id,
             'class_schedule_id' =>  $classSchedule->id

@@ -5,6 +5,9 @@ namespace App\Modules\User\Entities;
 use App\Modules\Activities\Entities\Activity;
 use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Gym\Entities\Gym;
+use App\Modules\GymClass\Entities\ClassScheduleDescription;
+use App\Modules\Photos\Entities\UserPhoto;
+use App\Modules\Transactions\Entities\Transaction;
 use App\Modules\UserProfile\Entities\UserSetting;
 use App\Ship\Abstraction\AbstractEntity;
 use Illuminate\Auth\Authenticatable;
@@ -61,6 +64,26 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     public function userSetting() :HasOne
     {
         return $this->hasOne(UserSetting::class, 'user_id', 'id');
+    }
+
+    public function userPhoto() :HasOne
+    {
+        return $this->hasOne(UserPhoto::class, '', 'id');
+    }
+
+    public function userDetail() :HasOne
+    {
+        return $this->hasOne(UserDetail::class, 'user_id', 'id');
+    }
+
+    public function userTransactions() :HasMany
+    {
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
+    }
+
+    public function classScheduleDescription() :HasOne
+    {
+        return $this->hasOne(ClassScheduleDescription::class, 'user_id', 'id');
     }
 
     /**
