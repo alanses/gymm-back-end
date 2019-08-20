@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Statistic\Actions\Gym;
+namespace App\Modules\Statistic\Tasks\Gym;
 
 use App\Modules\Gym\Entities\Gym;
 use App\Modules\Statistic\Tasks\Trainers\GetCountTrainersTask;

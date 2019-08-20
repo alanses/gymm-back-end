@@ -2,12 +2,15 @@
 
 namespace App\Modules\Statistic\Actions\Gym;
 
+use App\Modules\Gym\Entities\Gym;
 use App\Ship\Abstraction\AbstractAction;
 
 class GetCountClientsAction extends AbstractAction
 {
-    public function run()
+    public function run(Gym $gym)
     {
-        return 0;
+        $sum = $gym->classSchedules()->sum('count_persons');
+
+        return (int)$sum;
     }
 }

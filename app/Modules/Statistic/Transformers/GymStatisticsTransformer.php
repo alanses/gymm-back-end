@@ -16,7 +16,7 @@ class GymStatisticsTransformer extends Resource
     {
         return [
             'classes_count' => $this->resource['count_classes'],
-            'client_count' => $this->resource['count_clients'],
+            'count_clients' => $this->resource['count_clients'],
             'reviews' => $this->resource['count_reviews'],
             'trainers' => $this->resource['count_trainers']
         ];
