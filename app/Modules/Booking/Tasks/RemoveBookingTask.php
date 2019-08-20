@@ -19,6 +19,6 @@ class RemoveBookingTask extends AbstractTask
 
     public function run($id)
     {
-        return $this->repository->delete($id);
+        return $this->repository->deleteWhere(['event_id' => $id]);
     }
 }

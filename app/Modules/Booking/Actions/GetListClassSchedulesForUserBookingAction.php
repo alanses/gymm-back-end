@@ -36,6 +36,7 @@ class GetListClassSchedulesForUserBookingAction extends AbstractAction
         $dayOfWeek = $this->carbon->parse($request->booking_date)->dayOfWeek;
 
         return $this->call(GetListClassSchedulesTask::class, [], [
+            ['whereStartDateMoreThen' => [$request->booking_date]],
             ['whereDateRecurringPatternIs' => [$dayOfMouth, $dayOfWeek]],
             ['whereActivitiesIs' => [$this->getActivitiesIds($this->user)]],
             ['whereLevelIs' => [$this->getUserLevel($this->userSetting)]],

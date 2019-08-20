@@ -18,7 +18,7 @@ class RemoveBookingRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer|exists:bookings_class,id'
+            'id' => 'required|integer|exists:bookings_class,event_id'
         ];
     }
 

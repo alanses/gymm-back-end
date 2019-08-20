@@ -19,6 +19,7 @@ class CreateClassScheduleDescriptionTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->text('description')->nullable();
             $table->unsignedBigInteger('full_class_type_id')->nullable();
+            $table->float('rating_value')->unsigned()->default(0);
             $table->timestamps();
 
             $table->foreign('class_schedule_id')
@@ -35,6 +36,8 @@ class CreateClassScheduleDescriptionTable extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
+            $table->unique(['class_schedule_id', 'user_id']);
         });
     }
 

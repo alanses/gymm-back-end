@@ -8,6 +8,7 @@ use App\Modules\GymClass\Repositories\ClassScheduleRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\BetweenCriteria;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
+use App\Ship\Criterias\Eloquent\ThisMoreOrLessThatCriteria;
 use App\Ship\Criterias\Eloquent\WhereInCriteria;
 
 class GetListClassSchedulesTask extends AbstractTask
@@ -26,6 +27,11 @@ class GetListClassSchedulesTask extends AbstractTask
     {
         return $this->classScheduleRepository
             ->get();
+    }
+
+    public function whereStartDateMoreThen($value)
+    {
+        $this->classScheduleRepository->pushCriteria(new ThisMoreOrLessThatCriteria('start_date', '<=', $value));
     }
 
     public function whereDateRecurringPatternIs($dayOfMouth, $dayOfWeek)

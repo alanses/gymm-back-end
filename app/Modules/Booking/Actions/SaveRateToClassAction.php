@@ -3,6 +3,7 @@
 namespace App\Modules\Booking\Actions;
 
 use App\Modules\Booking\Http\Requests\SaveRateToClassRequest;
+use App\Modules\Booking\Tasks\SaveRatingForClassScheduleTask;
 use App\Modules\Booking\Tasks\SaveRatingToTrainerTask;
 use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\GymClass\Tasks\GetClassScheduleTask;
@@ -27,7 +28,7 @@ class SaveRateToClassAction extends AbstractAction
         $this->checkIfEventHasPassed($classSchedule);
 
         $this->call(SaveRatingToTrainerTask::class, [
-            $this->getDataForSaveRating($user, $classSchedule, $saveRateToClassRequest)
+            $this->getDataForSaveTrainerRating($user, $classSchedule, $saveRateToClassRequest)
         ]);
 
         $this->call(SaveClassScheduleDescriptionTask::class, [
@@ -43,16 +44,17 @@ class SaveRateToClassAction extends AbstractAction
             'user_id' => $user->id,
             'description' => $request->description,
             'full_class_type_id' => $request->full_class_type_id,
-            'class_schedule_id' =>  $classSchedule->id
+            'class_schedule_id' =>  $classSchedule->id,
+            'rating_value' => $request->rate_for_class_schedule,
         ];
     }
 
-    private function getDataForSaveRating(User $user, ClassSchedule $classSchedule, Request $request)
+    private function getDataForSaveTrainerRating(User $user, ClassSchedule $classSchedule, Request $request)
     {
         return [
             'user_id' => $user->id,
             'trainer_id' => $classSchedule->trainer_id,
-            'rating_value' => $request->rate,
+            'rating_value' => $request->rate_for_trainer,
         ];
     }
 

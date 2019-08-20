@@ -18,7 +18,8 @@ class SaveRateToClassRequest extends AbstractRequest
         return [
             'schedule_id' => 'required|exists:class_schedules,id',
             'full_class_type_id' => 'nullable|exists:full_class_types,id',
-            'rate' => 'nullable|in:1,2,3,4,5',
+            'rate_for_trainer' => 'nullable|in:1,2,3,4,5',
+            'rate_for_class_schedule' => 'nullable|in:1,2,3,4,5',
             'description' => 'nullable|string'
         ];
     }

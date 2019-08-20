@@ -9,6 +9,7 @@ use App\Modules\Photos\Entities\ClassSchedulePhoto;
 use App\Ship\Abstraction\AbstractEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ClassSchedule extends AbstractEntity
@@ -91,5 +92,13 @@ class ClassSchedule extends AbstractEntity
     public function gym() :BelongsTo
     {
         return $this->belongsTo(Gym::class, 'gym_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function classScheduleDescription() :HasMany
+    {
+        return $this->hasMany(ClassScheduleDescription::class, 'class_schedule_id', 'id');
     }
 }

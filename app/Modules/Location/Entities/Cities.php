@@ -7,5 +7,10 @@ use App\Ship\Abstraction\AbstractEntity;
 
 class Cities extends AbstractEntity
 {
-    protected $fillable = [];
+    protected $table = 'cities';
+
+    protected $fillable = [
+        'name',
+        'displayed_name'
+    ];
 }

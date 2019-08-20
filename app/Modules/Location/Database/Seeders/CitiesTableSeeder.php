@@ -31,7 +31,8 @@ class CitiesTableSeeder extends Seeder
 
         $this->citiesRepository->create([
             'country_id' => 228,
-            'name' => 'lviv'
+            'name' => 'lviv',
+            'displayed_name' => 'Lviv'
         ]);
     }
 }

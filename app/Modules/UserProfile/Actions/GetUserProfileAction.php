@@ -18,10 +18,16 @@ class GetUserProfileAction extends AbstractAction
                     $query->with('plan');
                 },
                 'bookings' => function($query2) {
-                    $query2->with('classSchedule')
-                        ->whereHas('classSchedule', function($query) {
-                            $query->where('start_date', '>', Carbon::now());
-                        });
+                    $query2->with(['classSchedule' => function($query) {
+                        $query->with([
+                            'activityType',
+                            'gym',
+                            'trainer.avgRating'
+                        ]);
+                    }])
+                    ->whereHas('classSchedule', function($query) {
+                        $query->where('start_date', '>', Carbon::now());
+                    });
                 }
             ]
         );
