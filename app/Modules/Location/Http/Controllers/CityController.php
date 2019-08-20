@@ -14,24 +14,4 @@ class CityController extends ApiController
 
         return CitiesTransformer::collection($cities);
     }
-
-    public function getCityControllerById()
-    {
-
-    }
-
-    public function createCityController()
-    {
-
-    }
-
-    public function updateCityController()
-    {
-
-    }
-
-    public function deleteCityController()
-    {
-
-    }
 }

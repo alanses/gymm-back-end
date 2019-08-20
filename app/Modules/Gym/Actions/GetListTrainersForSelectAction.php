@@ -3,8 +3,8 @@
 namespace App\Modules\Gym\Actions;
 
 use App\Modules\Gym\Repositories\TrainerRepository;
-use App\Modules\Gym\Tasks\FindGymTask;
-use App\Modules\Gym\Tasks\GetTrainersForSelectTask;
+use App\Modules\Gym\Tasks\GetGymFromUserTask;
+use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class GetListTrainersForSelectAction extends AbstractAction
@@ -19,18 +19,12 @@ class GetListTrainersForSelectAction extends AbstractAction
         $this->trainerRepository = $trainerRepository;
     }
 
-    public function run($id)
+    public function run()
     {
-        $gym = $this->call(FindGymTask::class, [], [
-            [
-                'getByField' => ['user_id', $id]
-            ]
-        ]);
+        $user = $this->call(GetAuthenticatedUserTask::class);
 
-        return $this->call(GetTrainersForSelectTask::class, [], [
-            [
-                'getByField' => ['gym_id', $gym->id]
-            ]
-        ]);
+        $gym = $this->call(GetGymFromUserTask::class, [$user]);
+
+        return $gym->trainers;
     }
 }

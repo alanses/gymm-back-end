@@ -40,12 +40,11 @@ class TrainerController extends ApiController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function getListTrainersForSelect(Request $request)
+    public function getListTrainersForSelect()
     {
-        $trainers = $this->call(GetListTrainersForSelectAction::class, [$request->user_id]);
+        $trainers = $this->call(GetListTrainersForSelectAction::class);
 
         return TrainersForSelectTransformer::collection($trainers);
     }

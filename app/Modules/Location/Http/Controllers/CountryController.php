@@ -14,24 +14,4 @@ class CountryController extends ApiController
 
         return CountriesTransformer::collection($countries);
     }
-
-    public function getCountryById()
-    {
-
-    }
-
-    public function createCountry()
-    {
-
-    }
-
-    public function updateCountry()
-    {
-
-    }
-
-    public function deleteCountry()
-    {
-
-    }
 }

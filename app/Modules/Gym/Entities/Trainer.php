@@ -3,9 +3,11 @@
 namespace App\Modules\Gym\Entities;
 
 use App\Modules\Activities\Entities\Activity;
+use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\Photos\Entities\TrainerPhoto;
 use App\Ship\Abstraction\AbstractEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Trainer extends AbstractEntity
@@ -49,6 +51,14 @@ class Trainer extends AbstractEntity
     public function photo() :HasOne
     {
         return $this->hasOne(TrainerPhoto::class, 'trainer_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function classSchedules() :HasMany
+    {
+        return $this->hasMany(ClassSchedule::class, 'trainer_id', 'id');
     }
 
     /**

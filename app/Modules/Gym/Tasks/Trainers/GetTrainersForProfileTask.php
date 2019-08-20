@@ -11,7 +11,11 @@ class GetTrainersForProfileTask extends AbstractTask
     {
         return $gym
             ->trainers()
+            ->withCount('classSchedules')
             ->get($this->getSelectedFields())
-            ->load(['avgRating']);
+            ->load([
+                'avgRating',
+                'photo'
+            ]);
     }
 }
