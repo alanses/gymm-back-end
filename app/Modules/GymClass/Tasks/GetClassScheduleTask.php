@@ -58,4 +58,13 @@ class GetClassScheduleTask extends AbstractTask
     {
         $this->classScheduleRepository->pushCriteria(new ThisEqualThatCriteria($field, $value));
     }
+
+    public function withRelations()
+    {
+        $this->classScheduleRepository->with([
+            'trainer',
+            'activityType',
+            'classScheduleDescription.user.userSetting.city'
+        ]);
+    }
 }

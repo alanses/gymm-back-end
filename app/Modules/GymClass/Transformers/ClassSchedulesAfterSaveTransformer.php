@@ -7,7 +7,7 @@ use App\Ship\Parents\Resource;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
-class ClassSchedulesCollection extends Resource
+class ClassSchedulesAfterSaveTransformer extends Resource
 {
     /**
      * Transform the resource into an array.

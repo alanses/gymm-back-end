@@ -69,4 +69,11 @@ class GetListClassSchedulesTask extends AbstractTask
         $this->classScheduleRepository
             ->pushCriteria(new ThisLessOrGreaterColumnThatCriteria($countSpots));
     }
+
+    public function whereStartDateIs($value)
+    {
+        $this->classScheduleRepository->pushCriteria(
+            new ThisEqualThatCriteria('start_date', $value)
+        );
+    }
 }

@@ -10,9 +10,8 @@ class GetClassScheduleAction extends AbstractAction
     public function run($id)
     {
         return $this->call(GetClassScheduleTask::class, [], [
-            [
-                'getByField' => ['id', $id]
-            ]
+            ['getByField' => ['id', $id]],
+            ['withRelations' => []]
         ])
             ->first();
     }
