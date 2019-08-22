@@ -14,7 +14,9 @@ class BookingClass extends AbstractEntity
     protected $fillable = [
         'event_id',
         'user_id',
-        'confirm'
+        'confirm',
+        'booking_date',
+        'count_guest'
     ];
 
     public static $IS_CONFIRM = 1;

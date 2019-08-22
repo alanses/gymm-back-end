@@ -16,7 +16,7 @@ class GetStatisticForMonthRequest extends AbstractRequest
     public function rules()
     {
         return [
-            ''
+            'month_name' => 'required|string|in:January,February,March,April,May,June,July,August,September,October,November,December'
         ];
     }
 

@@ -23,14 +23,6 @@ class SaveBookingAction extends AbstractAction
 
             $this->validateBookingBeforeSave($user, $request);
 
-            $gymClass = $this->call(GetClassScheduleTask::class, [], [
-                    [
-                        'getByField' => ['id', $request->schedule_id]
-                    ]
-            ])->first();
-
-            $this->setNewPersonToEvent($gymClass);
-
             $booking = $this->call(SaveBookingTask::class, [
                 $this->getDataForCreateBooking($request, $user)
             ]);
@@ -46,19 +38,16 @@ class SaveBookingAction extends AbstractAction
         return [
             'event_id' => $request->schedule_id,
             'user_id' => $user->id,
-            'confirm' => BookingClass::$IS_NOT_CONFIRM
+            'confirm' => BookingClass::$IS_NOT_CONFIRM,
+            'booking_date' => $request->booking_date,
+            'count_guest' => optional($user->userSetting)->spots
         ];
-    }
-
-    private function setNewPersonToEvent(ClassSchedule $classSchedule) :int
-    {
-        return $classSchedule->increment('count_persons');
     }
 
     protected function validateBookingBeforeSave(User $user, Request $request)
     {
         $this->checkIfUserBookingEventBefore($user, $request);
-        $this->checkMaxBookingCount($request);
+        //$this->checkMaxBookingCount($request);
     }
 
     private function checkIfUserBookingEventBefore(User $user, Request $request)

@@ -29,7 +29,6 @@ class CreateClassSchedulesTable extends Migration
             $table->char('is_recurring', '1')->nullable();
 
             $table->unsignedBigInteger('trainer_id')->nullable();
-            $table->integer('count_persons')->default(0);
             $table->integer('max_count_persons')->nullable();
             $table->unsignedBigInteger('gym_id')->nullable();
 
@@ -54,8 +53,6 @@ class CreateClassSchedulesTable extends Migration
                 ->references('id')
                 ->on('gyms')
                 ->onDelete('cascade');
-
-            $table->index('count_persons');
 
         });
     }
