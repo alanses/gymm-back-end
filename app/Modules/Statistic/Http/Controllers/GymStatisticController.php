@@ -2,8 +2,8 @@
 
 namespace App\Modules\Statistic\Http\Controllers;
 
-use App\Modules\Statistic\Actions\GetStatisticForDayAction;
 use App\Modules\Statistic\Actions\Gym\GetGymProfileStatisticSubAction;
+use App\Modules\Statistic\Actions\Gym\GetStatisticForDayAction;
 use App\Modules\Statistic\Actions\Gym\GetStatisticForMouthAction;
 use App\Modules\Statistic\Http\Requests\GetStatisticForDayRequest;
 use App\Modules\Statistic\Http\Requests\GetStatisticForMonthRequest;

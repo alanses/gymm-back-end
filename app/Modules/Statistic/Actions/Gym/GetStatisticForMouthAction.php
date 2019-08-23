@@ -11,11 +11,9 @@ use App\Ship\Abstraction\AbstractAction;
 
 class GetStatisticForMouthAction extends AbstractAction
 {
-    public function run(string $date)
+    public function run(string $monthName)
     {
         $data = [];
-
-        dd($date);
 
         $user = $this->call(GetAuthenticatedUserTask::class);
         $gym = $this->call(GetGymFromUserTask::class, [$user]);
