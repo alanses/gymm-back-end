@@ -11,7 +11,7 @@ class GetClassScheduleForUserAction extends AbstractAction
     {
         $scheduleClass = $this->call(GetClassScheduleTask::class, [], [
             [
-                'getByField' => ['id', $id]
+                'findByField' => ['id', $id]
             ]
         ])
             ->first()

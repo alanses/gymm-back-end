@@ -28,6 +28,10 @@ class GetListClassSchedulesWithUserFilterAction extends AbstractAction
         $this->user = $this->call(GetAuthenticatedUserTask::class);
         $this->userSetting = $this->getUserSetting($this->user);
 
+        if(!$this->userSetting) {
+            return collect();
+        }
+
         return $this->call(GetListClassSchedulesTask::class, [], [
             ['whereActivitiesIs' => [$this->getActivitiesIds($this->user)]],
             ['whereLevelIs' => [$this->getUserLevel($this->userSetting)]],

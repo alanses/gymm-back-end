@@ -15,8 +15,6 @@ class BookingClass extends AbstractEntity
         'event_id',
         'user_id',
         'confirm',
-        'booking_date',
-        'count_guest'
     ];
 
     public static $IS_CONFIRM = 1;

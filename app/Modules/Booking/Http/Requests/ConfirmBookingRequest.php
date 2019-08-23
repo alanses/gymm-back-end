@@ -16,7 +16,7 @@ class ConfirmBookingRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'booking_id' => 'required|integer'
+            'booking_id' => 'required|integer|exists:bookings_class,id'
         ];
     }
 

@@ -5,6 +5,7 @@ namespace App\Modules\Activities\Http\Controllers;
 use App\Modules\Activities\Actions\AddActivitiesToUserAction;
 use App\Modules\Activities\Actions\GetAllActivitiesAction;
 use App\Modules\Activities\Transformers\ActivitiesTransformer;
+use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Parents\ApiController;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,9 @@ class ActivitiesController extends ApiController
 
     public function addActivitiesToUser(Request $request)
     {
-        $this->call(AddActivitiesToUserAction::class, [$request->user_id, $request->activities]);
+        $user = $this->call(GetAuthenticatedUserTask::class);
+
+        $this->call(AddActivitiesToUserAction::class, [$user, $request->activities]);
 
         return $this->success('ok');
     }

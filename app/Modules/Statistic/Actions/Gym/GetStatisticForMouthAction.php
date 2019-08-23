@@ -11,25 +11,27 @@ use App\Ship\Abstraction\AbstractAction;
 
 class GetStatisticForMouthAction extends AbstractAction
 {
-    public function run(string $monthName)
+    public function run(string $date)
     {
         $data = [];
+
+        dd($date);
 
         $user = $this->call(GetAuthenticatedUserTask::class);
         $gym = $this->call(GetGymFromUserTask::class, [$user]);
 
         $data['count_classes'] = $this->call(GetStatisticForClassTask::class, [], [
-            ['whereStartDateIs' => ['start_date', $monthName]],
+            ['findByField' => ['start_date', $monthName]],
             ['whereGymIS' => [$gym->id]]
         ]);
 
         $data['count_clients'] = $this->call(GetStatisticForClientsTask::class, [], [
-            ['whereStartDateIs' => ['start_date', $monthName]],
+            ['findByField' => ['start_date', $monthName]],
             ['whereGymIS' => [$gym->id]]
         ]);
 
         $data['count_reviews'] = $this->call(GetStatisticForReviewsTask::class, [], [
-            ['whereStartDateIs' => ['start_date', $monthName]],
+            ['findByField' => ['start_date', $monthName]],
             ['whereGymIS' => [$gym->id]]
         ]);
 

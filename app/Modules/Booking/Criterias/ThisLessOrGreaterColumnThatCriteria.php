@@ -27,6 +27,6 @@ class ThisLessOrGreaterColumnThatCriteria extends Criteria
      */
     public function apply($model, PrettusRepositoryInterface $repository)
     {
-        return $model->whereRaw($this->value . '<= class_schedules.max_count_persons');
+        return $model->whereRaw('class_schedules.count_persons <= class_schedules.max_count_persons ' . '-' . $this->value);
     }
 }

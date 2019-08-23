@@ -28,6 +28,6 @@ class GetListBookingForCalendarForUserTask extends AbstractTask
 
     public function whereDate($date)
     {
-        $this->repository->pushCriteria(new ThisEqualThatCriteria('booking_date', $date));
+        $this->repository->pushCriteria(new FindByRelationCriteria('classSchedule', 'start_date', $date));
     }
 }

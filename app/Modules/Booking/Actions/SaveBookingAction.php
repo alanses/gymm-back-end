@@ -38,9 +38,7 @@ class SaveBookingAction extends AbstractAction
         return [
             'event_id' => $request->schedule_id,
             'user_id' => $user->id,
-            'confirm' => BookingClass::$IS_NOT_CONFIRM,
-            'booking_date' => $request->booking_date,
-            'count_guest' => optional($user->userSetting)->spots
+            'confirm' => BookingClass::$IS_NOT_CONFIRM
         ];
     }
 

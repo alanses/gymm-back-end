@@ -27,16 +27,26 @@ class CreateClassSchedulesTable extends Migration
 
             $table->char('is_full_day_event', '1')->nullable();
             $table->char('is_recurring', '1')->nullable();
+            $table->unsignedBigInteger('recurring_type_id')->nullable();
 
             $table->unsignedBigInteger('trainer_id')->nullable();
+            $table->integer('count_persons')->default(0);
             $table->integer('max_count_persons')->nullable();
             $table->unsignedBigInteger('gym_id')->nullable();
+
+            $table->string('file_name')->nullable();
+            $table->string('origin_name')->nullable();
 
             $table->timestamps();
 
             $table->foreign('class_type_id')
                 ->references('id')
                 ->on('class_types')
+                ->onDelete('cascade');
+
+            $table->foreign('recurring_type_id')
+                ->references('id')
+                ->on('recurring_types')
                 ->onDelete('cascade');
 
             $table->foreign('activities_id')

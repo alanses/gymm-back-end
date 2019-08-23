@@ -2,8 +2,6 @@
 
 namespace App\Modules\GymClass\Tasks;
 
-use App\Modules\Gym\Entities\Gym;
-use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\GymClass\Http\Requests\ClassScheduleRequest;
 use App\Modules\GymClass\Repositories\ClassScheduleRepository;
 use App\Ship\Abstraction\AbstractTask;
@@ -20,22 +18,9 @@ class CreateClassScheduleTask extends AbstractTask
         $this->classRepository = $classRepository;
     }
 
-    public function run(ClassScheduleRequest $request, Gym $gym) : ClassSchedule
+    public function run(array $data)
     {
-        return $this->classRepository->create([
-            'class_type_id' => $request->class_type_id,
-            'activities_id' => $request->activities_id,
-            'level' => $request->level,
-            'credits' => $request->credits,
-            'start_date' => $request->start_date,
-            'start_time' => $request->start_time,
-            'end_date' => null,
-            'trainer_id' => $request->trainer_id,
-            'end_time' => $request->end_time,
-            'is_recurring' => $this->getIsRecurring($request),
-            'max_count_persons' => $request->count_persons,
-            'gym_id' => $gym->id
-        ]);
+        $this->classRepository->insert($data);
     }
 
     /**

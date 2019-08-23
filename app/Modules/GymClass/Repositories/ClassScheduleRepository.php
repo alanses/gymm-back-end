@@ -29,4 +29,9 @@ class ClassScheduleRepository extends AbstractRepository
     {
         return $this->model->whereRaw('class_schedules.count_persons <= class_schedules.max_count_persons - 1');
     }
+
+    public function getLastClassSchedule()
+    {
+        return $this->model->orderBy('id', 'desc')->first();
+    }
 }

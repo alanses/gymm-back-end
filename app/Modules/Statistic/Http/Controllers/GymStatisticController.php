@@ -28,7 +28,7 @@ class GymStatisticController extends ApiController
 
     public function getStatisticForDay(GetStatisticForDayRequest $request)
     {
-        $statistic = $this->call(GetStatisticForDayAction::class, [$request->month_name]);
+        $statistic = $this->call(GetStatisticForDayAction::class, [$request->date]);
 
         return new GymStatisticsTransformer($statistic);
     }

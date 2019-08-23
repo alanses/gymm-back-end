@@ -28,7 +28,8 @@ class ClassSchedule extends AbstractEntity
         'trainer_id',
         'count_persons',
         'max_count_persons',
-        'gym_id'
+        'gym_id',
+        'recurring_type_id'
     ];
 
     public function setFirstNameAttribute($value)
@@ -44,14 +45,6 @@ class ClassSchedule extends AbstractEntity
     public function setEndTimeAttribute($value)
     {
         $this->attributes['end_time'] = Carbon::parse($value)->format('Y-m-d H:i:s');
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function photo() :HasOne
-    {
-        return $this->hasOne(ClassSchedulePhoto::class, 'class_schedule_id', 'id');
     }
 
     /**
@@ -76,6 +69,11 @@ class ClassSchedule extends AbstractEntity
     public function recurringPattern() :HasOne
     {
         return $this->hasOne(RecurringPattern::class, 'class_schedule_id', 'id');
+    }
+
+    public function recurringType()
+    {
+        return $this->belongsTo(RecurringType::class, 'recurring_type_id', 'id');
     }
 
     /**

@@ -25,8 +25,13 @@ class BookingsForUserCalendar extends Resource
             'start_time' => $this->getStartTime(),
             'end_time' => $this->getEndTime(),
             'lesson_time' => $this->getLessonTime(),
-            'credits' => $this->credits
+            'credits' => $this->getCredits()
         ];
+    }
+
+    public function getCredits()
+    {
+        return optional($this->classSchedule)->credits;
     }
 
     public function getSchedule()

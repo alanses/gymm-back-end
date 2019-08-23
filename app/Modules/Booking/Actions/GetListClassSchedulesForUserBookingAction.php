@@ -33,36 +33,18 @@ class GetListClassSchedulesForUserBookingAction extends AbstractAction
         $this->user = $this->call(GetAuthenticatedUserTask::class);
         $this->userSetting = $this->getUserSetting($this->user);
 
-        $dayOfMouth = $this->carbon->parse($request->booking_date)->format('d');
-        $dayOfWeek = $this->carbon->parse($request->booking_date)->dayOfWeek;
-
         $listClassSchedule =  $this->call(GetListClassSchedulesTask::class, [], [
             ['whereStartDateMoreThen' => [$request->booking_date]],
-            ['whereDateRecurringPatternIs' => [$dayOfMouth, $dayOfWeek]],
             ['whereActivitiesIs' => [$this->getActivitiesIds($this->user)]],
             ['whereLevelIs' => [$this->getUserLevel($this->userSetting)]],
             ['wherePoints' => [
                 $this->getCretitsFrom($this->userSetting),
                 $this->getCretitsTo($this->userSetting),
             ]],
+            ['whereSpots' => [$this->getSpots($this->userSetting)]]
         ])
             ->load(['trainer.avgRating']);
-
-        foreach ($listClassSchedule as $key => $item) {
-            $countGuest = $this->countBookingClass($request, $item->id);
-            if($countGuest >= $item->max_count_persons) {
-                $listClassSchedule->forget($key);
-            }
-        }
-
         return $listClassSchedule;
-    }
-
-    private function countBookingClass(GetClassScheduleUserRequest $request, $id)
-    {
-        return BookingClass::where('booking_date', $request->booking_date)
-            ->where('event_id', $id)
-            ->sum('count_guest');
     }
 
     private function getActivitiesIds(User $user) :array

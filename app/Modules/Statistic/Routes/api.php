@@ -16,5 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(function () {
     Route::get('gym/profile/statistic', 'GymStatisticController@getProfileStatistic');
     Route::get('gym/profile/statistic/month', 'GymStatisticController@getStatisticForMonth');
-    Route::get('gym/profile/statistic/day', 'GymStatisticController@getStatisticForPeriod');
+    Route::get('gym/profile/statistic/day', 'GymStatisticController@getStatisticForDay');
 });

@@ -9,7 +9,7 @@ use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Filesystem\Factory as FilesystemManager;
 
-class UploadPhotoToClassScheduleTask extends AbstractTask
+class UploadPhotoToTrainerTask extends AbstractTask
 {
     private $filesystem;
     private $path;
@@ -27,7 +27,7 @@ class UploadPhotoToClassScheduleTask extends AbstractTask
         $this->path = null;
     }
 
-    public function run(UploadedFile $file, ?int $userId, string $basePath)
+    public function run(UploadedFile $file, EntityInterface $model, ?int $userId, string $basePath)
     {
         $this->setPath($basePath);
 
@@ -43,10 +43,15 @@ class UploadPhotoToClassScheduleTask extends AbstractTask
 
         $this->filesystemManager->disk('public')->put("{$this->path}/{$filename}", $file->get());
 
-        return [
-            'file_name' => "{$filename}",
-            'origin_name' => $file->getClientOriginalName()
-        ];
+        $photo = $model->photo()->create(
+            [
+                'user_id' => $userId,
+                'file_name' => "{$filename}",
+                'origin_name' => $file->getClientOriginalName()
+            ]
+        );
+
+        return $photo;
     }
 
     public function setPath(string $path)

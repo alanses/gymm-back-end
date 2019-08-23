@@ -28,7 +28,7 @@ class ClassSchedulesAfterSaveTransformer extends Resource
             'lesson_time' => $this->getLessonTime(),
             'repeat' => $this->getRepeat(),
             'trainer' => $this->getTrainerName(),
-            'photo' => $this->getPhoto()
+//            'photo' => $this->getPhoto()
         ];
     }
 
@@ -63,8 +63,8 @@ class ClassSchedulesAfterSaveTransformer extends Resource
 
     private function getRepeat()
     {
-        if($recurringPattern = $this->recurringPattern) {
-            return $recurringPattern->recurringType->displayed_name;
+        if($recurringPattern = $this->recurringType) {
+            return $recurringPattern->displayed_name;
         }
     }
 
@@ -75,8 +75,8 @@ class ClassSchedulesAfterSaveTransformer extends Resource
 
     private function getPhoto()
     {
-        if($this->photo) {
-            return env('APP_URL') . Storage::url(Photo::getBasePathForSchedule() .  $this->photo->file_name);
+        if($this->file_name) {
+            return env('APP_URL') . Storage::url(Photo::getBasePathForSchedule() .  $this->file_name);
         }
     }
 }

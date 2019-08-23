@@ -41,4 +41,9 @@ class GetStatisticForClassTask extends AbstractTask
     {
         $this->repository->pushCriteria(new ThisEqualThatCriteria('gym_id', $value));
     }
+
+    public function findByField(string $field, string $value)
+    {
+        $this->repository->pushCriteria(new ThisEqualThatCriteria($field, $value));
+    }
 }
