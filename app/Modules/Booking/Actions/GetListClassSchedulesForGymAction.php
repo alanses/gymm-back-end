@@ -26,12 +26,8 @@ class GetListClassSchedulesForGymAction extends AbstractAction
         $user = $this->call(GetAuthenticatedUserTask::class);
         $gym = $this->call(GetGymFromUserTask::class, [$user]);
 
-        $dayOfMouth = $this->carbon->parse($request->booking_date)->format('d');
-        $dayOfWeek = $this->carbon->parse($request->booking_date)->dayOfWeek;
-
         return $this->call(GetListClassSchedulesTask::class, [], [
             ['whereGymIs' => [$gym->id]],
-            ['whereDateRecurringPatternIs' => [$dayOfMouth, $dayOfWeek]],
             ['whereStartDateIs' => [$request->booking_date]]
         ])
             ->load(['trainer', 'classType']);
