@@ -8,6 +8,7 @@ use App\Modules\Authentication\Actions\SendNewPasswordOnEmailAction;
 use App\Modules\Authentication\Http\Requests\ForgotPasswordRequest;
 use App\Modules\Authentication\Http\Requests\LoginRequest;
 use App\Modules\Authentication\Http\Requests\RestorePasswordRequest;
+use App\Modules\Authentication\Tasks\UserIsAdminTask;
 use App\Modules\User\Actions\FindUserByEmailAction;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Transformers\UserTransformer;
@@ -60,5 +61,23 @@ class AuthenticationController extends ApiController
         ]);
 
         return $this->success('ok');
+    }
+
+    public function loginForAdmin(LoginRequest $request)
+    {
+        $result = $this->call(ApiLoginAction::class, [
+            $request,
+            env('CLIENT_WEB_ADMIN_ID'),
+            env('CLIENT_WEB_ADMIN_SECRET'),
+        ]);
+
+        /** @var User $user */
+        $user = $this->call(FindUserByEmailAction::class, [$request->email]);
+
+        $this->call(UserIsAdminTask::class, [$user]);
+
+        $user['response_content'] = $result['response-content'];
+
+        return $this->transform($user, UserTransformer::class);
     }
 }

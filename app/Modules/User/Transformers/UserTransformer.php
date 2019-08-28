@@ -54,7 +54,7 @@ class UserTransformer extends Transformer
             return 'gym';
         }
 
-        if($entity->user_type == User::$is_supper_admin) {
+        if($entity->user_type == User::$is_admin) {
             return 'supper_admin';
         }
     }

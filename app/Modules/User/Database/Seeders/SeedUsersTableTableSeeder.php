@@ -30,7 +30,7 @@ class SeedUsersTableTableSeeder extends Seeder
             'name' => 'admin',
             'password' => 'admin',
             'email' => 'SupperAdmin@gmail.com',
-            'user_type' => User::$is_supper_admin
+            'user_type' => User::$is_admin
         ]);
 
         $this->userRepository->create([

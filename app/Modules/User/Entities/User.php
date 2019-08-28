@@ -28,7 +28,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
     use HasApiTokens, Notifiable;
 
-    static public $is_supper_admin = 1;
+    static public $is_admin = 1;
     static public $is_gym = 2;
     static public $is_user = 3;
 
@@ -116,7 +116,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         }
 
         if($type == 'supper_admin') {
-            return self::$is_supper_admin;
+            return self::$is_admin;
         }
     }
 
