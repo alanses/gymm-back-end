@@ -5,6 +5,7 @@ namespace App\Modules\User\Tasks;
 use App\Modules\User\Repositories\UserRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
+use App\Ship\Criterias\Eloquent\WhereInCriteria;
 use App\Ship\Parents\Task;
 use Prettus\Repository\Exceptions\RepositoryException;
 
@@ -37,5 +38,15 @@ class GetAllUsersTask extends AbstractTask
     public function getByField(string $fieldName, $value)
     {
         $this->repository->pushCriteria(new ThisEqualThatCriteria($fieldName, $value));
+    }
+
+    public function whereTypeIn(string $fieldName, array $value)
+    {
+        $this->repository->pushCriteria(new WhereInCriteria($fieldName, $value));
+    }
+
+    public function withRelation()
+    {
+        $this->repository->with('userPhoto');
     }
 }
