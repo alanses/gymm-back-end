@@ -15,4 +15,5 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->group(function () {
     Route::get('admin/users', 'AdminController@getListUsers');
+    Route::delete('admin/user/{id}', 'AdminController@deleteUser');
 });
