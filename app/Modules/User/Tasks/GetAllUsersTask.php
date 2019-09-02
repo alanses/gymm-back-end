@@ -27,7 +27,7 @@ class GetAllUsersTask extends AbstractTask
      */
     public function run()
     {
-        return $this->repository->paginate();
+        return $this->repository->paginate(10);
     }
 
     /**

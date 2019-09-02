@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->smallInteger('user_type')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -16,6 +16,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -26,7 +27,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends AbstractEntity implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
-    use HasApiTokens, Notifiable;
+    use HasApiTokens, Notifiable, SoftDeletes;
 
     static public $is_admin = 1;
     static public $is_gym = 2;
@@ -60,7 +61,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     /**
      * @return HasOne
      */
-    
+
     public function userSetting() :HasOne
     {
         return $this->hasOne(UserSetting::class, 'user_id', 'id');
