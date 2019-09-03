@@ -32,6 +32,6 @@ class ThisLikeThatCriteria extends Criteria
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        return $model->where($this->key, 'like', $this->value);
+        return $model->where($this->key, 'like', '%' . $this->value . '%');
     }
 }

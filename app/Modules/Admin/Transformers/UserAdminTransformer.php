@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Transformers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
 use App\Modules\User\Entities\User;
 use App\Modules\Photos\Entities\UserPhoto;
@@ -19,14 +20,16 @@ class UserAdminTransformer extends Resource
     {
         return [
             'id' => $this->id,
-            'admin' => $this->admin,
             'email' => $this->email,
+            'name' => $this->name,
             'user_type' => $this->getUserType($this->user_type),
-            'photo' => $this->getPhoto()
+            'photo' => $this->getPhoto(),
+            'registered_at_date' => $this->getRegisteredAtDate(),
+            'registered_at_time' => $this->getRegisteredAtTime()
         ];
     }
 
-    public function getUserType(string $type)
+    private function getUserType(string $type)
     {
         if($type == User::$is_user) {
             return 'User';
@@ -42,5 +45,17 @@ class UserAdminTransformer extends Resource
         if($userPhoto = $this->userPhoto) {
             return env('APP_URL') . Storage::url(UserPhoto::getBasePathForUserPhotos() .  $userPhoto->file_name);
         }
+    }
+
+    private function getRegisteredAtDate()
+    {
+        return Carbon::parse($this->created_at)
+            ->format('m-d-y');
+    }
+
+    private function getRegisteredAtTime()
+    {
+        return Carbon::parse($this->created_at)
+            ->format('H:i:s');
     }
 }

@@ -4,9 +4,11 @@ namespace App\Modules\User\Tasks;
 
 use App\Modules\User\Repositories\UserRepository;
 use App\Ship\Abstraction\AbstractTask;
+use App\Ship\Criterias\Eloquent\OrWhereLikeCriteria;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
+use App\Ship\Criterias\Eloquent\ThisLikeThatCriteria;
 use App\Ship\Criterias\Eloquent\WhereInCriteria;
-use App\Ship\Parents\Task;
+use Illuminate\Http\Request;
 use Prettus\Repository\Exceptions\RepositoryException;
 
 class GetAllUsersTask extends AbstractTask
@@ -48,5 +50,13 @@ class GetAllUsersTask extends AbstractTask
     public function withRelation()
     {
         $this->repository->with('userPhoto');
+    }
+
+    public function search(Request $request)
+    {
+        if($searchValue = $request->search) {
+            $this->repository->pushCriteria(new ThisLikeThatCriteria('email', $searchValue));
+            $this->repository->pushCriteria(new OrWhereLikeCriteria('name', $searchValue));
+        }
     }
 }

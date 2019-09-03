@@ -10,12 +10,13 @@ use App\Ship\Parents\ApiController;
 use App\Modules\Admin\Transformers\ListUsersForAdminTransformer;
 use App\Modules\User\Actions\DeleteUserAction;
 use App\Modules\User\Actions\GetUsersForAdminAction;
+use Illuminate\Http\Request;
 
 class UsersController extends ApiController
 {
-    public function getListUsers()
+    public function getListUsers(Request $request)
     {
-        $users = $this->call(GetUsersForAdminAction::class);
+        $users = $this->call(GetUsersForAdminAction::class, [$request]);
 
         return ListUsersForAdminTransformer::collection($users);
     }
