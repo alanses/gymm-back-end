@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Gym\Entities\Gym;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -23,6 +24,7 @@ class CreateGymTable extends Migration
 
             $table->float('lat')->nullable();
             $table->float('lng')->nullable();
+            $table->smallInteger('is_available')->default(Gym::$IS_NOT_AVAILABLE);
 
             $table->timestamps();
 

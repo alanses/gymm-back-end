@@ -20,6 +20,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('gym/trainers', 'TrainerController@getListTrainerForProfile');
     Route::delete('trainer/{id}', 'TrainerController@deleteTrainer');
 
-    Route::get('list/gyms', 'GymControllerController@getListGyms');
-    Route::get('gym/{id}', 'GymControllerController@getGym');
+    Route::get('list/gyms', 'GymController@getListGyms');
+    Route::get('gym/{id}', 'GymController@getGym');
 });

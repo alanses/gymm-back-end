@@ -14,8 +14,12 @@ class Gym extends AbstractEntity
         'available_from',
         'available_to',
         'lat',
-        'lng'
+        'lng',
+        'is_available'
     ];
+
+    public static $IS_AVAILABLE = 1;
+    public static $IS_NOT_AVAILABLE = 0;
 
     public function trainers()
     {

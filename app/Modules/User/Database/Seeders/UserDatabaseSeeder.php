@@ -24,5 +24,6 @@ class UserDatabaseSeeder extends Seeder
         $this->call(SeedTrainersTableSeeder::class);
         $this->call(SeedRatingForTrainersTableSeeder::class);
         $this->call(SeedUsersClientsTableSeeder::class);
+        $this->call(SeedGymsClientsTableSeeder::class);
     }
 }

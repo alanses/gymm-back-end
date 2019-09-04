@@ -10,7 +10,7 @@ use App\Modules\Gym\Transformers\GymTransformer;
 use App\Modules\Gym\Transformers\ListGymsTransformer;
 use App\Ship\Parents\ApiController;
 
-class GymControllerController extends ApiController
+class GymController extends ApiController
 {
     public function getListGyms()
     {

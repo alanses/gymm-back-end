@@ -17,4 +17,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/users', 'UsersController@getListUsers');
     Route::get('admin/users/{id}', 'UsersController@getUserByID');
     Route::delete('admin/user/{id}', 'UsersController@deleteUser');
+
+    Route::get('admin/gyms', 'GymsController@getGyms');
 });
