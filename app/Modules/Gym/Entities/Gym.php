@@ -4,6 +4,7 @@ namespace App\Modules\Gym\Entities;
 
 use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\GymClass\Entities\ClassScheduleDescription;
+use App\Modules\User\Entities\User;
 use App\Ship\Abstraction\AbstractEntity;
 
 class Gym extends AbstractEntity
@@ -34,5 +35,10 @@ class Gym extends AbstractEntity
     public function classSchedulesDescription()
     {
         return $this->hasManyThrough(ClassScheduleDescription::class, ClassSchedule::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
