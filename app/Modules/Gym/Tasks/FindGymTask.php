@@ -35,4 +35,9 @@ class FindGymTask extends AbstractTask
     {
         $this->gymRepository->pushCriteria(new ThisEqualThatCriteria($fieldName, $value));
     }
+
+    public function withRelations()
+    {
+        $this->gymRepository->with(['user']);
+    }
 }

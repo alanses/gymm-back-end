@@ -4,7 +4,7 @@ namespace App\Modules\Admin\Http\Requests;
 
 use App\Ship\Abstraction\AbstractRequest;
 
-class GymRequest extends AbstractRequest
+class UpdateGymRequest extends AbstractRequest
 {
     protected $urlParameters = [
         'id'
@@ -18,7 +18,11 @@ class GymRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer|exists:gyms,id'
+            'id' => 'required|integer|exists:gyms,id',
+            'email' => 'required|string',
+            'name' => 'required|string',
+            'address' => 'nullable|string',
+            'description' => 'nullable|string'
         ];
     }
 

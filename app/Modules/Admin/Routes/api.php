@@ -20,4 +20,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('admin/gyms', 'GymsController@getGyms');
     Route::get('admin/gyms/{id}', 'GymsController@getGym');
+
+    Route::put('admin/gyms/confirm/{id}', 'GymsController@confirmGym');
+
+    Route::put('admin/gyms/{id}', 'GymsController@updateGym');
 });

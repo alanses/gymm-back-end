@@ -2,10 +2,10 @@
 
 namespace App\Modules\Admin\Tasks;
 
-use App\Modules\User\Entities\User;
+use App\Modules\Gym\Repositories\GymRepository;
 use App\Modules\User\Repositories\UserRepository;
 use App\Ship\Abstraction\AbstractTask;
-use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
+use App\Ship\Criterias\Eloquent\FindByRelationCriteria;
 
 class GetListGymsForAdminTask extends AbstractTask
 {
@@ -14,7 +14,7 @@ class GetListGymsForAdminTask extends AbstractTask
      */
     private $repository;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(GymRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -24,13 +24,15 @@ class GetListGymsForAdminTask extends AbstractTask
         return $this->repository->paginate(10);
     }
 
-    public function whereIsGym()
-    {
-        $this->repository->pushCriteria(new ThisEqualThatCriteria('user_type', User::$is_gym));
-    }
-
     public function withRelation()
     {
-        $this->repository->with(['gym']);
+        $this->repository->with(['user']);
+    }
+
+    public function whereNameIs(string $value)
+    {
+        if($value) {
+            $this->repository->pushCriteria(new FindByRelationCriteria('user', 'email', $value));
+        }
     }
 }

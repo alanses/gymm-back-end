@@ -10,7 +10,6 @@ class GetListGymsForAdminAction extends AbstractAction
     public function run()
     {
         return $this->call(GetListGymsForAdminTask::class, [], [
-            ['whereIsGym' => []],
             ['withRelation' => []]
         ]);
     }

@@ -17,28 +17,36 @@ class GymTransformer extends Resource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
+            'name' => $this->getGymName(),
+            'email' => $this->getGymEmail(),
             'address' => $this->getGymAddress(),
+            'description' => $this->description,
             'available_from' => $this->getGymAvailableFrom(),
             'available_to' => $this->getGymAvailableTo(),
+            'lat' => $this->lat,
+            'lng' => $this->lng,
             'is_available' => $this->getIsAvailable()
         ];
     }
 
-    private function getGymAddress()
+    private function getGymName()
     {
-        return optional($this->gym)->address;
+        return optional($this->user)->name;
     }
 
-    public function getGymDescription()
+    public function getGymEmail()
     {
-        return optional($this->gym)->description;
+        return optional($this->user)->email;
+    }
+
+    private function getGymAddress()
+    {
+        return $this->address;
     }
 
     public function getGymAvailableFrom()
     {
-        $available_from = optional($this->gym)->available_from;
+        $available_from = $this->available_from;
 
         if($available_from) {
             return Carbon::parse($available_from)->format('H:i:s');
@@ -47,30 +55,17 @@ class GymTransformer extends Resource
 
     public function getGymAvailableTo()
     {
-        $available_from = optional($this->gym)->available_to;
+        $available_from = $this->available_to;
 
         if($available_from) {
             return Carbon::parse($available_from)->format('H:i:s');
         }
-
-    }
-
-    public function getGymLat()
-    {
-        return optional($this->gym)->lat;
-    }
-
-    public function getGymLng()
-    {
-        return optional($this->gym)->lng;
     }
 
     public function getIsAvailable()
     {
-        $is_available = optional($this->gym)->is_available;
-
-        if(is_numeric($is_available)) {
-            return boolval($is_available);
+        if(is_numeric($this->is_available)) {
+            return boolval($this->is_available);
         }
     }
 }
