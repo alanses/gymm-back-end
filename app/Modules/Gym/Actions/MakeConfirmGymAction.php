@@ -2,8 +2,8 @@
 
 namespace App\Modules\Gym\Actions;
 
+use App\Modules\Gym\Tasks\ChangeConfirmationGymTask;
 use App\Modules\Gym\Tasks\FindGymTask;
-use App\Modules\Gym\Tasks\UpdateGymTask;
 use App\Ship\Abstraction\AbstractAction;
 use App\Modules\Admin\Http\Requests\GymRequest;
 
@@ -15,6 +15,6 @@ class MakeConfirmGymAction extends AbstractAction
             ['getByField' => ['id', $request->id]]
         ]);
 
-        $this->call(UpdateGymTask::class, [$gym, $request]);
+        $this->call(ChangeConfirmationGymTask::class, [$gym, $request]);
     }
 }

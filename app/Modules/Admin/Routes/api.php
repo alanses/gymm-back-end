@@ -24,4 +24,6 @@ Route::middleware('auth:api')->group(function () {
     Route::put('admin/gyms/confirm/{id}', 'GymsController@confirmGym');
 
     Route::put('admin/gyms/{id}', 'GymsController@updateGym');
+
+    Route::get('admin/location', 'LocationController@getLocation');
 });
