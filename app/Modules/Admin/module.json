@@ -6,7 +6,8 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "App\\Modules\\Admin\\Providers\\AdminServiceProvider"
+        "App\\Modules\\Admin\\Providers\\AdminServiceProvider",
+        "App\\Modules\\Admin\\Providers\\LocationProvider"
     ],
     "aliases": {},
     "files": [],

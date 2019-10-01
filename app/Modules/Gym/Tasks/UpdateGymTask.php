@@ -2,18 +2,30 @@
 
 namespace App\Modules\Gym\Tasks;
 
-use App\Modules\Admin\Http\Requests\GymRequest;
-use App\Modules\Gym\Entities\Gym;
+use App\Modules\Gym\Repositories\GymRepository;
 use App\Ship\Abstraction\AbstractTask;
 
 class UpdateGymTask extends AbstractTask
 {
-    public function run(Gym $gym, GymRequest $request)
-    {
-        $available = (int)$request->available;
+    /**
+     * @var GymRepository
+     */
+    private $gymRepository;
 
-        return $gym->update([
-            'is_available' => $available
-        ]);
+    public function __construct(GymRepository $gymRepository)
+    {
+        $this->gymRepository = $gymRepository;
+    }
+
+    /**
+     * @param array $attributes
+     * @param $id
+     * @return mixed
+     * @throws \Prettus\Validator\Exceptions\ValidatorException
+     */
+
+    public function run(array $attributes, $id)
+    {
+        return $this->gymRepository->update($attributes, $id);
     }
 }
