@@ -11,7 +11,6 @@ use App\Modules\Booking\Http\Requests\GetClassSchedulesRequest;
 use App\Modules\Booking\Http\Requests\GetClassScheduleUserRequest;
 use App\Modules\Booking\Transformers\ListClassSchedulesForGymTransformer;
 use App\Modules\Booking\Transformers\ListClassSchedulesForUserTransformer;
-use Illuminate\Http\Request;
 
 class ClassScheduleController extends ApiController
 {
