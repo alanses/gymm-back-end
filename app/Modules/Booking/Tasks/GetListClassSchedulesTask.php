@@ -7,6 +7,7 @@ use App\Modules\GymClass\Entities\RecurringPattern;
 use App\Modules\GymClass\Repositories\ClassScheduleRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\BetweenCriteria;
+use App\Ship\Criterias\Eloquent\OrderByCriteria;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
 use App\Ship\Criterias\Eloquent\ThisMoreOrLessThatCriteria;
 use App\Ship\Criterias\Eloquent\WhereInCriteria;
@@ -75,5 +76,12 @@ class GetListClassSchedulesTask extends AbstractTask
         $this->classScheduleRepository->pushCriteria(
             new ThisEqualThatCriteria('start_date', $value)
         );
+    }
+
+
+    public function sortByTime()
+    {
+        $this->classScheduleRepository
+            ->pushCriteria(new OrderByCriteria('start_time'));
     }
 }
