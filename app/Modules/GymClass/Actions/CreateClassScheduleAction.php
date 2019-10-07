@@ -41,6 +41,8 @@ class CreateClassScheduleAction extends AbstractAction
             ]);
         }
 
+        $event = $this->call(CreateClassScheduleEventAction::class, [$this->getDataForCreateEvent($request, $gym, $this->photo)]);
+
         foreach ($this->dateHelperService->generateListDates($request) as $item)
         {
             array_push($this->classSchedules, $this->getData($request, $item, $gym, $this->photo));
@@ -63,6 +65,29 @@ class CreateClassScheduleAction extends AbstractAction
             'level' => $request->level,
             'credits' => $request->credits,
             'start_date' => $dateTime->format('Y-m-d'),
+            'start_time' => Carbon::parse($request->start_time)->toDateTimeString(),
+            'end_date' => null,
+            'trainer_id' => $request->trainer_id,
+            'end_time' => Carbon::parse($request->end_time)->toDateTimeString(),
+            'is_recurring' => $this->getIsRecurring($request),
+            'recurring_type_id' => $this->getRecurringType($request),
+            'max_count_persons' => $request->count_persons,
+            'gym_id' => $gym->id,
+            'file_name' => $this->getFileName($photo),
+            'origin_name' => $this->getOriginName($photo),
+            'created_at' => Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon::now()->toDateTimeString(),
+        ];
+    }
+
+    private function getDataForCreateEvent(ClassScheduleRequest $request, Gym $gym, ?array $photo)
+    {
+        return [
+            'class_type_id' => $request->class_type_id,
+            'activities_id' => $request->activities_id,
+            'level' => $request->level,
+            'credits' => $request->credits,
+            'start_date' => $request->start_date,
             'start_time' => Carbon::parse($request->start_time)->toDateTimeString(),
             'end_date' => null,
             'trainer_id' => $request->trainer_id,

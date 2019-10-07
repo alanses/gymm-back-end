@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassSchedulesTable extends Migration
+class CreateListEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateClassSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('class_schedules', function (Blueprint $table) {
+        Schema::create('list_events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('class_type_id')->nullable();
             $table->unsignedBigInteger('activities_id')->nullable();
@@ -36,8 +36,6 @@ class CreateClassSchedulesTable extends Migration
 
             $table->string('file_name')->nullable();
             $table->string('origin_name')->nullable();
-
-            $table->unsignedBigInteger('class_schedule_event_id')->nullable();
 
             $table->timestamps();
 
@@ -65,7 +63,6 @@ class CreateClassSchedulesTable extends Migration
                 ->references('id')
                 ->on('gyms')
                 ->onDelete('cascade');
-
         });
     }
 
@@ -76,6 +73,6 @@ class CreateClassSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_schedules');
+        Schema::dropIfExists('list_events');
     }
 }
