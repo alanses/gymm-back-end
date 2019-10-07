@@ -28,7 +28,7 @@ class ClassSchedulesAfterSaveTransformer extends Resource
             'lesson_time' => $this->getLessonTime(),
             'repeat' => $this->getRepeat(),
             'trainer' => $this->getTrainerName(),
-//            'photo' => $this->getPhoto()
+            'photo' => $this->getPhoto()
         ];
     }
 
