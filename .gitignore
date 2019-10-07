@@ -22,3 +22,4 @@ rabbitMQ
 !/public/web.config
 !/public/index.php
 !/public/robots.txt
+laradock

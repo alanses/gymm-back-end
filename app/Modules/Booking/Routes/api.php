@@ -13,6 +13,7 @@
 
 Route::middleware('auth:api')->group(function () {
     Route::get('classes/schedule/gym', 'ClassScheduleController@getClassSchedulesForGym');
+    Route::get('all/classes/schedule/gym', 'ClassScheduleController@getAllClassSchedulesForGym');
     Route::get('classes/schedule/user', 'ClassScheduleController@getClassSchedulesForBooking');
     Route::get('classes/schedule/calendar', 'BookingController@getListBookingForUserCalendar');
     Route::get('data/for/create/rate', 'RateController@getDataForCreateRateToClass');
