@@ -17,6 +17,6 @@ class GetAllClassSchedulesForGymAction extends AbstractAction
         return $this->call(GetListClassSchedulesTask::class, [], [
             ['whereGymIs' => [$gym->id]],
         ])
-            ->load(['trainer', 'classType']);
+            ->load(['trainer', 'classType', 'activityType']);
     }
 }
