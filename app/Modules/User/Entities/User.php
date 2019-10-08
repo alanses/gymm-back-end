@@ -69,7 +69,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
 
     public function userPhoto() :HasOne
     {
-        return $this->hasOne(UserPhoto::class, '', 'id');
+        return $this->hasOne(UserPhoto::class, 'user_id', 'id');
     }
 
     public function userDetail() :HasOne

@@ -31,9 +31,8 @@ class GetStatisticForClientsTask extends AbstractTask
         return (int)$this->repository->sum('count_persons');
     }
 
-    public function whereStartDateIs(string $field, string $monthName)
+    public function whereStartDateIs(string $field, string $numberOfMouth)
     {
-        $numberOfMouth = $this->converterDateHelperService->getMouthNumber($monthName);
         $this->repository->pushCriteria(new WhereMonthCriteria($field, $numberOfMouth));
     }
 

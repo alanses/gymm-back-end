@@ -95,4 +95,14 @@ class ClassScheduleEvent extends AbstractEntity
     {
         return $this->hasMany(ClassScheduleDescription::class, 'class_schedule_id', 'id');
     }
+
+    public function classSchedule()
+    {
+        return $this->hasMany(ClassSchedule::class, 'class_schedule_event_id', 'id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasManyThrough(ClassScheduleDescription::class, ClassSchedule::class);
+    }
 }

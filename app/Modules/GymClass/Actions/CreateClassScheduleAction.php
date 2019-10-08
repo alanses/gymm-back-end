@@ -45,7 +45,7 @@ class CreateClassScheduleAction extends AbstractAction
 
         foreach ($this->dateHelperService->generateListDates($request) as $item)
         {
-            array_push($this->classSchedules, $this->getData($request, $item, $gym, $this->photo));
+            array_push($this->classSchedules, $this->getData($request, $item, $gym, $event, $this->photo));
         }
 
         $this->call(CreateClassScheduleTask::class, [
@@ -57,7 +57,7 @@ class CreateClassScheduleAction extends AbstractAction
         return $classSchedule;
     }
 
-    private function getData(ClassScheduleRequest $request, DateTime $dateTime, Gym $gym, ?array $photo)
+    private function getData(ClassScheduleRequest $request, DateTime $dateTime, Gym $gym, $event, ?array $photo)
     {
         return [
             'class_type_id' => $request->class_type_id,
@@ -77,6 +77,7 @@ class CreateClassScheduleAction extends AbstractAction
             'origin_name' => $this->getOriginName($photo),
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString(),
+            'class_schedule_event_id' => $event->id
         ];
     }
 

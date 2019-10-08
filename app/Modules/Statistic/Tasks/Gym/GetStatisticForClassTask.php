@@ -32,9 +32,8 @@ class GetStatisticForClassTask extends AbstractTask
         return $this->repository->count();
     }
 
-    public function whereStartDateIs(string $field, string $monthName)
+    public function whereStartDateIs(string $field, string $numberOfMouth)
     {
-        $numberOfMouth = $this->converterDateHelperService->getMouthNumber($monthName);
         $this->repository->pushCriteria(new WhereMonthCriteria($field, $numberOfMouth));
     }
 

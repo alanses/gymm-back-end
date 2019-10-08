@@ -18,4 +18,7 @@ Route::post('registration/gym', 'UserController@createGym');
 
 Route::middleware('auth:api')->group(function () {
     Route::get('users/{id}', 'UserController@getUserById');
+
+    Route::get('list/clients', 'ClientsController@getListClients');
+    Route::get('list/reviews', 'ReviewsController@getListReviews');
 });
