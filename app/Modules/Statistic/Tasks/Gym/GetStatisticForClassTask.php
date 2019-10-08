@@ -7,6 +7,7 @@ use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\CountCriteria;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
 use App\Ship\Criterias\Eloquent\WhereMonthCriteria;
+use App\Ship\Criterias\Eloquent\WhereYearIsCriteria;
 use App\Ship\Services\ConverterDateHelperService;
 
 class GetStatisticForClassTask extends AbstractTask
@@ -45,5 +46,10 @@ class GetStatisticForClassTask extends AbstractTask
     public function findByField(string $field, string $value)
     {
         $this->repository->pushCriteria(new ThisEqualThatCriteria($field, $value));
+    }
+
+    public function whereYearIS(string $field, string $year)
+    {
+        $this->repository->pushCriteria(new WhereYearIsCriteria($field, $year));
     }
 }

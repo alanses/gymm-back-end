@@ -21,7 +21,7 @@ class GymStatisticController extends ApiController
 
     public function getStatisticForMonth(GetStatisticForMonthRequest $request)
     {
-        $statistic = $this->call(GetStatisticForMouthAction::class, [$request->month_name]);
+        $statistic = $this->call(GetStatisticForMouthAction::class, [$request->month_name, $request->year]);
 
         return new GymStatisticsTransformer($statistic);
     }

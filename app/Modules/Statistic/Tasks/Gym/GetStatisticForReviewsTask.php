@@ -7,6 +7,7 @@ use App\Modules\GymClass\Repositories\ClassScheduleRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
 use App\Ship\Criterias\Eloquent\WhereMonthCriteria;
+use App\Ship\Criterias\Eloquent\WhereYearIsCriteria;
 use App\Ship\Services\ConverterDateHelperService;
 
 class GetStatisticForReviewsTask extends AbstractTask
@@ -57,5 +58,10 @@ class GetStatisticForReviewsTask extends AbstractTask
     public function whereGymIS($value)
     {
         $this->repository->pushCriteria(new ThisEqualThatCriteria('gym_id', $value));
+    }
+
+    public function whereYearIS(string $field, string $year)
+    {
+        $this->repository->pushCriteria(new WhereYearIsCriteria($field, $year));
     }
 }
