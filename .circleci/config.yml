@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  deploy:
+    docker:
+      - image: circleci/node:10.15.3-stretch
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "61:79:a6:3d:87:dc:d7:50:6c:ae:46:bf:d8:93:38:89"
+      - run:
+          name: Run only into master
+          command: echo "Run only into master"
+      - run:
+          name: Add sshpass
+          command: sudo apt-get install sshpass
+      - run:
+          name: pull changes to server
+          command: sshpass -p $PASSWORD
+            ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $LOGIN@$IP -p $PORT
+            'cd /home/gymm/web/gymm.redentu.com/public_html && git pull && echo pull changes finish'
+workflows:
+  version: 2
+  main:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: master
