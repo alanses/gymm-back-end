@@ -24,8 +24,19 @@ class ListClassSchedulesForGymTransformer extends Resource
             'lesson_time' => $this->getLessonTime(),
             'max_count_persons' => $this->max_count_persons,
             'count_persons' => $this->count_persons,
-            'address' => null
+            'address' => $this->getAddress(),
+            'class_type' => $this->getClassType()
         ];
+    }
+
+    private function getClassType()
+    {
+        return optional($this->activityType)->displayed_name;
+    }
+
+    private function getAddress()
+    {
+        return optional($this->gym)->address;
     }
 
     private function getLessonTime()
