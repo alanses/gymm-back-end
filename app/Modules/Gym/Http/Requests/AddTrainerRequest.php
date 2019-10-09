@@ -16,7 +16,6 @@ class AddTrainerRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|integer|exists:users,id',
             'trainer_name' => 'required|string',
             'level' => 'nullable|integer',
             'cretits_from' => 'nullable|integer',

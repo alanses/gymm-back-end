@@ -9,6 +9,7 @@ use App\Modules\Gym\Tasks\Trainers\CreateTrainerTask;
 use App\Modules\Gym\Tasks\Trainers\SyncTrainerWithActivitiesTask;
 use App\Modules\Photos\Entities\TrainerPhoto;
 use App\Modules\Photos\Tasks\UploadPhotoToTrainerTask;
+use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class CreateTrainerAction extends AbstractAction
@@ -19,9 +20,11 @@ class CreateTrainerAction extends AbstractAction
      */
     public function run(AddTrainerRequest $request)
     {
+        $user = $this->call(GetAuthenticatedUserTask::class);
+
         $gym = $this->call(FindGymTask::class, [], [
             [
-                'getByField' => ['user_id', $request->user_id]
+                'getByField' => ['user_id', $user->id]
             ]
         ]);
 
