@@ -2,7 +2,9 @@
 
 namespace App\Modules\GymClass\Transformers;
 
+use App\Modules\Photos\Entities\Photo;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\Storage;
 
 class ClassEventTransformer extends Resource
 {
@@ -10,8 +12,16 @@ class ClassEventTransformer extends Resource
     {
         return [
             'trainer_name' => $this->getTrainerName(),
-            'reviews' => $this->getReviews()
+            'reviews' => $this->getReviews(),
+            'photo' => $this->getPhoto()
         ];
+    }
+
+    private function getPhoto()
+    {
+        if($this->file_name) {
+            return env('APP_URL') . Storage::url(Photo::getBasePathForSchedule() .  $this->file_name);
+        }
     }
 
     private function getTrainerName()

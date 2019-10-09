@@ -41,7 +41,9 @@ class CreateClassScheduleAction extends AbstractAction
             ]);
         }
 
-        $event = $this->call(CreateClassScheduleEventAction::class, [$this->getDataForCreateEvent($request, $gym, $this->photo)]);
+        $event = $this->call(CreateClassScheduleEventAction::class, [
+            $this->getDataForCreateEvent($request, $gym, $this->photo)
+        ]);
 
         foreach ($this->dateHelperService->generateListDates($request) as $item)
         {
