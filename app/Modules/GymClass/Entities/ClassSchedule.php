@@ -30,7 +30,8 @@ class ClassSchedule extends AbstractEntity
         'max_count_persons',
         'gym_id',
         'recurring_type_id',
-        'class_schedule_event_id'
+        'class_schedule_event_id',
+        'description'
     ];
 
     public function setFirstNameAttribute($value)

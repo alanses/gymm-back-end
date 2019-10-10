@@ -32,7 +32,8 @@ class ClassScheduleEvent extends AbstractEntity
         'gym_id',
         'recurring_type_id',
         'file_name',
-        'origin_name'
+        'origin_name',
+        'description'
     ];
 
     public function setStartTimeAttribute($value)

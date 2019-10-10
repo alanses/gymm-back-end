@@ -36,6 +36,7 @@ class CreateListEventsTable extends Migration
 
             $table->string('file_name')->nullable();
             $table->string('origin_name')->nullable();
+            $table->text('description')->nullable();
 
             $table->timestamps();
 

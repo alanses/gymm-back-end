@@ -36,6 +36,7 @@ class CreateClassSchedulesTable extends Migration
 
             $table->string('file_name')->nullable();
             $table->string('origin_name')->nullable();
+            $table->text('description')->nullable();
 
             $table->unsignedBigInteger('class_schedule_event_id')->nullable();
 

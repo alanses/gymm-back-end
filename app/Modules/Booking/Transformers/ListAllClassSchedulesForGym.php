@@ -17,9 +17,10 @@ class ListAllClassSchedulesForGym extends Resource
         return [
             'event_id' => $this->id,
             'name' => $this->getActivityType(),
+            'description' => $this->description,
             'credits' => $this->credits,
             'trainer' => $this->getTrainerName(),
-            'avg_rating' => $this->getAvgRating(),
+            'avg_rating' => $this->getAvgRating()
         ];
     }
 
