@@ -25,7 +25,7 @@ class ListClassSchedulesForGymTransformer extends Resource
             'max_count_persons' => $this->max_count_persons,
             'count_persons' => $this->count_persons,
             'address' => $this->getAddress(),
-            'class_type' => $this->getClassType()
+            'class_type' => $this->getClassType(),
         ];
     }
 

@@ -12,9 +12,15 @@ class ClassEventTransformer extends Resource
     {
         return [
             'trainer_name' => $this->getTrainerName(),
+            'name' => $this->getName(),
             'reviews' => $this->getReviews(),
             'photo' => $this->getPhoto()
         ];
+    }
+
+    private function getName()
+    {
+        return optional($this->activityType)->displayed_name;
     }
 
     private function getPhoto()

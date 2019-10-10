@@ -13,6 +13,6 @@ class GetEventAction extends AbstractAction
             ['whereIdIs' => [$id]]
         ]);
 
-        return $event->load(['reviews.user', 'trainer']);
+        return $event->load(['reviews.user', 'trainer', 'activityType']);
     }
 }
