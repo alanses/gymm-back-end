@@ -79,7 +79,8 @@ class CreateClassScheduleAction extends AbstractAction
             'origin_name' => $this->getOriginName($photo),
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString(),
-            'class_schedule_event_id' => $event->id
+            'class_schedule_event_id' => $event->id,
+            'description' => $request->description
         ];
     }
 
@@ -103,6 +104,7 @@ class CreateClassScheduleAction extends AbstractAction
             'origin_name' => $this->getOriginName($photo),
             'created_at' => Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon::now()->toDateTimeString(),
+            'description' => $request->description
         ];
     }
 
