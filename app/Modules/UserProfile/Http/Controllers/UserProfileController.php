@@ -19,7 +19,7 @@ class UserProfileController extends ApiController
 {
     public function saveSettings(UserSettingsRequest $request)
     {
-        $user = $this->call(GetUserByIdAction::class, [$request->user_id]);
+        $user = $this->call(GetAuthenticatedUserTask::class);
 
         $this->call(CreateOrUpdateProfileSettingAction::class, [$request]);
 

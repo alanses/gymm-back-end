@@ -16,24 +16,26 @@ class GetUserSettingsTransformer extends Resource
     {
         return [
             'user_id' => $this->id,
-            'city_id' => $this->userSetting->city_id,
-            'spots' => $this->userSetting->spots,
-            'level' => $this->userSetting->level,
-            'distance' => $this->userSetting->distance,
-            'cretits_from' => $this->userSetting->cretits_from,
-            'cretits_to' => $this->userSetting->cretits_to,
+            'city_id' => optional($this->userSetting)->city_id,
+            'spots' => optional($this->userSetting)->spots,
+            'level' => optional($this->userSetting)->level,
+            'distance' => optional($this->userSetting)->distance,
+            'cretits_from' => optional($this->userSetting)->cretits_from,
+            'cretits_to' => optional($this->userSetting)->cretits_to,
             'activities' => $this->includeActivities(),
         ];
     }
 
-    public function includeActivities()
+    private function includeActivities()
     {
-        return $this->activities->map(function ($activity) {
-            return [
-                'id' => $activity->id,
-                'name' => $activity->name,
-                'displayed_name' => $activity->displayed_name,
-            ];
-        });
+        if($this->activities) {
+            return $this->activities->map(function ($activity) {
+                return [
+                    'id' => $activity->id,
+                    'name' => $activity->name,
+                    'displayed_name' => $activity->displayed_name,
+                ];
+            });
+        }
     }
 }
