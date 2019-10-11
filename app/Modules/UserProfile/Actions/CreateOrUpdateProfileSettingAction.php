@@ -15,7 +15,7 @@ class CreateOrUpdateProfileSettingAction extends AbstractAction
         $this->addUserId($settings, $user);
 
         return $this->call(CreateOrUpdateProfileSettingTask::class, [
-
+            $settings
         ]);
     }
 
