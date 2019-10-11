@@ -11,16 +11,22 @@ class CreateOrUpdateProfileSettingAction extends AbstractAction
 {
     public function run(UserSettingsRequest $request, User $user)
     {
+        $settings = $this->getDataForCreateUserSettings($request, $user);
+        $this->addUserId($settings, $user);
+
         return $this->call(CreateOrUpdateProfileSettingTask::class, [
-            $this->getDataForCreateUserSettings($request, $user)
+
         ]);
+    }
+
+    private function addUserId(array &$settings, User $user) {
+        $settings['user_id'] = $user->id;
     }
 
     private function getDataForCreateUserSettings(UserSettingsRequest $request, User $user)
     {
         return $request->only([
             'city_id',
-            $user->id,
             'spots',
             'level',
             'distance',
