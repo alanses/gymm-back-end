@@ -23,11 +23,33 @@ class GetUserProfileTransformer extends Resource
             'total_credits_into_plan' => $this->getTotalCredits(),
             'payment_card' => null,
             'plan_name' => $this->getPlanName(),
-            'reviews' => null,
+            'reviews' => $this->getReviews(),
             'bookings' => $this->getBookings(),
         ];
     }
 
+    private function getReviews()
+    {
+        if($this->classScheduleDescription) {
+            return $this->classScheduleDescription->map(function ($scheduleDescription) {
+                return [
+                    'reviews_id' => $scheduleDescription->id,
+                    'description' => $scheduleDescription->description,
+                    'rating_value' => $scheduleDescription->rating_value,
+                    'name' => $this->getClassScheduleName($scheduleDescription)
+            ];
+        });
+        }
+    }
+
+    private function getClassScheduleName($scheduleDescription)
+    {
+        if($classSchedule = $scheduleDescription->classSchedule) {
+            if($activityType = $classSchedule->activityType){
+               return $activityType->displayed_name;
+            }
+        }
+    }
     protected function getBookings()
     {
         return $this->bookings->map(function ($booking) {

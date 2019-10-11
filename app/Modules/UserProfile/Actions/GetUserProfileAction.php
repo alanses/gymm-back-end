@@ -28,6 +28,9 @@ class GetUserProfileAction extends AbstractAction
                     ->whereHas('classSchedule', function($query) {
                         $query->where('start_date', '>', Carbon::now());
                     });
+                },
+                'classScheduleDescription' => function($query3) {
+                    $query3->with('classSchedule.activityType');
                 }
             ]
         );
