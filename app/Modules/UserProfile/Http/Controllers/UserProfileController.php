@@ -21,7 +21,7 @@ class UserProfileController extends ApiController
     {
         $user = $this->call(GetAuthenticatedUserTask::class);
 
-        $this->call(CreateOrUpdateProfileSettingAction::class, [$request]);
+        $this->call(CreateOrUpdateProfileSettingAction::class, [$request, $user]);
 
         $this->call(AddActivitiesToUserAction::class, [$user, $request->activities]);
 
