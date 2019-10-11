@@ -31,15 +31,17 @@ class GetUserProfileTransformer extends Resource
     private function getReviews()
     {
         if($this->classScheduleDescription) {
-            return $this->classScheduleDescription->map(function ($scheduleDescription) {
-                return [
-                    'reviews_id' => $scheduleDescription->id,
-                    'description' => $scheduleDescription->description,
-                    'rating_value' => $scheduleDescription->rating_value,
-                    'name' => $this->getClassScheduleName($scheduleDescription)
-            ];
-        });
+                return $this->classScheduleDescription->map(function ($scheduleDescription) {
+                    return [
+                        'reviews_id' => $scheduleDescription->id,
+                        'description' => $scheduleDescription->description,
+                        'rating_value' => $scheduleDescription->rating_value,
+                        'name' => $this->getClassScheduleName($scheduleDescription)
+                ];
+                });
         }
+
+        return [];
     }
 
     private function getClassScheduleName($scheduleDescription)
