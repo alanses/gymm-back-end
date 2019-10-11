@@ -28,7 +28,7 @@ class UserProfileController extends ApiController
         return new GetUserSettingsTransformer($user);
     }
 
-    public function getProfileSettingsByUserId($id)
+    public function getProfileSettingsByUserId()
     {
         $user = $this->call(GetAuthenticatedUserTask::class);
 
