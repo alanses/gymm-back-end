@@ -29,13 +29,12 @@ class GetUserSettingsTransformer extends Resource
     private function includeActivities()
     {
         if($this->activities) {
-            return $this->activities->map(function ($activity) {
-                return [
-                    'id' => $activity->id,
-                    'name' => $activity->name,
-                    'displayed_name' => $activity->displayed_name,
-                ];
+
+            $activities = $this->activities->map(function ($activity) {
+                return $activity->id;
             });
+
+            return $activities->toArray();
         }
     }
 }
