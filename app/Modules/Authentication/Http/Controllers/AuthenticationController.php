@@ -11,6 +11,7 @@ use App\Modules\Authentication\Http\Requests\RestorePasswordRequest;
 use App\Modules\Authentication\Tasks\UserIsAdminTask;
 use App\Modules\User\Actions\FindUserByEmailAction;
 use App\Modules\User\Entities\User;
+use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Modules\User\Transformers\UserTransformer;
 use App\Ship\Parents\ApiController;
 use Illuminate\Support\Facades\Auth;
@@ -54,10 +55,12 @@ class AuthenticationController extends ApiController
      */
     public function restorePassword(RestorePasswordRequest $request)
     {
+        $user = $this->call(GetAuthenticatedUserTask::class);
+
         $this->call(RestorePasswordAction::class, [
             $request->old_password,
             $request->new_password,
-            $request->user_id
+            $user->id
         ]);
 
         return $this->success('ok');
