@@ -17,8 +17,8 @@ class ClassSchedulesWithUserFilterTransformer extends Resource
         return [
             'schedule_id' => $this->id,
             'credits' => $this->credits,
-            'activity' => $this->getActivity(),
-            'distance' => null,
+            'name' => $this->getActivity(),
+            'distance' => 1,
             'trainer' => $this->getTrainerName(),
             'avg_rating' => $this->getAvgRating(),
             'description' => $this->description
