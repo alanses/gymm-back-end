@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/userprofile', function (Request $request) {
 
 Route::middleware('auth:api')->group(function () {
     Route::post('profile/settings', 'UserProfileController@saveSettings');
+    Route::put('update/profile/settings', 'UserProfileController@updateSettings');
     Route::post('user/profile/save-photo', 'UserProfileController@saveUserProfileImage');
     Route::get('user/profile/settings', 'UserProfileController@getProfileSettingsByUserId');
     Route::get('user/profile', 'UserProfileController@getProfile');

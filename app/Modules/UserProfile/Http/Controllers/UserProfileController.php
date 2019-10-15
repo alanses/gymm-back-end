@@ -9,6 +9,8 @@ use App\Modules\UserProfile\Actions\CheckIfUserHasProfileSettingsAction;
 use App\Modules\UserProfile\Actions\CreateOrUpdateProfileSettingAction;
 use App\Modules\UserProfile\Actions\GetUserProfileAction;
 use App\Modules\UserProfile\Actions\SaveUserProfileImageAction;
+use App\Modules\UserProfile\Actions\UpdateUserActivitiesAction;
+use App\Modules\UserProfile\Actions\UpdateUserSettingsAction;
 use App\Modules\UserProfile\Http\Requests\SaveUserProfileImageRequest;
 use App\Modules\UserProfile\Http\Requests\UserSettingsRequest;
 use App\Modules\UserProfile\Transformers\GetUserProfileTransformer;
@@ -26,6 +28,17 @@ class UserProfileController extends ApiController
         $this->call(CreateOrUpdateProfileSettingAction::class, [$request, $user]);
 
         $this->call(AddActivitiesToUserAction::class, [$user, $request->activities]);
+
+        return new GetUserSettingsTransformer($user);
+    }
+
+    public function updateSettings(UserSettingsRequest $request)
+    {
+        $user = $this->call(GetAuthenticatedUserTask::class);
+
+        $this->call(UpdateUserSettingsAction::class, [$request, $user]);
+
+        $this->call(UpdateUserActivitiesAction::class, [$request->activities, $user]);
 
         return new GetUserSettingsTransformer($user);
     }
