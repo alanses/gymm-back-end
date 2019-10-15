@@ -17,6 +17,7 @@ class CreateGymTable extends Migration
         Schema::create('gyms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable()->unique();
+            $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->text('description')->nullable();
             $table->timestamp('available_from')->nullable();

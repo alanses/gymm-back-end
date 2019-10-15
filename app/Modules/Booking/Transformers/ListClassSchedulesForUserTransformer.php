@@ -17,6 +17,7 @@ class ListClassSchedulesForUserTransformer extends Resource
     {
         return [
             'schedule_id' => $this->id,
+            'gym_name' => $this->getGymName(),
             'trainer' => $this->getTrainerName(),
             'start_time' => Carbon::parse($this->start_time)->format('H:i'),
             'end_time' => Carbon::parse($this->end_time)->format('H:i'),
@@ -25,6 +26,11 @@ class ListClassSchedulesForUserTransformer extends Resource
             'credits' => $this->credits,
             'address' => null
         ];
+    }
+
+    private function getGymName()
+    {
+        return optional($this->gym)->name;
     }
 
     private function getLessonTime()
