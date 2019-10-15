@@ -20,7 +20,8 @@ class ClassSchedulesWithUserFilterTransformer extends Resource
             'activity' => $this->getActivity(),
             'distance' => null,
             'trainer' => $this->getTrainerName(),
-            'avg_rating' => $this->getAvgRating()
+            'avg_rating' => $this->getAvgRating(),
+            'description' => $this->description
         ];
     }
 
