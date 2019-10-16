@@ -40,12 +40,16 @@ class ClassScheduleInfoTransformer extends Resource
 
     private function getLat()
     {
-        return optional($this->gym)->lat;
+        if($lat = optional($this->gym)->lat) {
+           return floatval($lat);
+        }
     }
 
     private function getLng()
     {
-        return optional($this->gym)->lng;
+        if($lng = optional($this->gym)->lng) {
+            return floatval($lng);
+        }
     }
 
     private function getTrainerName()
