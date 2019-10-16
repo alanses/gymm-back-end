@@ -25,4 +25,6 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('delete/class-schedule/{id}', 'GymClassController@deleteClassSchedule');
 
     Route::get('class/schedules/events/{id}', 'EventsController@getEvent');
+
+    Route::get('class/schedules/full-info/{id}', 'GymClassController@getClassScheduleFullInfo');
 });

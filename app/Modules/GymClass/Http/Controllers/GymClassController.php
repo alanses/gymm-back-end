@@ -6,12 +6,14 @@ use App\Modules\GymClass\Actions\CreateClassScheduleAction;
 use App\Modules\GymClass\Actions\DeleteClassScheduleAction;
 use App\Modules\GymClass\Actions\GetClassScheduleAction;
 use App\Modules\GymClass\Actions\GetClassScheduleForUserAction;
+use App\Modules\GymClass\Actions\GetClassScheduleFullInfoAction;
 use App\Modules\GymClass\Actions\GetDataForCreateGymClassAction;
 use App\Modules\GymClass\Actions\GetListClassSchedulesWithUserFilterAction;
 use App\Modules\GymClass\Http\Requests\ClassScheduleRequest;
 use App\Modules\GymClass\Http\Requests\DeleteClassScheduleRequest;
 use App\Modules\GymClass\Transformers\ClassScheduleForGymTransformer;
 use App\Modules\GymClass\Transformers\ClassScheduleForUserTransformer;
+use App\Modules\GymClass\Transformers\ClassScheduleInfoTransformer;
 use App\Modules\GymClass\Transformers\ClassSchedulesAfterSaveTransformer;
 use App\Modules\GymClass\Transformers\ClassSchedulesWithUserFilterTransformer;
 use App\Ship\Parents\ApiController;
@@ -66,5 +68,12 @@ class GymClassController extends ApiController
         $this->call(DeleteClassScheduleAction::class, [$request->id]);
 
         return $this->success();
+    }
+
+    public function getClassScheduleFullInfo($id)
+    {
+        $classSchedule = $this->call(GetClassScheduleFullInfoAction::class, [$id]);
+
+        return new ClassScheduleInfoTransformer($classSchedule);
     }
 }
