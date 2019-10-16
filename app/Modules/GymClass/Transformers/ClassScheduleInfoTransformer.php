@@ -11,7 +11,7 @@ class ClassScheduleInfoTransformer extends Resource
     public function toArray($request)
     {
         return [
-            'schedule_id' => $this->id,
+            'id' => $this->id,
             'trainer_name' => $this->getTrainerName(),
             'description' => $this->getDescription(),
             'avg_rating' => $this->getAvgRating(),
