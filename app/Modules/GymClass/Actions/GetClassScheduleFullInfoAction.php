@@ -14,7 +14,7 @@ class GetClassScheduleFullInfoAction extends AbstractAction
         ]);
 
         if($classSchedule = $classSchedule->first()) {
-            return $classSchedule->load(['trainer', 'gym']);
+            return $classSchedule->load(['trainer', 'gym', 'activityType']);
         }
     }
 }

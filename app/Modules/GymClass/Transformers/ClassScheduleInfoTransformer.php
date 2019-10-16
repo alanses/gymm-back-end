@@ -12,6 +12,7 @@ class ClassScheduleInfoTransformer extends Resource
     {
         return [
             'id' => $this->id,
+            'name' => $this->getClassName(),
             'trainer_name' => $this->getTrainerName(),
             'description' => $this->getDescription(),
             'avg_rating' => $this->getAvgRating(),
@@ -21,6 +22,12 @@ class ClassScheduleInfoTransformer extends Resource
             'lat' => $this->getLat(),
             'lng' => $this->getLng(),
         ];
+    }
+
+    private function getClassName()
+    {
+        return optional($this->activityType)
+            ->displayed_name;
     }
 
     private function getLessonTime()
