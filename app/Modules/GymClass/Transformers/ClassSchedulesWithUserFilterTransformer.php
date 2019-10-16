@@ -15,7 +15,7 @@ class ClassSchedulesWithUserFilterTransformer extends Resource
     public function toArray($request)
     {
         return [
-            'schedule_id' => $this->id,
+            'id' => $this->id,
             'credits' => $this->credits,
             'name' => $this->getActivity(),
             'distance' => 1,
