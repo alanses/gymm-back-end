@@ -16,7 +16,7 @@ class ListClassSchedulesForUserTransformer extends Resource
     public function toArray($request)
     {
         return [
-            'schedule_id' => $this->id,
+            'id' => $this->id,
             'gym_name' => $this->getGymName(),
             'trainer' => $this->getTrainerName(),
             'start_time' => Carbon::parse($this->start_time)->format('H:i'),
