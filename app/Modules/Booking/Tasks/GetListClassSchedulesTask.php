@@ -32,7 +32,7 @@ class GetListClassSchedulesTask extends AbstractTask
 
     public function whereStartDateMoreThen($value)
     {
-        $this->classScheduleRepository->pushCriteria(new ThisMoreOrLessThatCriteria('start_date', '<=', $value));
+        $this->classScheduleRepository->pushCriteria(new ThisMoreOrLessThatCriteria('start_date', '=', $value));
     }
 
     public function whereDateRecurringPatternIs($dayOfMouth, $dayOfWeek)
