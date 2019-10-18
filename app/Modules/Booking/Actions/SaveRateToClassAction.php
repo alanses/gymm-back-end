@@ -45,7 +45,7 @@ class SaveRateToClassAction extends AbstractAction
             'description' => $request->description,
             'full_class_type_id' => $request->full_class_type_id,
             'class_schedule_id' =>  $classSchedule->id,
-            'rating_value' => $request->rate_for_class_schedule,
+            'rating_value' => $request->rating_value,
         ];
     }
 
@@ -54,7 +54,7 @@ class SaveRateToClassAction extends AbstractAction
         return [
             'user_id' => $user->id,
             'trainer_id' => $classSchedule->trainer_id,
-            'rating_value' => $request->rate_for_trainer,
+            'rating_value' => $request->rating_value,
         ];
     }
 
