@@ -15,7 +15,8 @@ class GetTrainersForProfileTask extends AbstractTask
             ->get($this->getSelectedFields())
             ->load([
                 'avgRating',
-                'photo'
+                'photo',
+                'bookings'
             ]);
     }
 }

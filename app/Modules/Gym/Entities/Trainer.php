@@ -3,6 +3,7 @@
 namespace App\Modules\Gym\Entities;
 
 use App\Modules\Activities\Entities\Activity;
+use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\Photos\Entities\TrainerPhoto;
 use App\Ship\Abstraction\AbstractEntity;
@@ -59,6 +60,11 @@ class Trainer extends AbstractEntity
     public function classSchedules() :HasMany
     {
         return $this->hasMany(ClassSchedule::class, 'trainer_id', 'id');
+    }
+
+    public function bookings()
+    {
+        return $this->hasManyThrough(BookingClass::class, ClassSchedule::class, 'trainer_id', 'event_id');
     }
 
     /**

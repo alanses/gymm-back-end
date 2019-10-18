@@ -19,9 +19,15 @@ class ConvertTrainersFieldsTask extends AbstractTask
                 'avg_rating' => $this->getAvgRating($trainer),
                 'count_ratings' => $this->getRatingDetails($trainer),
                 'image' => $this->getImage($trainer),
-                'count_classes' => $this->getCountClasses($trainer)
+                'count_classes' => $this->getCountClasses($trainer),
+                'can_delete' => $this->checkIfCanDelete($trainer)
             ];
         });
+    }
+
+    private function checkIfCanDelete(Trainer $trainer)
+    {
+        return $trainer->bookings->isEmpty() ? true : false;
     }
 
     private function getCountClasses(Trainer $trainer)

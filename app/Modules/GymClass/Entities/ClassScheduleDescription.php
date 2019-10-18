@@ -3,6 +3,7 @@
 namespace App\Modules\GymClass\Entities;
 
 use App\Modules\Gym\Entities\RatingForTrainer;
+use App\Modules\Gym\Entities\Trainer;
 use App\Modules\User\Entities\User;
 use App\Ship\Abstraction\AbstractEntity;
 
