@@ -22,6 +22,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('classes/schedule/create', 'BookingController@createBooking');
     Route::post('classes/schedule/confirm', 'BookingController@confirmBooking');
 
+    Route::post('save/rate', 'RateController@saveRateToClass');
     Route::post('save/rate/full-class', 'RateController@saveRateOfClass');
     Route::put('update/rate/{id}', 'RateController@saveRateDescriptionOfClass');
 

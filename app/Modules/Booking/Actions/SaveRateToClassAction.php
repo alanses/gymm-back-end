@@ -55,6 +55,7 @@ class SaveRateToClassAction extends AbstractAction
             'user_id' => $user->id,
             'trainer_id' => $classSchedule->trainer_id,
             'rating_value' => $request->rating_value,
+            'comment' => $request->description
         ];
     }
 
