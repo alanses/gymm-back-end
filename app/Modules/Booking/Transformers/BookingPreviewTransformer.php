@@ -5,18 +5,18 @@ namespace App\Modules\Booking\Transformers;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
 
-class BookingTransformer extends Resource
+class BookingPreviewTransformer extends Resource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request
+     * @param \Illuminate\Http\Request
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'booking_id' => $this->id,
+            'id' => $this->id,
             'class' => $this->getClassName(),
             'date' => $this->getDate(),
             'time_start' => $this->getStartTime(),
@@ -29,46 +29,40 @@ class BookingTransformer extends Resource
 
     private function getClassName()
     {
-        if($class_schedule = $this->classSchedule) {
-            return optional($class_schedule->classType)->name;
-        }
+        return optional($this->classType)->name;
     }
 
     private function getDate()
     {
-        return optional($this->classSchedule)->start_date;
+        return $this->start_date;
     }
 
     private function getStartTime()
     {
-        if($class_schedule = $this->classSchedule) {
+        if ($this->start_time) {
             return Carbon::parse($this->start_time)->format('H:i');
         }
     }
 
     private function getEndTime()
     {
-        if($class_schedule = $this->classSchedule) {
+        if ($this->end_time) {
             return Carbon::parse($this->end_time)->format('H:i');
         }
     }
 
     private function getAddress()
     {
-        if($class_schedule = $this->classSchedule) {
-            return optional($class_schedule->gym)->address;
-        }
+        return optional($this->gym)->address;
     }
 
     private function getTrainerName()
     {
-        if($class_schedule = $this->classSchedule) {
-            return optional($class_schedule->trainer)->trainer_name;
-        }
+        return optional($this->trainer)->trainer_name;
     }
 
     private function getCredits()
     {
-        return optional($this->classSchedule)->credits;
+        return $this->credits;
     }
 }

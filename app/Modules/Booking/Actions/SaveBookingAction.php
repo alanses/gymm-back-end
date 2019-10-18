@@ -38,14 +38,14 @@ class SaveBookingAction extends AbstractAction
         return [
             'event_id' => $request->schedule_id,
             'user_id' => $user->id,
-            'confirm' => BookingClass::$IS_NOT_CONFIRM
+            'confirm' => BookingClass::$IS_CONFIRM
         ];
     }
 
     protected function validateBookingBeforeSave(User $user, Request $request)
     {
         $this->checkIfUserBookingEventBefore($user, $request);
-        //$this->checkMaxBookingCount($request);
+        $this->checkMaxBookingCount($request);
     }
 
     private function checkIfUserBookingEventBefore(User $user, Request $request)

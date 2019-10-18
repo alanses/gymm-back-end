@@ -16,7 +16,7 @@ class SaveRateDescriptionAction extends AbstractAction
 {
     public function run(SaveRateDescriptionOfClassRequest $request)
     {
-//        return DB::transaction(function () use ($request) {
+        return DB::transaction(function () use ($request) {
 
             $user = $this->call(GetAuthenticatedUserTask::class);
 
@@ -28,7 +28,7 @@ class SaveRateDescriptionAction extends AbstractAction
             $this->call(SetRatingToTrainerAction::class, [
                 $this->getDataForSaveRatingForTrainer($request, $classScheduleDescription, $user)
             ]);
-//        });
+        });
     }
 
     private function getDataForUpdateRateDescription(SaveRateDescriptionOfClassRequest $request)
