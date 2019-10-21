@@ -20,6 +20,9 @@ class BookingClass extends AbstractEntity
     public static $IS_CONFIRM = 1;
     public static $IS_NOT_CONFIRM = 0;
 
+    public static $IS_NOT_VISITED = 0;
+    public static $IS_VISITED = 1;
+
     /**
      * @return BelongsTo
      */

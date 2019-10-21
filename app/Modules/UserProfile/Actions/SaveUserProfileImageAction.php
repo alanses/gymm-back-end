@@ -6,6 +6,7 @@ use App\Modules\Photos\Entities\UserPhoto;
 use App\Modules\Photos\Tasks\UploadPhotoToUserTask;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Modules\UserProfile\Http\Requests\SaveUserProfileImageRequest;
+use App\Modules\UserProfile\Tasks\DeletePhotoIfExistTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class SaveUserProfileImageAction extends AbstractAction
@@ -14,13 +15,12 @@ class SaveUserProfileImageAction extends AbstractAction
     {
         $user = $this->call(GetAuthenticatedUserTask::class);
 
-        $this->call(UploadPhotoToUserTask::class, [
-            $request->photo,
-            $user,
-            $user->id,
+        $this->call(DeletePhotoIfExistTask::class, [$user]);
+
+        $this->call(UploadPhotoToUserTask::class, [$request->photo, $user, $user->id,
             UserPhoto::getBasePathForUserPhotos()
         ]);
 
-        return $user->userPhoto;
+        return $user->userPhoto()->first();
     }
 }

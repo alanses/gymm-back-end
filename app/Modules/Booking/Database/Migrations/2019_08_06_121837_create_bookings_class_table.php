@@ -18,6 +18,7 @@ class CreateBookingsClassTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('event_id')->nullable();
             $table->smallInteger('confirm')->default(0);
+            $table->smallInteger('visited')->default(0);
             $table->timestamps();
 
             $table->foreign('event_id')

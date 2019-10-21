@@ -3,6 +3,7 @@
 namespace App\Modules\Booking\Http\Controllers;
 
 use App\Modules\Booking\Actions\GetAllEventsForGymAction;
+use App\Modules\Booking\Actions\GetPassedClassByUserAction;
 use App\Modules\Booking\Transformers\ListAllClassSchedulesForGym;
 use App\Ship\Parents\ApiController;
 use App\Modules\Booking\Actions\GetListClassSchedulesForGymAction;
@@ -33,5 +34,12 @@ class ClassScheduleController extends ApiController
         $listClassSchedules = $this->call(GetAllEventsForGymAction::class, []);
 
         return ListAllClassSchedulesForGym::collection($listClassSchedules);
+    }
+
+    public function getClassPassedByUser()
+    {
+        $passedSchedule = $this->call(GetPassedClassByUserAction::class);
+
+        dd($passedSchedule);
     }
 }
