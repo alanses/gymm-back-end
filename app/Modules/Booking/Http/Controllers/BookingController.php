@@ -53,4 +53,6 @@ class BookingController extends ApiController
 
         return BookingsForUserCalendar::collection($bookigs);
     }
+
+
 }

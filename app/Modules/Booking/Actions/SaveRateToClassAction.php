@@ -3,6 +3,7 @@
 namespace App\Modules\Booking\Actions;
 
 use App\Modules\Booking\Http\Requests\SaveRateToClassRequest;
+use App\Modules\Booking\Tasks\MakeVisitBookingTask;
 use App\Modules\Booking\Tasks\SaveRatingForClassScheduleTask;
 use App\Modules\Booking\Tasks\SaveRatingToTrainerTask;
 use App\Modules\GymClass\Entities\ClassSchedule;
@@ -35,6 +36,8 @@ class SaveRateToClassAction extends AbstractAction
             $this->getDataForCreateClassScheduleDescription($user, $classSchedule, $saveRateToClassRequest)
         ]);
 
+        $this->call(MakeVisitBookingTask::class, [$user, $saveRateToClassRequest->schedule_id]);
+
         return $classSchedule;
     }
 
@@ -64,7 +67,7 @@ class SaveRateToClassAction extends AbstractAction
         $currentDate = Carbon::now()->format('Y-m-d');
         $startDate = $classSchedule->start_date;
 
-        if($currentDate <= $startDate) {
+        if($currentDate < $startDate) {
             throw new AccessDeniedHttpException('Impossible to evaluate an event that has not yet occurred');
         }
 

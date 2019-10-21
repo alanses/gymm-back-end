@@ -18,6 +18,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('classes/schedule/calendar', 'BookingController@getListBookingForUserCalendar');
     Route::get('data/for/create/rate', 'RateController@getDataForCreateRateToClass');
     Route::get('booking/preview/{id}', 'BookingController@getBookingInfo');
+    Route::get('user/passed/class', 'ClassScheduleController@getClassPassedByUser');
 
     Route::post('classes/schedule/create', 'BookingController@createBooking');
     Route::post('classes/schedule/confirm', 'BookingController@confirmBooking');
