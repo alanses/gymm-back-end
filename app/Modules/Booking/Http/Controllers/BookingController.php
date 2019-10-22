@@ -5,11 +5,13 @@ namespace App\Modules\Booking\Http\Controllers;
 use App\Modules\Booking\Actions\ConfirmBookingAction;
 use App\Modules\Booking\Actions\GetBookingPreviewAction;
 use App\Modules\Booking\Actions\GetListBookingForCalendarAction;
+use App\Modules\Booking\Actions\RegisterThatUserNotPassedClassAction;
 use App\Modules\Booking\Actions\RemoveBookingAction;
 use App\Modules\Booking\Actions\SaveBookingAction;
 use App\Modules\Booking\Http\Requests\BookingRequest;
 use App\Modules\Booking\Http\Requests\ConfirmBookingRequest;
 use App\Modules\Booking\Http\Requests\ListBookingForCalendarRequest;
+use App\Modules\Booking\Http\Requests\RegisterUserNotPassClassRequest;
 use App\Modules\Booking\Http\Requests\RemoveBookingRequest;
 use App\Modules\Booking\Transformers\BookingPreviewTransformer;
 use App\Modules\Booking\Transformers\BookingsForUserCalendar;
@@ -53,6 +55,4 @@ class BookingController extends ApiController
 
         return BookingsForUserCalendar::collection($bookigs);
     }
-
-
 }

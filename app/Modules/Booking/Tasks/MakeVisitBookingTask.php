@@ -2,6 +2,7 @@
 
 namespace App\Modules\Booking\Tasks;
 
+use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Booking\Repositories\BookingClassRepository;
 use App\Modules\User\Entities\User;
 use App\Ship\Abstraction\AbstractTask;
@@ -18,7 +19,7 @@ class MakeVisitBookingTask extends AbstractTask
         $this->repository = $repository;
     }
 
-    public function run(User $user, $schedule_id)
+    public function run(User $user, $schedule_id, $visitByUser = 1)
     {
         $booking = $this->repository->findWhere([
             'user_id' => $user->id,
@@ -26,8 +27,8 @@ class MakeVisitBookingTask extends AbstractTask
         ])->first();
 
         $booking->update([
-            'passed' => 1,
-            'visited_by_user' => 1
+            'passed' => BookingClass::$IS_CONFIRM,
+            'visited_by_user' => $visitByUser
         ]);
     }
 }
