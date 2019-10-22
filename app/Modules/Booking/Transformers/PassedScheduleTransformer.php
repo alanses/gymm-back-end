@@ -17,15 +17,17 @@ class PassedScheduleTransformer extends Resource
     {
         return [
             'id' => $this->resource ? $this->event_id : null,
-            'start_date' => $this->getStartDate(),
-            'day_of_week' => $this->getDayOfWeekFromDate(),
-            'start_time' => $this->getStartTime(),
-            'end_time' => $this->getEndTime(),
-            'lesson_time' => $this->getLessonTime(),
-            'activity_name' => $this->getActivityName(),
-            'address' => $this->getAddress(),
-            'count_credits' => $this->getCountCredits(),
-            'trainer_name' => $this->getTrainerName()
+            'class_info' => [
+                'start_date' => $this->resource ? $this->getStartDate() : null,
+                'day_of_week' => $this->resource ? $this->getDayOfWeekFromDate() : null,
+                'start_time' => $this->resource ? $this->getStartTime() : null,
+                'end_time' => $this->resource ? $this->getEndTime() : null,
+                'lesson_time' => $this->resource ? $this->getLessonTime() : null,
+                'activity_name' => $this->resource ? $this->getActivityName() : null,
+                'address' => $this->resource ? $this->getAddress() : null,
+                'count_credits' => $this->resource ? $this->getCountCredits() : null,
+                'trainer_name' => $this->resource ? $this->getTrainerName() : null
+            ],
         ];
     }
 
