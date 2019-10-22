@@ -82,9 +82,9 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         return $this->hasMany(Transaction::class, 'user_id', 'id');
     }
 
-    public function classScheduleDescription() :HasOne
+    public function classScheduleDescription() :HasMany
     {
-        return $this->hasOne(ClassScheduleDescription::class, 'user_id', 'id');
+        return $this->hasMany(ClassScheduleDescription::class, 'user_id', 'id');
     }
 
     /**
