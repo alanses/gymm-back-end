@@ -64,7 +64,8 @@ class GetClassScheduleTask extends AbstractTask
         $this->classScheduleRepository->with([
             'trainer',
             'activityType',
-            'classScheduleDescription.user.userSetting.city'
+            'classScheduleDescription.user.userSetting.city',
+            'reviews'
         ]);
     }
 }

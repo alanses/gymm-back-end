@@ -2,6 +2,7 @@
 
 namespace App\Modules\GymClass\Transformers;
 
+use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\GymClass\Entities\ClassScheduleDescription;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
@@ -11,7 +12,7 @@ class ClassScheduleForGymTransformer extends Resource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request
+     * @param \Illuminate\Http\Request
      * @return array
      */
     public function toArray($request)
@@ -27,29 +28,30 @@ class ClassScheduleForGymTransformer extends Resource
 
     private function getReviews()
     {
-        return $this->classScheduleDescription->map(function ($classScheduleDescription) {
+        return $this->reviews->map(function ($review) {
             return [
-                'reviews_id' => $classScheduleDescription->id,
-                'rating_value' => $classScheduleDescription->rating_value,
-                'when' => $this->convertDate($classScheduleDescription),
-                'who' => optional($classScheduleDescription->user)->name,
-                'city' => $this->getCity($classScheduleDescription),
-                'description' => $classScheduleDescription->description
+                'reviews_id' => $review->id,
+                'rating_value' => $review->rating_value,
+                'when' => $this->convertDate($review),
+                'who' => optional($review->user)->name,
+                'city' => $this->getCity($review),
+                'description' => $review->comment
             ];
         });
+
     }
 
-    private function convertDate(ClassScheduleDescription $classScheduleDescription)
+    private function convertDate(RatingForTrainer $review)
     {
-        return Carbon::parse($classScheduleDescription->created_at)
+        return Carbon::parse($review->created_at)
             ->format('d.m h:i A');
     }
 
-    private function getCity(ClassScheduleDescription $classScheduleDescription)
+    private function getCity(RatingForTrainer $review)
     {
-        if($user = $classScheduleDescription->user) {
-            if($userSetting = $user->userSetting) {
-                if($city = $userSetting->city) {
+        if ($user = $review->user) {
+            if ($userSetting = $user->userSetting) {
+                if ($city = $userSetting->city) {
                     return $city->displayed_name;
                 }
             }

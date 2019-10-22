@@ -2,6 +2,8 @@
 
 namespace App\Modules\Statistic\Tasks\Gym;
 
+use App\Modules\Gym\Entities\RatingForTrainer;
+use App\Modules\Gym\Repositories\RatingForTrainerRepository;
 use App\Modules\GymClass\Repositories\ClassScheduleDescriptionRepository;
 use App\Modules\GymClass\Repositories\ClassScheduleRepository;
 use App\Ship\Abstraction\AbstractTask;
@@ -24,26 +26,26 @@ class GetStatisticForReviewsTask extends AbstractTask
     /**
      * @var ClassScheduleDescriptionRepository
      */
-    private $classScheduleDescriptionRepository;
+    private $ratingForTrainerRepository;
 
     public function __construct
     (
         ClassScheduleRepository $repository,
         ConverterDateHelperService $converterDateHelperService,
-        ClassScheduleDescriptionRepository $classScheduleDescriptionRepository
+        RatingForTrainerRepository $ratingForTrainerRepository
     )
     {
         $this->repository = $repository;
         $this->converterDateHelperService = $converterDateHelperService;
-        $this->classScheduleDescriptionRepository = $classScheduleDescriptionRepository;
+        $this->ratingForTrainerRepository = $ratingForTrainerRepository;
     }
 
     public function run()
     {
         $ClassSchedulesIds = $this->repository->get('id')->toArray();
 
-        $reviews = $this->classScheduleDescriptionRepository
-            ->findWhereIn('class_schedule_id', $ClassSchedulesIds)
+        $reviews = $this->ratingForTrainerRepository
+            ->findWhereIn('event_id', $ClassSchedulesIds)
             ->count();
 
         return $reviews;
@@ -62,5 +64,10 @@ class GetStatisticForReviewsTask extends AbstractTask
     public function whereYearIS(string $field, string $year)
     {
         $this->repository->pushCriteria(new WhereYearIsCriteria($field, $year));
+    }
+
+    public function findByField($field, $value)
+    {
+        $this->repository->pushCriteria(new ThisEqualThatCriteria($field, $value));
     }
 }

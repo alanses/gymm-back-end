@@ -41,4 +41,9 @@ class Gym extends AbstractEntity
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function reviews()
+    {
+        return $this->hasManyThrough(RatingForTrainer::class, Trainer::class);
+    }
 }

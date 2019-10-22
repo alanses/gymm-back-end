@@ -5,6 +5,7 @@ namespace App\Modules\User\Entities;
 use App\Modules\Activities\Entities\Activity;
 use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Gym\Entities\Gym;
+use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\GymClass\Entities\ClassScheduleDescription;
 use App\Modules\Photos\Entities\UserPhoto;
 use App\Modules\Transactions\Entities\Transaction;
@@ -85,6 +86,11 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     public function classScheduleDescription() :HasMany
     {
         return $this->hasMany(ClassScheduleDescription::class, 'user_id', 'id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(RatingForTrainer::class, 'user_id', 'id');
     }
 
     /**

@@ -17,6 +17,7 @@ class CreateRatingForTrainersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('trainer_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('event_id')->nullable();
             $table->float('rating_value')->unsigned()->default(0);
             $table->text('comment')->nullable();
             $table->timestamps();

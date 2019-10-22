@@ -2,6 +2,7 @@
 
 namespace App\Modules\GymClass\Transformers;
 
+use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\GymClass\Entities\ClassScheduleDescription;
 use Illuminate\Http\Resources\Json\Resource;
 
@@ -29,23 +30,25 @@ class ClassScheduleForUserTransformer extends Resource
 
     private function getReviews()
     {
-        return $this->classScheduleDescription->map(function ($element) {
-            return [
-                'when' => $element->created_at,
-                'user_name' => optional($element->user)->name,
-                'description' => $element->description,
-                'city_name' => $this->getCityName($element),
-                'rating' => $this->getRating($element)
-            ];
-        });
+        if($trainer = $this->trainer) {
+            return $trainer->ratings->map(function ($element) {
+                return [
+                    'when' => $element->created_at,
+                    'user_name' => optional($element->user)->name,
+                    'description' => $element->comment,
+                    'city_name' => $this->getCityName($element),
+                    'rating' => $this->getRating($element)
+                ];
+            });
+        }
     }
 
-    private function getRating(ClassScheduleDescription $classScheduleDescription)
+    private function getRating(RatingForTrainer $classScheduleDescription)
     {
         return $classScheduleDescription->rating_value;
     }
 
-    private function getCityName(ClassScheduleDescription $classScheduleDescription)
+    private function getCityName(RatingForTrainer $classScheduleDescription)
     {
         if($user = $classScheduleDescription->user) {
             if($userSetting = $user->userSetting) {

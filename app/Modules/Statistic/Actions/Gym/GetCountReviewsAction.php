@@ -9,6 +9,6 @@ class GetCountReviewsAction extends AbstractAction
 {
     public function run(Gym $gym)
     {
-        return $gym->classSchedulesDescription()->count();
+        return $gym->reviews()->count();
     }
 }

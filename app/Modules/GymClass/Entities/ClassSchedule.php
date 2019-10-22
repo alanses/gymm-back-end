@@ -4,8 +4,8 @@ namespace App\Modules\GymClass\Entities;
 
 use App\Modules\Activities\Entities\Activity;
 use App\Modules\Gym\Entities\Gym;
+use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\Gym\Entities\Trainer;
-use App\Modules\Photos\Entities\ClassSchedulePhoto;
 use App\Ship\Abstraction\AbstractEntity;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -100,5 +100,10 @@ class ClassSchedule extends AbstractEntity
     public function classScheduleDescription() :HasMany
     {
         return $this->hasMany(ClassScheduleDescription::class, 'class_schedule_id', 'id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(RatingForTrainer::class, 'event_id', 'id');
     }
 }

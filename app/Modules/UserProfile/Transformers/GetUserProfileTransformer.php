@@ -30,13 +30,13 @@ class GetUserProfileTransformer extends Resource
 
     private function getReviews()
     {
-        if($this->classScheduleDescription) {
-                return $this->classScheduleDescription->map(function ($scheduleDescription) {
+        if($this->reviews) {
+                return $this->reviews->map(function ($review) {
                     return [
-                        'reviews_id' => $scheduleDescription->id,
-                        'description' => $scheduleDescription->description,
-                        'rating_value' => $scheduleDescription->rating_value,
-                        'name' => $this->getClassScheduleName($scheduleDescription)
+                        'reviews_id' => $review->id,
+                        'description' => $review->comment,
+                        'rating_value' => $review->rating_value,
+                        'name' => $this->getReviewsName($review)
                 ];
                 });
         }
@@ -44,14 +44,13 @@ class GetUserProfileTransformer extends Resource
         return [];
     }
 
-    private function getClassScheduleName($scheduleDescription)
+    private function getReviewsName($review)
     {
-        if($classSchedule = $scheduleDescription->classSchedule) {
-            if($activityType = $classSchedule->activityType){
-               return $activityType->displayed_name;
-            }
+        if($classSchedule = $review->classSchedule) {
+            return optional($classSchedule->activityType)->displayed_name;
         }
     }
+
     protected function getBookings()
     {
         return $this->bookings->map(function ($booking) {

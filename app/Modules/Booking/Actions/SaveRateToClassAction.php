@@ -32,10 +32,6 @@ class SaveRateToClassAction extends AbstractAction
             $this->getDataForSaveTrainerRating($user, $classSchedule, $saveRateToClassRequest)
         ]);
 
-        $this->call(SaveClassScheduleDescriptionTask::class, [
-            $this->getDataForCreateClassScheduleDescription($user, $classSchedule, $saveRateToClassRequest)
-        ]);
-
         $this->call(MakeVisitBookingTask::class, [$user, $saveRateToClassRequest->schedule_id]);
 
         return $classSchedule;
@@ -58,7 +54,8 @@ class SaveRateToClassAction extends AbstractAction
             'user_id' => $user->id,
             'trainer_id' => $classSchedule->trainer_id,
             'rating_value' => $request->rating_value,
-            'comment' => $request->description
+            'comment' => $request->description,
+            'event_id' => $classSchedule->id
         ];
     }
 
