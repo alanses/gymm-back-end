@@ -27,7 +27,7 @@ class GetPassedClassByUserTask extends AbstractTask
     {
         return $this->repository
             ->get()
-            ->load('classSchedule');
+            ->load('classSchedule.activityType');
     }
 
     public function whereUserIs(User $user)

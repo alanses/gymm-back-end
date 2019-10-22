@@ -42,6 +42,5 @@ class ClassScheduleController extends ApiController
         $passedSchedule = $this->call(GetPassedClassByUserAction::class);
 
         return new PassedScheduleTransformer($passedSchedule);
-
     }
 }
