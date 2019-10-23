@@ -3,6 +3,7 @@
 namespace App\Modules\GymClass\Entities;
 
 use App\Modules\Activities\Entities\Activity;
+use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Gym\Entities\Gym;
 use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\Gym\Entities\Trainer;
@@ -105,5 +106,12 @@ class ClassSchedule extends AbstractEntity
     public function reviews()
     {
         return $this->hasMany(RatingForTrainer::class, 'event_id', 'id');
+    }
+
+    public function userBookings()
+    {
+        return $this
+            ->hasOne(BookingClass::class, 'event_id', 'id')
+            ->where('user_id', auth()->user()->id);
     }
 }

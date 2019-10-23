@@ -43,7 +43,8 @@ class GetListClassSchedulesForUserBookingAction extends AbstractAction
             ]],
             ['whereSpots' => [$this->getSpots($this->userSetting)]]
         ])
-            ->load(['trainer.avgRating']);
+            ->load(['trainer.avgRating', 'userBookings', 'gym']);
+
         return $listClassSchedule;
     }
 

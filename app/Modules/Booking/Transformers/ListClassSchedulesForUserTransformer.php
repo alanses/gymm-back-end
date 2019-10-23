@@ -24,8 +24,14 @@ class ListClassSchedulesForUserTransformer extends Resource
             'lesson_time' => $this->getLessonTime(),
             'avg_rating' => $this->getAvgRating(),
             'credits' => $this->credits,
-            'address' => $this->getAddress()
+            'address' => $this->getAddress(),
+            'is_booked' => $this->checkIfIsBooking()
         ];
+    }
+
+    private function checkIfIsBooking()
+    {
+        return $this->userBookings ? true : false;
     }
 
     private function getAddress()

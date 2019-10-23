@@ -16,14 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(function () {
     Route::get('admin/users', 'UsersController@getListUsers');
     Route::get('admin/users/{id}', 'UsersController@getUserByID');
-    Route::delete('admin/user/{id}', 'UsersController@deleteUser');
-
     Route::get('admin/gyms', 'GymsController@getGyms');
     Route::get('admin/gyms/{id}', 'GymsController@getGym');
+    Route::get('admin/location', 'LocationController@getLocation');
+    Route::get('admin/reviews', 'ReviewsController@getListReviews');
 
     Route::put('admin/gyms/confirm/{id}', 'GymsController@confirmGym');
-
     Route::put('admin/gyms/{id}', 'GymsController@updateGym');
 
-    Route::get('admin/location', 'LocationController@getLocation');
+    Route::delete('admin/user/{id}', 'UsersController@deleteUser');
+
+
 });
