@@ -23,10 +23,16 @@ class ClassScheduleForUserTransformer extends Resource
             'lat' => $this->getLat(),
             'lng' => $this->getLng(),
             'about_studio' => $this->getStudioInfo(),
+            'about_class' => $this->getInfoAboutClass(),
             'activities' => $this->getActivities(),
             'count_credits' => $this->getCountCredits(),
             'reviews' => $this->getReviews()
         ];
+    }
+
+    private function getInfoAboutClass()
+    {
+        return $this->description;
     }
 
     private function getReviews()

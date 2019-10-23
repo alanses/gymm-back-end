@@ -21,8 +21,13 @@ class ClassSchedulesWithUserFilterTransformer extends Resource
             'distance' => 1,
             'trainer' => $this->getTrainerName(),
             'avg_rating' => $this->getAvgRating(),
-            'description' => $this->description
+            'description' => $this->getGymDescription()
         ];
+    }
+
+    private function getGymDescription()
+    {
+        return optional($this->gym)->description;
     }
 
     private function getActivity()
