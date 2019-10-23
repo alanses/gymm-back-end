@@ -20,9 +20,11 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/gyms/{id}', 'GymsController@getGym');
     Route::get('admin/location', 'LocationController@getLocation');
     Route::get('admin/reviews', 'ReviewsController@getListReviews');
+    Route::get('admin/review/{id}', 'ReviewsController@getReview');
 
     Route::put('admin/gyms/confirm/{id}', 'GymsController@confirmGym');
     Route::put('admin/gyms/{id}', 'GymsController@updateGym');
+    Route::put('admin/review', 'ReviewsController@updateReview');
 
     Route::delete('admin/user/{id}', 'UsersController@deleteUser');
 
