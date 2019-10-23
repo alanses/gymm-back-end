@@ -20,6 +20,7 @@ class CreateRatingForTrainersTable extends Migration
             $table->unsignedBigInteger('event_id')->nullable();
             $table->float('rating_value')->unsigned()->default(0);
             $table->text('comment')->nullable();
+            $table->smallInteger('published')->nullable()->default(0);
             $table->timestamps();
 
             $table->foreign('trainer_id')

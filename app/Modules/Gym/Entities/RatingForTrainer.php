@@ -13,8 +13,12 @@ class RatingForTrainer extends AbstractEntity
         'user_id',
         'rating_value',
         'comment',
-        'event_id'
+        'event_id',
+        'published'
     ];
+
+    public static $is_published = 1;
+    public static $is_not_published = 0;
 
     public function user()
     {

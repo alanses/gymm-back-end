@@ -6,6 +6,7 @@ use App\Modules\Booking\Http\Requests\SaveRateToClassRequest;
 use App\Modules\Booking\Tasks\MakeVisitBookingTask;
 use App\Modules\Booking\Tasks\SaveRatingForClassScheduleTask;
 use App\Modules\Booking\Tasks\SaveRatingToTrainerTask;
+use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\GymClass\Tasks\GetClassScheduleTask;
 use App\Modules\GymClass\Tasks\SaveClassScheduleDescriptionTask;
@@ -55,7 +56,8 @@ class SaveRateToClassAction extends AbstractAction
             'trainer_id' => $classSchedule->trainer_id,
             'rating_value' => $request->rating_value,
             'comment' => $request->description,
-            'event_id' => $classSchedule->id
+            'event_id' => $classSchedule->id,
+            'published' => RatingForTrainer::$is_published
         ];
     }
 

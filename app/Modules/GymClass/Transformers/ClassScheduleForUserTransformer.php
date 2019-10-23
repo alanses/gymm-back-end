@@ -4,6 +4,7 @@ namespace App\Modules\GymClass\Transformers;
 
 use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\GymClass\Entities\ClassScheduleDescription;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
 
 class ClassScheduleForUserTransformer extends Resource
@@ -33,7 +34,7 @@ class ClassScheduleForUserTransformer extends Resource
         if($trainer = $this->trainer) {
             return $trainer->ratings->map(function ($element) {
                 return [
-                    'when' => $element->created_at,
+                    'when' => $this->getCreatingDate($element),
                     'user_name' => optional($element->user)->name,
                     'description' => $element->comment,
                     'city_name' => $this->getCityName($element),
@@ -43,9 +44,14 @@ class ClassScheduleForUserTransformer extends Resource
         }
     }
 
-    private function getRating(RatingForTrainer $classScheduleDescription)
+    private function getCreatingDate(RatingForTrainer $ratingForTrainer)
     {
-        return $classScheduleDescription->rating_value;
+        return Carbon::parse($ratingForTrainer->created_at)->format('Y.m.d H:i');
+    }
+
+    private function getRating(RatingForTrainer $ratingForTrainer)
+    {
+        return $ratingForTrainer->rating_value;
     }
 
     private function getCityName(RatingForTrainer $classScheduleDescription)
