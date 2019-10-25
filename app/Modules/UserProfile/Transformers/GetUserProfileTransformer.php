@@ -3,8 +3,11 @@
 namespace App\Modules\UserProfile\Transformers;
 
 use App\Modules\Booking\Entities\BookingClass;
+use App\Modules\Photos\Entities\TrainerPhoto;
+use App\Modules\Photos\Entities\UserPhoto;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\Storage;
 
 class GetUserProfileTransformer extends Resource
 {
@@ -23,8 +26,26 @@ class GetUserProfileTransformer extends Resource
             'total_credits_into_plan' => $this->getTotalCredits(),
             'payment_card' => null,
             'plan_name' => $this->getPlanName(),
+            'avatar' => $this->getAvatar(),
             'reviews' => $this->getReviews(),
             'bookings' => $this->getBookings(),
+            'language' => $this->getLanguageInfo()
+        ];
+    }
+
+    private function getAvatar()
+    {
+        if($photo = $this->userPhoto) {
+            return env('APP_URL') . Storage::url(UserPhoto::getBasePathForUserPhotos() .  $photo->file_name);
+        }
+    }
+
+    private function getLanguageInfo()
+    {
+        return [
+            'language_id' => $this->language_id,
+            'short_name' => optional($this->language)->short_name,
+            'disabled_name' => optional($this->language)->disabled_name,
         ];
     }
 

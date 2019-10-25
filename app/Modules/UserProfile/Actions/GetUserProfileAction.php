@@ -29,7 +29,9 @@ class GetUserProfileAction extends AbstractAction
 //                        $query->where('start_date', '>', Carbon::now());
 //                    });
                 },
-                'reviews.classSchedule.activityType'
+                'reviews.classSchedule.activityType',
+                'language',
+                'userPhoto'
             ]
         );
     }
