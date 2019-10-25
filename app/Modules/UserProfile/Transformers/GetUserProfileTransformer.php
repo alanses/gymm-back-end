@@ -62,9 +62,17 @@ class GetUserProfileTransformer extends Resource
                 'address' => $this->getAddress($booking),
                 'trainer' => $this->getTrainerName($booking),
                 'count_credits' => $this->getCountCredits($booking),
-                'avg_rating' => $this->getAvgRating($booking)
+                'avg_rating' => $this->getAvgRating($booking),
+                'is_booked' => $this->checkIfBookingActual($booking)
             ];
         });
+    }
+
+    private function checkIfBookingActual(BookingClass $booking)
+    {
+        if($classSchedule = $booking->classSchedule) {
+            return ($classSchedule->start_date > Carbon::now()) ? true : false;
+        }
     }
 
     private function getCountCredits(BookingClass $booking)

@@ -24,10 +24,10 @@ class GetUserProfileAction extends AbstractAction
                             'gym',
                             'trainer.avgRating'
                         ]);
-                    }])
-                    ->whereHas('classSchedule', function($query) {
-                        $query->where('start_date', '>', Carbon::now());
-                    });
+                    }]);
+//                    ->whereHas('classSchedule', function($query) {
+//                        $query->where('start_date', '>', Carbon::now());
+//                    });
                 },
                 'reviews.classSchedule.activityType'
             ]
