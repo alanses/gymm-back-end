@@ -14,7 +14,6 @@ class PaymentController extends ApiController
 
     public function testPaymentConfirm()
     {
-        dd(request());
-        Log::info('test', request()->all());
+        Log::info('qwerty');
     }
 }
