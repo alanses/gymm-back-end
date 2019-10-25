@@ -7,6 +7,7 @@ use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Gym\Entities\Gym;
 use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\GymClass\Entities\ClassScheduleDescription;
+use App\Modules\Languages\Entities\Language;
 use App\Modules\Photos\Entities\UserPhoto;
 use App\Modules\Transactions\Entities\Transaction;
 use App\Modules\UserProfile\Entities\UserSetting;
@@ -39,7 +40,8 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         'email',
         'login',
         'password',
-        'user_type'
+        'user_type',
+        'language_id'
     ];
 
     /**
@@ -88,7 +90,7 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         return $this->hasMany(ClassScheduleDescription::class, 'user_id', 'id');
     }
 
-    public function reviews()
+    public function reviews() :HasMany
     {
         return $this->hasMany(RatingForTrainer::class, 'user_id', 'id');
     }
@@ -102,9 +104,14 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         return $this->hasOne(Gym::class, 'user_id', 'id');
     }
 
-    public function bookings()
+    public function bookings() :HasMany
     {
         return $this->hasMany(BookingClass::class, 'user_id', 'id');
+    }
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class, 'language_id', 'id');
     }
 
     /**
