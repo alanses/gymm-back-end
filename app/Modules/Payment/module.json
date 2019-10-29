@@ -6,9 +6,12 @@
     "active": 1,
     "order": 0,
     "providers": [
-        "App\\Modules\\Payment\\Providers\\PaymentServiceProvider"
+        "App\\Modules\\Payment\\Providers\\PaymentServiceProvider",
+        "App\\Modules\\Payment\\Providers\\PaymentSystemProvider"
     ],
     "aliases": {},
-    "files": [],
+    "files": [
+        "Helpers/PaymentHelper.php"
+    ],
     "requires": []
 }
