@@ -5,7 +5,9 @@ namespace App\Modules\Payment\Service;
 
 use App\Modules\Plans\Entities\Plan;
 use App\Modules\User\Entities\User;
+use Carbon\Carbon;
 use \GuzzleHttp\Client as HttpClient;
+use stdClass;
 
 class CloudPaymentsService
 {
@@ -17,10 +19,6 @@ class CloudPaymentsService
      * @var string
      */
     private $CloudPaymentsSecretApi;
-    /**
-     * @var HttpClient
-     */
-    private $client;
 
     public function __construct
     (
@@ -66,13 +64,82 @@ class CloudPaymentsService
                     'Amount' => $plan->payment_for_month,
                     'Currency' => 'USD',
                     'IpAddress' => $this->getIdAddress(),
-                    'AccountId' => $user->email,
+                    'AccountId' => $user->email ?? $user->name,
                     'Name' => $user->name,
                     'CardCryptogramPacket' => $cryptID
                 ]
             ])
             ->getBody()
             ->getContents();
+    }
+
+    public function confirmPayment(string $TransactionId, string $PaRes)
+    {
+        return $this->request()
+            ->post('https://api.cloudpayments.ru/payments/cards/post3ds', [
+                'json' => [
+                    'TransactionId' => $TransactionId,
+                    'PaRes' => $PaRes
+                ]
+            ])
+            ->getBody()
+            ->getContents();
+    }
+
+    public function makeSubscribe(stdClass $payment)
+    {
+        return $this->request()->post('https://api.cloudpayments.ru/subscriptions/create', [
+                'json' => [
+                    'token' => $this->getPaymentToken($payment),
+                    'accountId' => $this->getPaymentAccountId($payment),
+                    'description' => $this->getPaymentDescription($payment),
+                    'email' => $this->getUserEmail($payment),
+                    'amount' => $this->getAmount($payment),
+                    'currency' => $this->getCurrency($payment),
+                    'requireConfirmation' => false,
+                    'startDate' => $this->getDateForNextMonth(),
+                    'interval' => 'Month',
+                    'period' => 1
+                ]
+            ])
+            ->getBody()
+            ->getContents();
+    }
+
+    private function getDateForNextMonth()
+    {
+        return Carbon::now()
+            ->addMonth();
+    }
+
+    private function getCurrency(stdClass $payment)
+    {
+        return $payment->Model->PaymentCurrency;
+    }
+
+    private function getAmount(stdClass $payment)
+    {
+        return $payment->Model->Amount;
+    }
+
+    private function getUserEmail(stdClass $payment)
+    {
+        return $payment->Model->AccountId;
+    }
+
+    private function getPaymentDescription(stdClass $payment)
+    {
+        return 'monthly subscription to the service gym.com for user ' . $payment->Model->AccountId;
+    }
+
+    private function getPaymentToken(stdClass $payment)
+    {
+        return $payment->Model->Token;
+    }
+
+    private function getPaymentAccountId(stdClass $payment)
+    {
+        return $payment->Model->AccountId;
     }
 
     private function getIdAddress()

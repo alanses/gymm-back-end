@@ -4,8 +4,9 @@ namespace App\Modules\Payment\Tasks;
 
 use App\Modules\Payment\Service\CloudPaymentsService;
 use App\Ship\Abstraction\AbstractTask;
+use Illuminate\Http\Request;
 
-class SendPaymentTask extends AbstractTask
+class ConfirmPaymentTask extends AbstractTask
 {
     /**
      * @var CloudPaymentsService
@@ -17,9 +18,9 @@ class SendPaymentTask extends AbstractTask
         $this->cloudPaymentsService = $cloudPaymentsService;
     }
 
-    public function run($plan, $cryptID, $user)
+    public function run(Request $request)
     {
-        return json_decode($this->cloudPaymentsService->makePaymentsCardsCharge($plan, $cryptID, $user));
+        return json_decode($this->cloudPaymentsService
+                ->confirmPayment($request->MD, $request->PaRes));
     }
-
 }

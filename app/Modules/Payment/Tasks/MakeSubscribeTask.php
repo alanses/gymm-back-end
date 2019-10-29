@@ -4,8 +4,9 @@ namespace App\Modules\Payment\Tasks;
 
 use App\Modules\Payment\Service\CloudPaymentsService;
 use App\Ship\Abstraction\AbstractTask;
+use stdClass;
 
-class SendPaymentTask extends AbstractTask
+class MakeSubscribeTask extends AbstractTask
 {
     /**
      * @var CloudPaymentsService
@@ -17,9 +18,10 @@ class SendPaymentTask extends AbstractTask
         $this->cloudPaymentsService = $cloudPaymentsService;
     }
 
-    public function run($plan, $cryptID, $user)
+    public function run(stdClass $payment)
     {
-        return json_decode($this->cloudPaymentsService->makePaymentsCardsCharge($plan, $cryptID, $user));
+        return json_decode($this->cloudPaymentsService->makeSubscribe(
+            $payment
+        ));
     }
-
 }
