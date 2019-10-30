@@ -19,8 +19,14 @@ class UserLanguageTransformer extends Resource
             'name' => $this->name,
             'email' => $this->email,
             'language_id' => $this->language_id,
-            'language_name' => $this->getLanguageName()
+            'language_name' => $this->getLanguageName(),
+            'short_name' => $this->getLanguageShortName()
         ];
+    }
+
+    private function getLanguageShortName()
+    {
+        return optional($this->language)->short_name;
     }
 
     private function getLanguageName()
