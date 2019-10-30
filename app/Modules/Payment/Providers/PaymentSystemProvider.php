@@ -17,7 +17,7 @@ class PaymentSystemProvider extends ServiceProvider
         $this->app->singleton(CloudPaymentsService::class, function ($app) {
             return new CloudPaymentsService(
                 env('CLOUD_PAYMENTS_PUBLIC_ID', 'pk_f5473e33edb52cd05a238f382de02'),
-                env('CLOUD_PAYMENTS_SECRET_API', '264c8ac7333775e3d7ad65736cc81013'),
+                env('CLOUD_PAYMENTS_SECRET_API', '264c8ac7333775e3d7ad65736cc81013')
             );
         });
     }
