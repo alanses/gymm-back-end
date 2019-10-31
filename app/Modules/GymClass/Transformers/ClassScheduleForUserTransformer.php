@@ -40,11 +40,14 @@ class ClassScheduleForUserTransformer extends Resource
         if($trainer = $this->trainer) {
             return $trainer->ratings->map(function ($element) {
                 return [
-                    'when' => $this->getCreatingDate($element),
-                    'user_name' => optional($element->user)->name,
+                    'id' => $element->id,
                     'description' => $element->comment,
+                    'user_name' => optional($element->user)->name,
+                    'address' => $this->getAddress(),
+                    'when' => $this->getCreatingDate($element),
                     'city_name' => $this->getCityName($element),
-                    'rating' => $this->getRating($element)
+                    'rating_value' => $this->getRating($element),
+                    'created_at' => $element->created_at
                 ];
             });
         }

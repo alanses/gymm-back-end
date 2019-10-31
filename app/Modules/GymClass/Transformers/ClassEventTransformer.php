@@ -42,7 +42,7 @@ class ClassEventTransformer extends Resource
         return $this->reviews->map(function ($review) {
             return [
                 'id' => $review->id,
-                'description' => $review->description,
+                'description' => $review->comment,
                 'user_name' => $this->getUserName($review),
                 'address' => $this->getUserAddress($review),
                 'rating_value' => $review->rating_value,
