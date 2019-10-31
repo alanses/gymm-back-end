@@ -15,7 +15,7 @@ class ListAllClassSchedulesForGym extends Resource
     public function toArray($request)
     {
         return [
-            'event_id' => $this->id,
+            'id' => $this->id,
             'name' => $this->getActivityType(),
             'description' => $this->description,
             'credits' => $this->credits,
