@@ -46,7 +46,7 @@ class ClassScheduleForUserTransformer extends Resource
                     'address' => $this->getAddress(),
                     'when' => $this->getCreatingDate($element),
                     'city_name' => $this->getCityName($element),
-                    'rating_value' => $this->getRating($element),
+                    'rating' => $this->getRating($element),
                     'created_at' => $element->created_at
                 ];
             });

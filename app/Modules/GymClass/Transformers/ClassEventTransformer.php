@@ -3,6 +3,7 @@
 namespace App\Modules\GymClass\Transformers;
 
 use App\Modules\Gym\Entities\RatingForTrainer;
+use App\Modules\GymClass\Entities\ClassScheduleDescription;
 use App\Modules\Photos\Entities\Photo;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
@@ -47,7 +48,7 @@ class ClassEventTransformer extends Resource
                 'description' => $review->comment,
                 'user_name' => $this->getUserName($review),
                 'address' => $this->getUserAddress($review),
-                'rating_value' => $review->rating_value,
+                'rating' => $review->rating_value,
                 'created_at' => $review->created_at,
                 'when' => $this->getCreatingDate($review),
                 'city_name' => $this->getCityName($review),
@@ -55,7 +56,7 @@ class ClassEventTransformer extends Resource
         });
     }
 
-    private function getCityName(RatingForTrainer $classScheduleDescription)
+    private function getCityName(ClassScheduleDescription $classScheduleDescription)
     {
         if($user = $classScheduleDescription->user) {
             if($userSetting = $user->userSetting) {
