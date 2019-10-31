@@ -2,7 +2,9 @@
 
 namespace App\Modules\GymClass\Transformers;
 
+use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\Photos\Entities\Photo;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,9 +48,25 @@ class ClassEventTransformer extends Resource
                 'user_name' => $this->getUserName($review),
                 'address' => $this->getUserAddress($review),
                 'rating_value' => $review->rating_value,
-                'created_at' => $review->created_at
+                'created_at' => $review->created_at,
+                'when' => $this->getCreatingDate($review),
+                'city_name' => $this->getCityName($review),
             ];
         });
+    }
+
+    private function getCityName(RatingForTrainer $classScheduleDescription)
+    {
+        if($user = $classScheduleDescription->user) {
+            if($userSetting = $user->userSetting) {
+                return optional($userSetting->city)->displayed_name;
+            }
+        }
+    }
+
+    private function getCreatingDate($review)
+    {
+        return Carbon::parse($review->created_at)->format('Y.m.d H:i');
     }
 
 
