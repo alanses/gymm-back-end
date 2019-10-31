@@ -3,13 +3,13 @@
 namespace App\Modules\Payment\Actions;
 
 use App\Modules\Payment\Http\Requests\PaymentRequest;
-use App\Modules\Payment\Tasks\AddPointsToAccountTask;
 use App\Modules\Payment\Tasks\CheckIfNeed3DVerificationTask;
 use App\Modules\Payment\Tasks\CheckIfPaymentConfirmTask;
 use App\Modules\Payment\Tasks\CheckIfTransactionRejectedTask;
-use App\Modules\Payment\Tasks\GetPlanTask;
 use App\Modules\Payment\Tasks\MakeSubscribeTask;
 use App\Modules\Payment\Tasks\SendPaymentTask;
+use App\Modules\Plans\Tasks\GetPlanTask;
+use App\Modules\Plans\Tasks\SubscribeUserToPlanTask;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Abstraction\AbstractAction;
 
@@ -33,9 +33,11 @@ class MakePaymentAction extends AbstractAction
 
         $this->call(CheckIfPaymentConfirmTask::class, [$payment]);
 
-        $this->call(AddPointsToAccountTask::class, [$plan, $user]);
-
         $this->call(MakeSubscribeTask::class, [$payment]);
+
+        $this->call(SubscribeUserToPlanTask::class, [$plan], [
+            ['whereUserIdIs' => [$user->id]]
+        ]);
     }
 
     private function getCardCryptogramPacket(PaymentRequest $request)

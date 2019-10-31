@@ -4,6 +4,7 @@ namespace App\Modules\User\Tasks;
 
 use App\Modules\User\Repositories\UserRepository;
 use App\Ship\Abstraction\AbstractTask;
+use App\Ship\Criterias\Eloquent\OrWhereCriteria;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
 
 class GetUserTask extends AbstractTask
@@ -35,5 +36,10 @@ class GetUserTask extends AbstractTask
     public function getByField(string $fieldName, $value)
     {
         $this->repository->pushCriteria(new ThisEqualThatCriteria($fieldName, $value));
+    }
+
+    public function whereLoginIs(string $value)
+    {
+        $this->repository->pushCriteria(new OrWhereCriteria('login', $value));
     }
 }

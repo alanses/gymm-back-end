@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Payment\Tasks;
+namespace App\Modules\Plans\Tasks;
 
 use App\Modules\Plans\Repositories\PlanRepository;
 use App\Ship\Abstraction\AbstractTask;

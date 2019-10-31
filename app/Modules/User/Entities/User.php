@@ -114,6 +114,11 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         return $this->belongsTo(Language::class, 'language_id', 'id');
     }
 
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
+    }
+
     /**
      * @param string $type
      * @return int

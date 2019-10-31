@@ -5,9 +5,13 @@ namespace App\Modules\Payment\Http\Controllers;
 use App\Exceptions\Need3DVerificationException;
 use App\Modules\Payment\Actions\ConfirmPaymentAction;
 use App\Modules\Payment\Actions\MakePaymentAction;
+use App\Modules\Payment\Actions\RegisterUserSubscribeAction;
 use App\Modules\Payment\Http\Requests\PaymentRequest;
 use App\Modules\Payment\Service\CloudPaymentsService;
 use App\Modules\Payment\Transformers\Validation3DTransformer;
+use App\Modules\Plans\Tasks\GetPlanTask;
+use App\Modules\Transactions\Tasks\RegisterTransactionTask;
+use App\Modules\User\Tasks\GetUserTask;
 use App\Ship\Parents\ApiController;
 use Illuminate\Http\Request;
 
@@ -43,7 +47,9 @@ class PaymentController extends ApiController
 
     public function confirmPayment(Request $request)
     {
-        $this->call(ConfirmPaymentAction::class, [$request]);
+        $subscribe = $this->call(ConfirmPaymentAction::class, [$request]);
+
+        $this->call(RegisterUserSubscribeAction::class, [$subscribe]);
 
         return view('confirm-payment');
     }

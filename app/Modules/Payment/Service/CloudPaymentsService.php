@@ -41,11 +41,6 @@ class CloudPaymentsService
         ]);
     }
 
-    private function getToken()
-    {
-        return 'Basic ' . base64_encode($this->CloudPaymentsPublicID . ':' . $this->CloudPaymentsSecretApi);
-    }
-
     public function testConnect()
     {
         $request = $this->request()->get('https://api.cloudpayments.ru/test');
@@ -64,7 +59,7 @@ class CloudPaymentsService
                     'Amount' => $plan->payment_for_month,
                     'Currency' => 'USD',
                     'IpAddress' => $this->getIdAddress(),
-                    'AccountId' => $user->email ?? $user->name,
+                    'AccountId' => $user->email ?? $user->login,
                     'Name' => $user->name,
                     'CardCryptogramPacket' => $cryptID
                 ]
@@ -104,6 +99,11 @@ class CloudPaymentsService
             ])
             ->getBody()
             ->getContents();
+    }
+
+    private function getToken()
+    {
+        return 'Basic ' . base64_encode($this->CloudPaymentsPublicID . ':' . $this->CloudPaymentsSecretApi);
     }
 
     private function getDateForNextMonth()
