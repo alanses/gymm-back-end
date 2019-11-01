@@ -4,7 +4,7 @@ namespace App\Modules\Payment\Transformers;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class Validation3DTransformer extends Resource
+class ValidationSubscribe3DTransformer extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -25,7 +25,7 @@ class Validation3DTransformer extends Resource
         $PaReq = '?PaReq=' . base64_encode($this->getPaReq());
         $AcsUrl = '&AcsUrl=' . base64_encode($this->getAcsUrl());
         $MD = '&MD=' . base64_encode($this->getMD());
-        return env('APP_URL') . 'payment' . $PaReq . $AcsUrl . $MD;
+        return env('APP_URL') . 'subscribe' . $PaReq . $AcsUrl . $MD;
     }
 
     private function getPaReq() {

@@ -23,7 +23,7 @@ class RegisterTransactionTask extends AbstractTask
         $this->totalPoints = 0;
     }
 
-    public function run(Plan $plan, User $user)
+    public function run($plan, User $user)
     {
         return $this->repository->create([
             'user_id' => $user->id,
@@ -40,7 +40,7 @@ class RegisterTransactionTask extends AbstractTask
         return !$lastTransaction ? 0 : $lastTransaction->total;
     }
 
-    public function addPoints(User $user, Plan $plan)
+    public function addPoints(User $user, $plan)
     {
         $currentPoints = $this->getCurrentPointOfUser($user);
 
@@ -66,9 +66,9 @@ class RegisterTransactionTask extends AbstractTask
     public function setOperationType(string $operationType)
     {
         if($operationType == 'add') {
-            return Transaction::$ADD_BONUS;
+            $this->operationType = Transaction::$ADD_BONUS;
         } elseif ($operationType == 'remove') {
-            return Transaction::$REMOVE_BONUS;
+            $this->operationType = Transaction::$REMOVE_BONUS;
         } else {
             throw new \LogicException('Operation Type Not found');
         }

@@ -3,6 +3,7 @@
 
 namespace App\Modules\Payment\Service;
 
+use App\Modules\Payment\Entities\PaymentPlan;
 use App\Modules\Plans\Entities\Plan;
 use App\Modules\User\Entities\User;
 use Carbon\Carbon;
@@ -50,13 +51,31 @@ class CloudPaymentsService
         return $response;
     }
 
-    public function makePaymentsCardsCharge(Plan $plan, string $cryptID, User $user)
+    public function makePaymentSubscribe(Plan $plan, string $cryptID, User $user)
     {
         return $this->request()
             ->post('https://api.cloudpayments.ru/payments/cards/charge', [
                 'json' => [
                     'publicId' => $this->CloudPaymentsPublicID,
                     'Amount' => $plan->payment_for_month,
+                    'Currency' => 'USD',
+                    'IpAddress' => $this->getIdAddress(),
+                    'AccountId' => $user->email ?? $user->login,
+                    'Name' => $user->name,
+                    'CardCryptogramPacket' => $cryptID
+                ]
+            ])
+            ->getBody()
+            ->getContents();
+    }
+
+    public function makePayment(PaymentPlan $paymentPlan, string $cryptID, User $user)
+    {
+        return $this->request()
+            ->post('https://api.cloudpayments.ru/payments/cards/charge', [
+                'json' => [
+                    'publicId' => $this->CloudPaymentsPublicID,
+                    'Amount' => $paymentPlan->price,
                     'Currency' => 'USD',
                     'IpAddress' => $this->getIdAddress(),
                     'AccountId' => $user->email ?? $user->login,
@@ -84,19 +103,30 @@ class CloudPaymentsService
     public function makeSubscribe(stdClass $payment)
     {
         return $this->request()->post('https://api.cloudpayments.ru/subscriptions/create', [
-                'json' => [
-                    'token' => $this->getPaymentToken($payment),
-                    'accountId' => $this->getPaymentAccountId($payment),
-                    'description' => $this->getPaymentDescription($payment),
-                    'email' => $this->getUserEmail($payment),
-                    'amount' => $this->getAmount($payment),
-                    'currency' => $this->getCurrency($payment),
-                    'requireConfirmation' => false,
-                    'startDate' => $this->getDateForNextMonth(),
-                    'interval' => 'Month',
-                    'period' => 1
-                ]
-            ])
+            'json' => [
+                'token' => $this->getPaymentToken($payment),
+                'accountId' => $this->getPaymentAccountId($payment),
+                'description' => $this->getPaymentDescription($payment),
+                'email' => $this->getUserEmail($payment),
+                'amount' => $this->getAmount($payment),
+                'currency' => $this->getCurrency($payment),
+                'requireConfirmation' => false,
+                'startDate' => $this->getDateForNextMonth(),
+                'interval' => 'Month',
+                'period' => 1
+            ]
+        ])
+            ->getBody()
+            ->getContents();
+    }
+
+    public function makeUnFollowForSubscribe(string $subID)
+    {
+        return $this->request()->post('https://api.cloudpayments.ru/subscriptions/cancel', [
+            'json' => [
+                'Id' => $subID
+            ]
+        ])
             ->getBody()
             ->getContents();
     }

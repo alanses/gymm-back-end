@@ -14,5 +14,7 @@ use Illuminate\Http\Request;
 */
 Route::middleware('auth:api')->group(function () {
     Route::get('payment-connect', 'PaymentController@testingConnect');
-    Route::post('make/payment', 'PaymentController@makePayment');
+    Route::post('subscribe', 'SubscribePaymentController@subscribe');
+    Route::post('payment', 'PaymentController@payment');
+    Route::delete('unfollow/subscribe', 'SubscribePaymentController@makeUnFollowSubscribe');
 });

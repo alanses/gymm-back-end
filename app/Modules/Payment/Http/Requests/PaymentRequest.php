@@ -16,7 +16,7 @@ class PaymentRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'plan_id' => 'required|exists:plans,id',
+            'payment_plan_id' => 'required|exists:payments_plans,id',
             'CardCryptogramPacket' => 'required'
         ];
     }

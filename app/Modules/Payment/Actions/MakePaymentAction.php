@@ -4,12 +4,10 @@ namespace App\Modules\Payment\Actions;
 
 use App\Modules\Payment\Http\Requests\PaymentRequest;
 use App\Modules\Payment\Tasks\CheckIfNeed3DVerificationTask;
-use App\Modules\Payment\Tasks\CheckIfPaymentConfirmTask;
 use App\Modules\Payment\Tasks\CheckIfTransactionRejectedTask;
-use App\Modules\Payment\Tasks\MakeSubscribeTask;
-use App\Modules\Payment\Tasks\SendPaymentTask;
-use App\Modules\Plans\Tasks\GetPlanTask;
-use App\Modules\Plans\Tasks\SubscribeUserToPlanTask;
+use App\Modules\Payment\Tasks\GetPaymentPlanTask;
+use App\Modules\Payment\Tasks\SendPayment;
+use App\Modules\Transactions\Tasks\RegisterTransactionTask;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Abstraction\AbstractAction;
 
@@ -19,24 +17,23 @@ class MakePaymentAction extends AbstractAction
     {
         $user = $this->call(GetAuthenticatedUserTask::class);
 
-        $plan = $this->call(GetPlanTask::class, [], [
-            ['findByField' => ['id', $this->getPlanId($request)]]
+        $paymentPlan = $this->call(GetPaymentPlanTask::class, [], [
+            ['findByField' => ['id', $this->getPaymentPlanId($request)]]
         ]);
 
         $cryptID = $this->getCardCryptogramPacket($request);
 
-        $payment = $this->call(SendPaymentTask::class, [$plan, $cryptID, $user]);
+        $payment = $this->call(SendPayment::class, [], [
+            ['makePayment' => [$paymentPlan, $cryptID, $user]]
+        ]);
 
         $this->call(CheckIfTransactionRejectedTask::class, [$payment]);
 
         $this->call(CheckIfNeed3DVerificationTask::class, [$payment]);
 
-        $this->call(CheckIfPaymentConfirmTask::class, [$payment]);
-
-        $this->call(MakeSubscribeTask::class, [$payment]);
-
-        $this->call(SubscribeUserToPlanTask::class, [$plan], [
-            ['whereUserIdIs' => [$user->id]]
+        $this->call(RegisterTransactionTask::class, [$paymentPlan, $user], [
+            ['addPoints' => [$user, $paymentPlan]],
+            ['setOperationType' => ['add']]
         ]);
     }
 
@@ -45,8 +42,8 @@ class MakePaymentAction extends AbstractAction
         return $request->CardCryptogramPacket;
     }
 
-    private function getPlanId(PaymentRequest $request)
+    private function getPaymentPlanId(PaymentRequest $request)
     {
-        return $request->plan_id;
+        return $request->payment_plan_id;
     }
 }

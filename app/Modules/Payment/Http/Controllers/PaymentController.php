@@ -5,40 +5,30 @@ namespace App\Modules\Payment\Http\Controllers;
 use App\Exceptions\Need3DVerificationException;
 use App\Modules\Payment\Actions\ConfirmPaymentAction;
 use App\Modules\Payment\Actions\MakePaymentAction;
-use App\Modules\Payment\Actions\RegisterUserSubscribeAction;
+use App\Modules\Payment\Actions\RegisterUserPaymentAction;
 use App\Modules\Payment\Http\Requests\PaymentRequest;
-use App\Modules\Payment\Service\CloudPaymentsService;
-use App\Modules\Payment\Transformers\Validation3DTransformer;
-use App\Modules\Plans\Tasks\GetPlanTask;
-use App\Modules\Transactions\Tasks\RegisterTransactionTask;
-use App\Modules\User\Tasks\GetUserTask;
+use App\Modules\Payment\Transformers\PaymentTransformer;
+use App\Modules\Payment\Transformers\ValidationPayment3DTransformer;
 use App\Ship\Parents\ApiController;
 use Illuminate\Http\Request;
 
 class PaymentController extends ApiController
 {
-    public function testingConnect(CloudPaymentsService $cloudPaymentsService)
-    {
-        $request = $cloudPaymentsService->testConnect();
-
-        return $this->success($request);
-    }
-
-    public function makePayment(PaymentRequest $request)
+    public function payment(PaymentRequest $request)
     {
         try {
             $payment = $this->call(MakePaymentAction::class, [$request]);
 
-            return $payment;
+            return new PaymentTransformer($payment);
 
         } catch (Need3DVerificationException $exception) {
-            return new Validation3DTransformer($exception->getData());
+            return new ValidationPayment3DTransformer($exception->getData());
         }
     }
 
     public function paymentForm(Request $request)
     {
-        return view('payment', [
+        return view('payment::payments.payment', [
             'PaReq' => base64_decode($request->PaReq),
             'AcsUrl' => base64_decode($request->AcsUrl),
             'MD' => base64_decode($request->MD),
@@ -47,10 +37,10 @@ class PaymentController extends ApiController
 
     public function confirmPayment(Request $request)
     {
-        $subscribe = $this->call(ConfirmPaymentAction::class, [$request]);
+        $payment = $this->call(ConfirmPaymentAction::class, [$request]);
 
-        $this->call(RegisterUserSubscribeAction::class, [$subscribe]);
+        $this->call(RegisterUserPaymentAction::class, [$payment]);
 
-        return view('confirm-payment');
+        return view('payment::payments.confirm-payment');
     }
 }

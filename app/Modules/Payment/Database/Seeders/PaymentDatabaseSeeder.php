@@ -16,6 +16,8 @@ class PaymentDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
+        $this->call(SeedPaymentPlansTableTableSeeder::class);
+
         // $this->call("OthersTableSeeder");
     }
 }

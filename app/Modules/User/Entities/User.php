@@ -9,6 +9,7 @@ use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\GymClass\Entities\ClassScheduleDescription;
 use App\Modules\Languages\Entities\Language;
 use App\Modules\Photos\Entities\UserPhoto;
+use App\Modules\Transactions\Entities\SubscribeHistory;
 use App\Modules\Transactions\Entities\Transaction;
 use App\Modules\UserProfile\Entities\UserSetting;
 use App\Ship\Abstraction\AbstractEntity;
@@ -117,6 +118,11 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     public function transaction()
     {
         return $this->hasMany(Transaction::class, 'user_id', 'id');
+    }
+
+    public function userSubscribeHistory()
+    {
+        return $this->hasMany(SubscribeHistory::class, 'user_id', 'id');
     }
 
     /**

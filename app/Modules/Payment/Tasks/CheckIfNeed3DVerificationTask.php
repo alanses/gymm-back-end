@@ -11,7 +11,7 @@ class CheckIfNeed3DVerificationTask extends AbstractTask
     public function run(stdClass $payment)
     {
         if($this->checkIfStatusRejected($payment) && $this->checkIfNeed3DVerification($payment)) {
-            throw new Need3DVerificationException('need 3D verification', $payment);
+            throw new Need3DVerificationException('Need 3D verification', $payment);
         }
     }
 
