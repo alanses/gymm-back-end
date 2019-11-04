@@ -17,4 +17,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('subscribe', 'SubscribePaymentController@subscribe');
     Route::post('payment', 'PaymentController@payment');
     Route::delete('unfollow/subscribe', 'SubscribePaymentController@makeUnFollowSubscribe');
+
+    Route::get('payments', 'PaymentController@listPaymentsPlans');
 });

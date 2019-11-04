@@ -3,11 +3,12 @@
 namespace App\Modules\Payment\Http\Controllers;
 
 use App\Exceptions\Need3DVerificationException;
-use App\Exceptions\TransactionRejectedException;
 use App\Modules\Payment\Actions\ConfirmPaymentAction;
+use App\Modules\Payment\Actions\GetListPaymentsPlansAction;
 use App\Modules\Payment\Actions\MakePaymentAction;
 use App\Modules\Payment\Actions\RegisterUserPaymentAction;
 use App\Modules\Payment\Http\Requests\PaymentRequest;
+use App\Modules\Payment\Transformers\ListPaymentsTransformer;
 use App\Modules\Payment\Transformers\PaymentTransformer;
 use App\Modules\Payment\Transformers\ValidationPayment3DTransformer;
 use App\Ship\Parents\ApiController;
@@ -43,5 +44,12 @@ class PaymentController extends ApiController
         $this->call(RegisterUserPaymentAction::class, [$payment]);
 
         return view('payment::payments.confirm-payment');
+    }
+
+    public function listPaymentsPlans()
+    {
+        $payments = $this->call(GetListPaymentsPlansAction::class);
+
+        return ListPaymentsTransformer::collection($payments);
     }
 }
