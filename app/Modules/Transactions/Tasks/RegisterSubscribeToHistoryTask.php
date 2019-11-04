@@ -26,12 +26,18 @@ class RegisterSubscribeToHistoryTask extends AbstractTask
             [
                 'user_id' => $user->id,
                 'plan_id' => $plan->id,
+                'subscribe_id' => $this->getSubId($subscribe),
                 'amount' => $this->getAmount($subscribe),
                 'currency' => $this->getCurrency($subscribe),
                 'next_transaction_date' => $this->getNextTransactionDate($subscribe),
                 'description' => $this->getDescription($subscribe),
             ]
         );
+    }
+
+    private function getSubId(stdClass $subscribe)
+    {
+        return $subscribe->Model->Id;
     }
 
     private function getNextTransactionDate(stdClass $subscribe)

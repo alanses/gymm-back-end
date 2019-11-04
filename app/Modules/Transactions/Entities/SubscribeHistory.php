@@ -14,6 +14,7 @@ class SubscribeHistory extends AbstractEntity
         'amount',
         'currency',
         'next_transaction_date',
-        'description'
+        'description',
+        'subscribe_id'
     ];
 }

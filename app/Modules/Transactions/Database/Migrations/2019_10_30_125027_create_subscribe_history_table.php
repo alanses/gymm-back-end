@@ -17,6 +17,7 @@ class CreateSubscribeHistoryTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('plan_id')->nullable();
+            $table->string('subscribe_id')->nullable();
             $table->integer('amount')->nullable();
             $table->string('currency')->nullable();
             $table->timestamp('next_transaction_date')->nullable();

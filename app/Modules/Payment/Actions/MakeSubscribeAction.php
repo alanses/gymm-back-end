@@ -11,6 +11,7 @@ use App\Modules\Payment\Tasks\MakeSubscribeTask;
 use App\Modules\Payment\Tasks\SendPayment;
 use App\Modules\Plans\Tasks\GetPlanTask;
 use App\Modules\Plans\Tasks\SubscribeUserToPlanTask;
+use App\Modules\Transactions\Tasks\RegisterSubscribeToHistoryTask;
 use App\Modules\Transactions\Tasks\RegisterTransactionTask;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Abstraction\AbstractAction;
@@ -37,11 +38,13 @@ class MakeSubscribeAction extends AbstractAction
 
         $this->call(CheckIfNeed3DVerificationTask::class, [$payment]);
 
-        $this->call(MakeSubscribeTask::class, [$payment]);
+        $subscribe = $this->call(MakeSubscribeTask::class, [$payment]);
 
         $this->call(SubscribeUserToPlanTask::class, [$plan, $user], [
             ['whereUserIdIs' => [$user->id]]
         ]);
+
+        $this->call(RegisterSubscribeToHistoryTask::class, [$plan, $user, $subscribe]);
 
         $this->call(RegisterTransactionTask::class, [$plan, $user], [
             ['addPoints' => [$user, $plan]],
