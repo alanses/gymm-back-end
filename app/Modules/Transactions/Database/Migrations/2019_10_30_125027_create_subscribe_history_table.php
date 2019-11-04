@@ -1,5 +1,6 @@
 <?php
 
+use App\Modules\Transactions\Entities\SubscribeHistory;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -22,6 +23,7 @@ class CreateSubscribeHistoryTable extends Migration
             $table->string('currency')->nullable();
             $table->timestamp('next_transaction_date')->nullable();
             $table->text('description')->nullable();
+            $table->smallInteger('status')->default(SubscribeHistory::$IS_ACTIVE);
             $table->timestamps();
 
             $table->foreign('user_id')

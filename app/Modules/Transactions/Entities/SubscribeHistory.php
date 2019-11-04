@@ -15,6 +15,10 @@ class SubscribeHistory extends AbstractEntity
         'currency',
         'next_transaction_date',
         'description',
-        'subscribe_id'
+        'subscribe_id',
+        'status'
     ];
+
+    public static $IS_ACTIVE = 1;
+    public static $IS_NOT_ACTIVE = 0;
 }

@@ -17,8 +17,10 @@ class UnFollowSubscribeTask extends AbstractTask
         $this->cloudPaymentsService = $cloudPaymentsService;
     }
 
-    public function run(string $subID) :\stdClass
+    public function run(?string $subID) :\stdClass
     {
-        return json_decode($this->cloudPaymentsService->makeUnFollowForSubscribe($subID));
+        if($subID) {
+            return json_decode($this->cloudPaymentsService->makeUnFollowForSubscribe($subID));
+        }
     }
 }
