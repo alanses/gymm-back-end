@@ -36,7 +36,7 @@ class MakeSubscribeAction extends AbstractAction
 
         $this->call(MakeSubscribeTask::class, [$payment]);
 
-        $this->call(SubscribeUserToPlanTask::class, [$plan], [
+        $this->call(SubscribeUserToPlanTask::class, [$plan, $user], [
             ['whereUserIdIs' => [$user->id]]
         ]);
 
