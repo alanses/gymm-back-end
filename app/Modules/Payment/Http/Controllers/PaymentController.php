@@ -3,6 +3,7 @@
 namespace App\Modules\Payment\Http\Controllers;
 
 use App\Exceptions\Need3DVerificationException;
+use App\Exceptions\TransactionRejectedException;
 use App\Modules\Payment\Actions\ConfirmPaymentAction;
 use App\Modules\Payment\Actions\MakePaymentAction;
 use App\Modules\Payment\Actions\RegisterUserPaymentAction;

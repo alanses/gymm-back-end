@@ -15,6 +15,8 @@ class UnFollowSubscribeAction extends AbstractAction
 
         $subscribe = $this->call(GetUserSubscribeTask::class, [$user]);
 
+        dd($subscribe);
+
         $this->call(UnFollowSubscribeTask::class);
     }
 }

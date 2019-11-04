@@ -2,16 +2,16 @@
 
 namespace App\Modules\Payment\Tasks;
 
+use App\Exceptions\TransactionRejectedException;
 use App\Ship\Abstraction\AbstractTask;
 use stdClass;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class CheckIfTransactionRejectedTask extends AbstractTask
 {
     public function run(stdClass $payment)
     {
         if($this->checkIfStatusRejected($payment) && $this->checkStatusDeclined($payment)) {
-            throw new BadRequestHttpException($payment->Model->CardHolderMessage);
+            throw new TransactionRejectedException($payment->Model->CardHolderMessage);
         }
     }
 
