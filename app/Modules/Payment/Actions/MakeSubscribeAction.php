@@ -6,6 +6,7 @@ use App\Modules\Payment\Http\Requests\SubscribeRequest;
 use App\Modules\Payment\Tasks\CheckIfNeed3DVerificationTask;
 use App\Modules\Payment\Tasks\CheckIfPaymentConfirmTask;
 use App\Modules\Payment\Tasks\CheckIfTransactionRejectedTask;
+use App\Modules\Payment\Tasks\CheckIfTransactionRejectedWithOutViewTask;
 use App\Modules\Payment\Tasks\MakeSubscribeTask;
 use App\Modules\Payment\Tasks\SendPayment;
 use App\Modules\Plans\Tasks\GetPlanTask;
@@ -30,7 +31,9 @@ class MakeSubscribeAction extends AbstractAction
             ['makeSubscribe' => [$plan, $cryptID, $user]]
         ]);
 
-        $this->call(CheckIfTransactionRejectedTask::class, [$payment]);
+        $this->call(CheckIfTransactionRejectedWithOutViewTask::class, [$payment]);
+
+//        $this->call(CheckIfTransactionRejectedTask::class, [$payment]);
 
         $this->call(CheckIfNeed3DVerificationTask::class, [$payment]);
 
