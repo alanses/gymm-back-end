@@ -2,6 +2,8 @@
 
 namespace App\Modules\Payment\Actions;
 
+use App\Modules\Payment\Tasks\MakeSettingBonusToAccountTask;
+use App\Modules\Payment\Tasks\RemoveOldSubscribeSubTask;
 use App\Modules\Plans\Tasks\GetPlanTask;
 use App\Modules\Plans\Tasks\SubscribeUserToPlanTask;
 use App\Modules\Transactions\Tasks\RegisterSubscribeToHistoryTask;
@@ -23,6 +25,8 @@ class RegisterUserSubscribeAction extends AbstractAction
             ['findByField' => ['payment_for_month', $this->getPayment($subscribe)]]
         ]);
 
+        $this->call(RemoveOldSubscribeSubTask::class, [$user]);
+
         $this->call(SubscribeUserToPlanTask::class, [$plan, $user]);
 
         $this->call(RegisterSubscribeToHistoryTask::class, [$plan, $user, $subscribe]);
@@ -31,6 +35,8 @@ class RegisterUserSubscribeAction extends AbstractAction
             ['addPoints' => [$user, $plan]],
             ['setOperationType' => ['add']]
         ]);
+
+        $this->call(MakeSettingBonusToAccountTask::class, [$user, $plan, $subscribe]);
     }
 
     private function getUserEmailOrLogin(stdClass $subscribe)

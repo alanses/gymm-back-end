@@ -5,8 +5,9 @@ namespace App\Modules\Payment\Actions;
 use App\Modules\Payment\Http\Requests\SubscribeRequest;
 use App\Modules\Payment\Tasks\CheckIfNeed3DVerificationTask;
 use App\Modules\Payment\Tasks\CheckIfTransactionRejectedWithOutViewTask;
+use App\Modules\Payment\Tasks\MakeSettingBonusToAccountTask;
 use App\Modules\Payment\Tasks\MakeSubscribeTask;
-use App\Modules\Payment\Tasks\RemoveOldSubscribeTask;
+use App\Modules\Payment\Tasks\RemoveOldSubscribeSubTask;
 use App\Modules\Payment\Tasks\SendPayment;
 use App\Modules\Plans\Tasks\GetPlanTask;
 use App\Modules\Plans\Tasks\SubscribeUserToPlanTask;
@@ -35,7 +36,7 @@ class MakeSubscribeAction extends AbstractAction
 
         $this->call(CheckIfNeed3DVerificationTask::class, [$payment]);
 
-        $this->call(RemoveOldSubscribeTask::class, [$user]);
+        $this->call(RemoveOldSubscribeSubTask::class, [$user]);
 
         $subscribe = $this->call(MakeSubscribeTask::class, [$payment]);
 
@@ -49,6 +50,8 @@ class MakeSubscribeAction extends AbstractAction
             ['addPoints' => [$user, $plan]],
             ['setOperationType' => ['add']]
         ]);
+
+        $this->call(MakeSettingBonusToAccountTask::class, [$user, $plan, $subscribe]);
 
         return $payment;
     }

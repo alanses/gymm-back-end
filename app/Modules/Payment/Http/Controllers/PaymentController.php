@@ -8,6 +8,7 @@ use App\Modules\Payment\Actions\GetListPaymentsPlansAction;
 use App\Modules\Payment\Actions\MakePaymentAction;
 use App\Modules\Payment\Actions\RegisterUserPaymentAction;
 use App\Modules\Payment\Http\Requests\PaymentRequest;
+use App\Modules\Payment\Service\CloudPaymentsService;
 use App\Modules\Payment\Transformers\ListPaymentsTransformer;
 use App\Modules\Payment\Transformers\PaymentTransformer;
 use App\Modules\Payment\Transformers\ValidationPayment3DTransformer;
@@ -51,5 +52,12 @@ class PaymentController extends ApiController
         $payments = $this->call(GetListPaymentsPlansAction::class);
 
         return ListPaymentsTransformer::collection($payments);
+    }
+
+    public function test(CloudPaymentsService $cloudPaymentsService)
+    {
+        dd(
+            json_decode($cloudPaymentsService->infoAboutPayment('sc_1673101be2c2086f3357847f3feab'))
+        );
     }
 }

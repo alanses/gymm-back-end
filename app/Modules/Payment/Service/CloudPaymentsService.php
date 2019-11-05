@@ -131,6 +131,18 @@ class CloudPaymentsService
             ->getContents();
     }
 
+    public function infoAboutPayment($id)
+    {
+        return $this->request()
+            ->post('https://api.cloudpayments.ru/subscriptions/get', [
+                'json' => [
+                    'Id' => $id
+                ]
+            ])
+            ->getBody()
+            ->getContents();
+    }
+
     private function getToken()
     {
         return 'Basic ' . base64_encode($this->CloudPaymentsPublicID . ':' . $this->CloudPaymentsSecretApi);

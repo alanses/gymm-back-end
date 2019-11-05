@@ -37,6 +37,21 @@ class DateHelperService extends AbstractService
         return $period;
     }
 
+    public function getListDatesForSubscribe($start_date)
+    {
+        $lastDateInNextYear = date('Y', strtotime('+1 year')) . '-12-31';
+
+        $todayDate = Carbon::parse($start_date)->format('Y-m-d');
+
+        $start    = new DateTime($todayDate);
+        $end      = new DateTime($lastDateInNextYear);
+
+        $interval = DateInterval::createFromDateString($this->getPeriodType(3));
+        $period   = new DatePeriod($start, $interval, $end);
+
+        return $period;
+    }
+
     protected function getPeriodType($requingTypes)
     {
         return self::$REQUIRING_TYPES[$requingTypes];
