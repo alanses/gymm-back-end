@@ -4,7 +4,7 @@ namespace App\Modules\Admin\Http\Requests;
 
 use App\Ship\Abstraction\AbstractRequest;
 
-class ReviewRequest extends AbstractRequest
+class ConfirmReviewRequest extends AbstractRequest
 {
     protected $urlParameters = [
         'id'
@@ -19,7 +19,7 @@ class ReviewRequest extends AbstractRequest
     {
         return [
             'id' => 'required|integer|exists:rating_for_trainers,id',
-            'comment' => 'nullable|string'
+            'available' => 'required|in:0,1'
         ];
     }
 

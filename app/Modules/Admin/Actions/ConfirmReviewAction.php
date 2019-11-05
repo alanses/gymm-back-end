@@ -2,13 +2,13 @@
 
 namespace App\Modules\Admin\Actions;
 
-use App\Modules\Admin\Http\Requests\ReviewRequest;
+use App\Modules\Admin\Http\Requests\ConfirmReviewRequest;
 use App\Modules\Gym\Tasks\UpdateRatingForTrainerTask;
 use App\Ship\Abstraction\AbstractAction;
 
-class UpdateReviewAction extends AbstractAction
+class ConfirmReviewAction extends AbstractAction
 {
-    public function run(ReviewRequest $request)
+    public function run(ConfirmReviewRequest $request)
     {
         return $this->call(UpdateRatingForTrainerTask::class, [
             $this->getDataForUpdateTrainerRating($request),
@@ -16,8 +16,10 @@ class UpdateReviewAction extends AbstractAction
         ]);
     }
 
-    private function getDataForUpdateTrainerRating(ReviewRequest $request)
+    private function getDataForUpdateTrainerRating(ConfirmReviewRequest $request)
     {
-        return $request->only(['comment']);
+        return [
+            'published' => (int)$request->available
+        ];
     }
 }
