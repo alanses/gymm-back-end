@@ -14,6 +14,7 @@ use App\Modules\Payment\Transformers\PaymentTransformer;
 use App\Modules\Payment\Transformers\ValidationPayment3DTransformer;
 use App\Ship\Parents\ApiController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PaymentController extends ApiController
 {
@@ -52,12 +53,5 @@ class PaymentController extends ApiController
         $payments = $this->call(GetListPaymentsPlansAction::class);
 
         return ListPaymentsTransformer::collection($payments);
-    }
-
-    public function test(CloudPaymentsService $cloudPaymentsService)
-    {
-        dd(
-            json_decode($cloudPaymentsService->infoAboutPayment('sc_1673101be2c2086f3357847f3feab'))
-        );
     }
 }

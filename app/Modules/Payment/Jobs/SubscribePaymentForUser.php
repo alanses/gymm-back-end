@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 use stdClass;
 
 class SubscribePaymentForUser implements ShouldQueue
@@ -67,12 +68,16 @@ class SubscribePaymentForUser implements ShouldQueue
                 'points' => $this->plan->count_credits,
                 'total' => $this->getTotalPoints()
             ]);
+
+            $this->registerIfOperationCurrect();
         }
     }
 
     private function checkIfUserSubscribeIsActive(CloudPaymentsService $cloudPaymentsService)
     {
         $subscribe = json_decode($cloudPaymentsService->infoAboutPayment($this->subscribe->Model->Id));
+
+        $this->registerSubInfo($subscribe);
 
         return ($this->checkIfPaymentExist($subscribe) && $this->checkIfStatusActive($subscribe)) ? true : false;
     }
@@ -104,5 +109,17 @@ class SubscribePaymentForUser implements ShouldQueue
     private function checkIfStatusActive(stdClass $subscribe)
     {
         return $subscribe->Model->Status == 'Active' ? true : false;
+    }
+
+    private function registerSubInfo(stdClass $subscribe)
+    {
+        $res = json_encode($subscribe);
+
+        Log::debug('subscribe', ['subscribe_info' => $res]);
+    }
+
+    private function registerIfOperationCurrect()
+    {
+        Log::debug('Point add to User', ['user' => json_encode($this->user)]);
     }
 }
