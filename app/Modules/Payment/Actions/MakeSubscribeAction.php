@@ -46,8 +46,9 @@ class MakeSubscribeAction extends AbstractAction
 
         $this->call(RegisterSubscribeToHistoryTask::class, [$plan, $user, $subscribe]);
 
-        $this->call(RegisterTransactionTask::class, [$plan, $user], [
+        $this->call(RegisterTransactionTask::class, [$user], [
             ['addPoints' => [$user, $plan]],
+            ['setPointsFromPlan' => [$plan]],
             ['setOperationType' => ['add']]
         ]);
 

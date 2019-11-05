@@ -4,8 +4,8 @@ namespace App\Modules\Booking\Actions;
 
 use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Booking\Tasks\ClassBooking\GetClassBookingTask;
+use App\Modules\Booking\Tasks\RegisterRemoveBonusSubTask;
 use App\Modules\Booking\Tasks\SaveBookingTask;
-use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\GymClass\Tasks\GetClassScheduleTask;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
@@ -26,6 +26,8 @@ class SaveBookingAction extends AbstractAction
             $booking = $this->call(SaveBookingTask::class, [
                 $this->getDataForCreateBooking($request, $user)
             ]);
+
+            $this->call(RegisterRemoveBonusSubTask::class, [$booking, $user]);
 
             return $booking->load(['classSchedule' => function($query) {
                 $query->with(['classType', 'activityType', 'trainer', 'gym']);

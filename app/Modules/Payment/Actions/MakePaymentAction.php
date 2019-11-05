@@ -11,8 +11,6 @@ use App\Modules\Payment\Tasks\SendPayment;
 use App\Modules\Transactions\Tasks\RegisterTransactionTask;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Abstraction\AbstractAction;
-use stdClass;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class MakePaymentAction extends AbstractAction
 {
@@ -36,8 +34,9 @@ class MakePaymentAction extends AbstractAction
 
         $this->call(CheckIfNeed3DVerificationTask::class, [$payment]);
 
-        $this->call(RegisterTransactionTask::class, [$paymentPlan, $user], [
+        $this->call(RegisterTransactionTask::class, [$user], [
             ['addPoints' => [$user, $paymentPlan]],
+            ['setPointsFromPlan' => [$paymentPlan]],
             ['setOperationType' => ['add']]
         ]);
     }

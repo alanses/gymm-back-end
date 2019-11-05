@@ -21,8 +21,9 @@ class RegisterUserPaymentAction extends AbstractAction
             ['findByField' => ['price', $this->getPayment($payment)]]
         ]);
 
-        $this->call(RegisterTransactionTask::class, [$paymentPlan, $user], [
+        $this->call(RegisterTransactionTask::class, [$user], [
             ['addPoints' => [$user, $paymentPlan]],
+            ['setPointsFromPlan' => [$paymentPlan]],
             ['setOperationType' => ['add']]
         ]);
     }
