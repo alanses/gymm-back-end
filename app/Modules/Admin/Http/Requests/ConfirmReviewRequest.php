@@ -19,7 +19,7 @@ class ConfirmReviewRequest extends AbstractRequest
     {
         return [
             'id' => 'required|integer|exists:rating_for_trainers,id',
-            'available' => 'required|in:0,1'
+            'available' => 'required'
         ];
     }
 

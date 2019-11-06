@@ -22,7 +22,8 @@ class ListReviewsTransformer extends Resource
             'comment' => $this->getComment(),
             'short_comment' => $this->getShortDescription(),
             'activity_name' => $this->getActivityName(),
-            'address' => $this->getEventAddress()
+            'address' => $this->getEventAddress(),
+            'published' => boolval($this->published)
         ];
     }
 

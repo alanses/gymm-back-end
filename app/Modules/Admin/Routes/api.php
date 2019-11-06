@@ -25,7 +25,7 @@ Route::middleware('auth:api')->group(function () {
     Route::put('admin/gyms/confirm/{id}', 'GymsController@confirmGym');
     Route::put('admin/gyms/{id}', 'GymsController@updateGym');
     Route::put('admin/review/{id}', 'ReviewsController@updateReview');
-    Route::put('admin/confirm/review/{id}', 'ReviewsController@confirmReview');
+    Route::put('admin/review/confirm/{id}', 'ReviewsController@confirmReview');
 
     Route::delete('admin/user/{id}', 'UsersController@deleteUser');
 
