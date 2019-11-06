@@ -18,7 +18,6 @@ class RestorePasswordRequest extends AbstractRequest
         return [
             'old_password' => 'required|string',
             'new_password' => 'required|string',
-            'user_id' => 'required|exists:users,id'
         ];
     }
 
