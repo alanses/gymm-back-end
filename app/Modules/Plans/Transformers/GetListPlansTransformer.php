@@ -4,6 +4,7 @@ namespace App\Modules\Plans\Transformers;
 
 use App\Modules\GymClass\Entities\ClassSchedule;
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\Auth;
 
 class GetListPlansTransformer extends Resource
 {
@@ -17,18 +18,37 @@ class GetListPlansTransformer extends Resource
     public function toArray($request)
     {
         return [
-            'plan_id' => $this->id,
-            'name' => $this->name,
-            'description' => $this->description,
-            'count_credits' => $this->count_credits,
-            'payment_for_month' => $this->payment_for_month,
-            'count_class' => $this->getCountClass() //Temp solusion
+            'user_plan_id' => $this->getUserPlan(),
+            'list_plans' => $this->getListPlans(),
         ];
     }
 
-    private function getCountClass()
+    private function getUserPlan()
     {
-        $classes = ClassSchedule::where('credits', '<=', $this->count_credits)
+        $user = Auth::user();
+
+        if($userDetail = $user->userDetail) {
+            return $userDetail->plan_id;
+        }
+    }
+
+    private function getListPlans()
+    {
+        return $this->resource->map(function ($plan) {
+            return [
+                'plan_id' => $plan->id,
+                'name' => $plan->name,
+                'description' => $plan->description,
+                'count_credits' => $plan->count_credits,
+                'payment_for_month' => $plan->payment_for_month,
+                'count_class' => $this->getCountClass($plan) //Temp solusion
+            ];
+        });
+    }
+
+    private function getCountClass($plan)
+    {
+        $classes = ClassSchedule::where('credits', '<=', $plan->count_credits)
             ->get();
 
         if ($classes->isEmpty()) {
@@ -40,7 +60,7 @@ class GetListPlansTransformer extends Resource
 
         foreach ($classes as $class) {
             $sum += $class->credits;
-            if ($sum <= $this->count_credits) {
+            if ($sum <= $plan->count_credits) {
                 $index++;
             }
         }

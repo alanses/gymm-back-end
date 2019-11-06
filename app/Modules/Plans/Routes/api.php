@@ -13,5 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-
-Route::get('list/plans', 'PlansController@getListPlans');
+Route::middleware('auth:api')->group(function () {
+    Route::get('list/plans', 'PlansController@getListPlans');
+});

@@ -12,6 +12,6 @@ class PlansController extends ApiController
     {
         $listPlans = $this->call(GetListPlansAction::class, []);
 
-        return GetListPlansTransformer::collection($listPlans);
+        return new GetListPlansTransformer($listPlans);
     }
 }
