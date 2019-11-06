@@ -96,10 +96,6 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         return $this->hasMany(RatingForTrainer::class, 'user_id', 'id');
     }
 
-    /**
-     * @return HasOne
-     */
-
     public function gym() :HasOne
     {
         return $this->hasOne(Gym::class, 'user_id', 'id');
@@ -125,11 +121,6 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         return $this->hasMany(SubscribeHistory::class, 'user_id', 'id');
     }
 
-    /**
-     * @param string $type
-     * @return int
-     */
-
     public static function getUserType(string $type) :int
     {
         if($type == 'user') {
@@ -148,5 +139,10 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     public static function getAdmin()
     {
         return self::find(1);
+    }
+
+    public function lastTransaction()
+    {
+        return $this->transaction()->latest()->first();
     }
 }

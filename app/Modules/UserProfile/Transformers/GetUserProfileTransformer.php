@@ -29,8 +29,26 @@ class GetUserProfileTransformer extends Resource
             'avatar' => $this->getAvatar(),
             'reviews' => $this->getReviews(),
             'bookings' => $this->getBookings(),
-            'language' => $this->getLanguageInfo()
+            'language' => $this->getLanguageInfo(),
+            'user_plan' => $this->getUserPlan(),
+            'user_current_points' => $this->userCurrentPoints()
         ];
+    }
+
+    private function userCurrentPoints()
+    {
+        if($lastTransaction = $this->lastTransaction()) {
+            return $lastTransaction->total;
+        }
+
+        return 0;
+    }
+
+    private function getUserPlan()
+    {
+        if($userDetail = $this->userDetail) {
+           return $userDetail->plan;
+        }
     }
 
     private function getAvatar()
