@@ -18,7 +18,7 @@ class GetListPlansTransformer extends Resource
     public function toArray($request)
     {
         return [
-            'user_plan_id' => $this->getUserPlan(),
+            'user_plan_index_plan_id' => $this->getUserPlan(),
             'list_plans' => $this->getListPlans(),
         ];
     }
@@ -28,7 +28,17 @@ class GetListPlansTransformer extends Resource
         $user = Auth::user();
 
         if($userDetail = $user->userDetail) {
-            return $userDetail->plan_id;
+            $user_plan = $userDetail->plan_id;
+
+            $index = $this->resource->search(function ($item) use ($user_plan) {
+                return $item->id == $user_plan;
+            });
+
+            if($index === false) {
+                return null;
+            }
+
+            return $index;
         }
     }
 
