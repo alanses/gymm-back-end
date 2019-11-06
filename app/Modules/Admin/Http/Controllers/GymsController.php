@@ -11,12 +11,13 @@ use App\Modules\Admin\Transformers\GymTransformer;
 use App\Modules\Admin\Transformers\ListGymsTransformer;
 use App\Modules\Gym\Actions\MakeConfirmGymAction;
 use App\Ship\Parents\ApiController;
+use Illuminate\Http\Request;
 
 class GymsController extends ApiController
 {
-    public function getGyms()
+    public function getGyms(Request $request)
     {
-        $gyms = $this->call(GetListGymsForAdminAction::class);
+        $gyms = $this->call(GetListGymsForAdminAction::class, [$request]);
 
         return ListGymsTransformer::collection($gyms);
     }

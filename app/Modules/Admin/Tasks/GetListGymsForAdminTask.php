@@ -6,6 +6,8 @@ use App\Modules\Gym\Repositories\GymRepository;
 use App\Modules\User\Repositories\UserRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\FindByRelationCriteria;
+use App\Ship\Criterias\Eloquent\FindByRelationUsingOperatorCriteria;
+use App\Ship\Criterias\Eloquent\FindOrByRelationCriteria;
 
 class GetListGymsForAdminTask extends AbstractTask
 {
@@ -29,7 +31,16 @@ class GetListGymsForAdminTask extends AbstractTask
         $this->repository->with(['user']);
     }
 
-    public function whereNameIs(string $value)
+    public function search(?string $value)
+    {
+        if($value) {
+            $value = '%' . $value . '%';
+            $this->repository
+                ->pushCriteria(new FindByRelationUsingOperatorCriteria('user', 'name', $value, 'like'));
+        }
+    }
+
+    public function whereNameIs(?string $value)
     {
         if($value) {
             $this->repository->pushCriteria(new FindByRelationCriteria('user', 'email', $value));
