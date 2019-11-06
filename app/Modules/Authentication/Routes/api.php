@@ -22,4 +22,7 @@ Route::post('login/instagram', 'LoginViaSocialNetworkController@loginViaInstagra
 Route::post('login/google', 'LoginViaSocialNetworkController@loginViaGoogle');
 
 Route::post('/send-new-password', 'AuthenticationController@sendNewPassword');
-Route::post('/restore-password', 'AuthenticationController@restorePassword');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/restore-password', 'AuthenticationController@restorePassword');
+});
