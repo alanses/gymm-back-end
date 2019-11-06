@@ -10,12 +10,13 @@ use App\Modules\Admin\Http\Requests\ConfirmReviewRequest;
 use App\Modules\Admin\Http\Requests\ReviewRequest;
 use App\Modules\Admin\Transformers\ListReviewsTransformer;
 use App\Ship\Parents\ApiController;
+use Illuminate\Http\Request;
 
 class ReviewsController extends ApiController
 {
-    public function getListReviews()
+    public function getListReviews(Request $request)
     {
-        $reviews = $this->call(GetListReviewsAction::class);
+        $reviews = $this->call(GetListReviewsAction::class, [$request]);
 
         return ListReviewsTransformer::collection($reviews);
     }

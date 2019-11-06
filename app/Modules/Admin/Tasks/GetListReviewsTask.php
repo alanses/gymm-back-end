@@ -4,6 +4,7 @@ namespace App\Modules\Admin\Tasks;
 
 use App\Modules\Gym\Repositories\RatingForTrainerRepository;
 use App\Ship\Abstraction\AbstractTask;
+use App\Ship\Criterias\Eloquent\ThisLikeThatCriteria;
 
 class GetListReviewsTask extends AbstractTask
 {
@@ -25,5 +26,12 @@ class GetListReviewsTask extends AbstractTask
     public function withRelation()
     {
         $this->ratingForTrainerRepository->with(['user', 'classSchedule.gym']);
+    }
+
+    public function search(?string $value)
+    {
+        if($value) {
+            $this->ratingForTrainerRepository->pushCriteria(new ThisLikeThatCriteria('comment', $value));
+        }
     }
 }
