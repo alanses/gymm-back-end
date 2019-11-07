@@ -19,6 +19,8 @@ class CreatePaymentsPlansTable extends Migration
             $table->string('description')->nullable();
             $table->integer('count_credits')->nullable();
             $table->integer('price')->nullable();
+            $table->integer('old_price')->nullable();
+            $table->integer('discount')->nullable();
             $table->timestamps();
         });
     }

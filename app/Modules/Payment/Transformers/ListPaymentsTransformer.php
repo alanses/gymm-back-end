@@ -19,7 +19,9 @@ class ListPaymentsTransformer extends Resource
             'name' => $this->name,
             'description' => $this->description,
             'count_credits' => $this->count_credits,
-            'price' => $this->price
+            'price' => $this->price,
+            'old_price' => $this->old_price,
+            'discount' => $this->discount,
         ];
     }
 }

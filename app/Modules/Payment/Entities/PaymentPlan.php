@@ -12,6 +12,8 @@ class PaymentPlan extends AbstractEntity
         'name',
         'description',
         'count_credits',
-        'price'
+        'price',
+        'old_price',
+        'discount'
     ];
 }
