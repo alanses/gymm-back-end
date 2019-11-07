@@ -8,6 +8,7 @@ use App\Modules\Authentication\Actions\SendNewPasswordOnEmailAction;
 use App\Modules\Authentication\Http\Requests\ForgotPasswordRequest;
 use App\Modules\Authentication\Http\Requests\LoginRequest;
 use App\Modules\Authentication\Http\Requests\RestorePasswordRequest;
+use App\Modules\Authentication\Tasks\CheckIfGymAvaibleTask;
 use App\Modules\Authentication\Tasks\UserIsAdminTask;
 use App\Modules\User\Actions\FindUserByEmailAction;
 use App\Modules\User\Entities\User;
@@ -33,6 +34,9 @@ class AuthenticationController extends ApiController
 
         /** @var User $user */
         $user = $this->call(FindUserByEmailAction::class, [$request->email]);
+
+        $this->call(CheckIfGymAvaibleTask::class, [$user]);
+
         $user['response_content'] = $result['response-content'];
 
         return $this->transform($user, UserTransformer::class);
