@@ -1,5 +1,5 @@
 up:
-	sudo docker-compose up -d
+	cd laradock/ && sudo docker-compose up -d nginx mysql phpmyadmin workspace
 kill:
 	sudo docker-compose kill
 down:
