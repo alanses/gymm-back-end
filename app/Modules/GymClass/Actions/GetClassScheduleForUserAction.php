@@ -19,6 +19,11 @@ class GetClassScheduleForUserAction extends AbstractAction
                 'gym',
                 'activityType',
                 'classScheduleDescription.user.userSetting',
+                'trainer' => function($query) {
+                    $query->with(['ratings' => function($query2) {
+                        $query2->where('published', 1);
+                    }]);
+                }
             ]);
 
         return $scheduleClass;
