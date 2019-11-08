@@ -49,7 +49,7 @@ class GymTransformer extends Resource
         $available_from = $this->available_from;
 
         if($available_from) {
-            return Carbon::parse($available_from)->format('H:i:s');
+            return Carbon::parse($available_from)->format('H:i');
         }
     }
 
@@ -58,7 +58,7 @@ class GymTransformer extends Resource
         $available_from = $this->available_to;
 
         if($available_from) {
-            return Carbon::parse($available_from)->format('H:i:s');
+            return Carbon::parse($available_from)->format('H:i');
         }
     }
 

@@ -30,8 +30,26 @@ class UpdateGymAction extends AbstractAction
         return [
             'address' => $request->address,
             'description' => $request->description,
-            'available_from' => Carbon::createFromFormat('H:i', $request->available_from)->format('Y-m-d H:i:s'),
-            'available_to' => Carbon::createFromFormat('H:i', $request->available_to)->format('Y-m-d H:i:s'),
+            'available_from' => $this->getAvailableFrom($request),
+            'available_to' => $this->getAvailableTo($request),
         ];
+    }
+
+    private function getAvailableFrom(UpdateGymRequest $request)
+    {
+        if($request->available_from) {
+            return Carbon::createFromFormat('H:i', $request->available_from)->format('Y-m-d H:i:s');
+        }
+
+        return null;
+    }
+
+    private function getAvailableTo(UpdateGymRequest $request)
+    {
+        if($request->available_to) {
+            return Carbon::createFromFormat('H:i', $request->available_to)->format('Y-m-d H:i:s');
+        }
+
+        return null;
     }
 }
