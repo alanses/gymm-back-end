@@ -51,8 +51,8 @@ class BookingController extends ApiController
 
     public function getListBookingForUserCalendar(ListBookingForCalendarRequest $request)
     {
-        $bookigs = $this->call(GetListBookingForCalendarAction::class, [$request]);
+        $bookings = $this->call(GetListBookingForCalendarAction::class, [$request]);
 
-        return BookingsForUserCalendar::collection($bookigs);
+        return BookingsForUserCalendar::collection($bookings);
     }
 }

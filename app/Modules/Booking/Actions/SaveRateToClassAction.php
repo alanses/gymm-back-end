@@ -2,14 +2,13 @@
 
 namespace App\Modules\Booking\Actions;
 
+use App\Modules\Achievements\Tasks\RegisterAchievementSubTask;
 use App\Modules\Booking\Http\Requests\SaveRateToClassRequest;
 use App\Modules\Booking\Tasks\MakeVisitBookingTask;
-use App\Modules\Booking\Tasks\SaveRatingForClassScheduleTask;
 use App\Modules\Booking\Tasks\SaveRatingToTrainerTask;
 use App\Modules\Gym\Entities\RatingForTrainer;
 use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\GymClass\Tasks\GetClassScheduleTask;
-use App\Modules\GymClass\Tasks\SaveClassScheduleDescriptionTask;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Ship\Abstraction\AbstractAction;
@@ -27,13 +26,15 @@ class SaveRateToClassAction extends AbstractAction
 
         $user = $this->call(GetAuthenticatedUserTask::class);
 
-        $this->checkIfEventHasPassed($classSchedule);
+//        $this->checkIfEventHasPassed($classSchedule);
 
-        $this->call(SaveRatingToTrainerTask::class, [
-            $this->getDataForSaveTrainerRating($user, $classSchedule, $saveRateToClassRequest)
-        ]);
+//        $this->call(SaveRatingToTrainerTask::class, [
+//            $this->getDataForSaveTrainerRating($user, $classSchedule, $saveRateToClassRequest)
+//        ]);
+//
+//        $this->call(MakeVisitBookingTask::class, [$user, $saveRateToClassRequest->schedule_id]);
 
-        $this->call(MakeVisitBookingTask::class, [$user, $saveRateToClassRequest->schedule_id]);
+        $this->call(RegisterAchievementSubTask::class, [$classSchedule, $user]);
 
         return $classSchedule;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Modules\GymClass\Entities;
 
+use App\Modules\Achievements\Entities\Achievement;
 use App\Modules\Activities\Entities\Activity;
 use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Gym\Entities\Gym;

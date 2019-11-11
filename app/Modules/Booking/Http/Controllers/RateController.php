@@ -17,7 +17,7 @@ use App\Ship\Parents\ApiController;
 
 class RateController extends ApiController
 {
-    public function saveRateToClass(SaveRateToClassRequest $saveRateToClassRequest) // deplicated
+    public function saveRateToClass(SaveRateToClassRequest $saveRateToClassRequest)
     {
         $rate = $this->call(SaveRateToClassAction::class, [$saveRateToClassRequest]);
 
