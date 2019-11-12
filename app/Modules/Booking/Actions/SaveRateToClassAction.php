@@ -26,13 +26,13 @@ class SaveRateToClassAction extends AbstractAction
 
         $user = $this->call(GetAuthenticatedUserTask::class);
 
-//        $this->checkIfEventHasPassed($classSchedule);
+        $this->checkIfEventHasPassed($classSchedule);
 
-//        $this->call(SaveRatingToTrainerTask::class, [
-//            $this->getDataForSaveTrainerRating($user, $classSchedule, $saveRateToClassRequest)
-//        ]);
-//
-//        $this->call(MakeVisitBookingTask::class, [$user, $saveRateToClassRequest->schedule_id]);
+        $this->call(SaveRatingToTrainerTask::class, [
+            $this->getDataForSaveTrainerRating($user, $classSchedule, $saveRateToClassRequest)
+        ]);
+
+        $this->call(MakeVisitBookingTask::class, [$user, $saveRateToClassRequest->schedule_id]);
 
         $this->call(RegisterAchievementSubTask::class, [$classSchedule, $user]);
 

@@ -2,6 +2,7 @@
 
 namespace App\Modules\User\Entities;
 
+use App\Modules\Achievements\Entities\UserActivity;
 use App\Modules\Activities\Entities\Activity;
 use App\Modules\Booking\Entities\BookingClass;
 use App\Modules\Gym\Entities\Gym;
@@ -119,6 +120,12 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
     public function userSubscribeHistory()
     {
         return $this->hasMany(SubscribeHistory::class, 'user_id', 'id');
+    }
+
+    public function userActivity()
+    {
+        return $this->hasMany(UserActivity::class, 'user_id', 'id');
+//        return $this->hasManyThrough(Activity::class, UserActivity::class, 'user_id', 'id');
     }
 
     public static function getUserType(string $type) :int

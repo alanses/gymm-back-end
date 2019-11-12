@@ -11,10 +11,12 @@ class RegisterAchievementSubTask extends AbstractTask
     public function run(ClassSchedule $classSchedule, User $user)
     {
         if($activityType = $classSchedule->activityType) {
+            $userActivities = $this->call(FindUserAchievementTask::class, [], [
+                ['whereUserIs' => [$user->id]],
+                ['whereActivityIs' => [$activityType->id]]
+            ]);
 
-            $userActivities = $this->call(FindUserAchievementTask::class, []);
-
-            dd($activityType, $userActivities);
+            $this->call(RegisterUserAchievementTask::class, [$activityType, $user, $userActivities]);
         }
     }
 }
