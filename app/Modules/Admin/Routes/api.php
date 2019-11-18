@@ -29,5 +29,5 @@ Route::middleware('auth:api')->group(function () {
 
     Route::delete('admin/user/{id}', 'UsersController@deleteUser');
 
-
+    Route::post('admin/review/notification', 'ReviewsController@sendEmailToAdmin');
 });

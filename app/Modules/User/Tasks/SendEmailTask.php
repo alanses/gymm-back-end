@@ -3,11 +3,11 @@
 namespace App\Modules\User\Tasks;
 
 use App\Modules\User\Emails\UserWasCreated;
-use App\Ship\Parents\Task;
 use Illuminate\Mail\Mailer;
 use Illuminate\Support\Collection;
+use App\Ship\Abstraction\AbstractTask;
 
-class SendEmailTask extends Task
+class SendEmailTask extends AbstractTask
 {
     protected $mailer;
 
