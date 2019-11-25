@@ -15,4 +15,10 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(function () {
     Route::get('list/countries/for/select', 'CountryController@getAllCountries');
     Route::get('list/cities/for/select', 'CityController@getAllCityControllers');
+
+    Route::get('admin/list/cities', 'CityController@getListCities');
+    Route::get('admin/city/{id}', 'CityController@getCity');
+    Route::post('admin/create/city', 'CityController@createCity');
+    Route::put('admin/update/city/{id}', 'CityController@updateCity');
+    Route::delete('admin/delete/city/{id}', 'CityController@deleteCity');
 });

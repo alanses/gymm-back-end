@@ -11,6 +11,7 @@ class Cities extends AbstractEntity
 
     protected $fillable = [
         'name',
-        'displayed_name'
+        'displayed_name',
+        'country_id'
     ];
 }
