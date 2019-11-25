@@ -4,6 +4,7 @@ namespace App\Modules\GymClass\Actions;
 
 use App\Modules\Activities\Tasks\GetActivitiesByUserTask;
 use App\Modules\Booking\Tasks\GetListClassSchedulesTask;
+use App\Modules\GymClass\Tasks\GetListEventsTask;
 use App\Modules\User\Entities\User;
 use App\Modules\User\Tasks\GetAuthenticatedUserTask;
 use App\Modules\UserProfile\Entities\UserSetting;
@@ -32,7 +33,7 @@ class GetListClassSchedulesWithUserFilterAction extends AbstractAction
             return collect();
         }
 
-        return $this->call(GetListClassSchedulesTask::class, [], [
+        return $this->call(GetListEventsTask::class, [], [
             ['whereActivitiesIs' => [$this->getActivitiesIds($this->user)]],
             ['whereLevelIs' => [$this->getUserLevel($this->userSetting)]],
             ['wherePoints' => [
