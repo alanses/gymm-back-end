@@ -62,4 +62,9 @@ class GetListEventsTask extends AbstractTask
         $this->classScheduleRepository
             ->pushCriteria(new OrderByCriteria('start_time'));
     }
+
+    public function findByField($field, $value)
+    {
+        $this->repository->pushCriteria(new ThisEqualThatCriteria($field, $value));
+    }
 }

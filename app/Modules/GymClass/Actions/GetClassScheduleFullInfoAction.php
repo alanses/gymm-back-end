@@ -2,14 +2,14 @@
 
 namespace App\Modules\GymClass\Actions;
 
-use App\Modules\GymClass\Tasks\GetClassScheduleTask;
+use App\Modules\GymClass\Tasks\GetListEventsTask;
 use App\Ship\Abstraction\AbstractAction;
 
 class GetClassScheduleFullInfoAction extends AbstractAction
 {
     public function run($id)
     {
-        $classSchedule = $this->call(GetClassScheduleTask::class, [], [
+        $classSchedule = $this->call(GetListEventsTask::class, [], [
             ['findByField' => ['id', $id]]
         ]);
 
