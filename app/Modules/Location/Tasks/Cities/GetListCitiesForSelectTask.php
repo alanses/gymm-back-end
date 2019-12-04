@@ -19,6 +19,6 @@ class GetListCitiesForSelectTask extends AbstractTask
 
     public function run()
     {
-        return $this->citiesRepository->getDataForSelect(['id', 'name']);
+        return $this->citiesRepository->getDataForSelect(['id', 'name', 'displayed_name']);
     }
 }
