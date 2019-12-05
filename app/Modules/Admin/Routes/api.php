@@ -21,13 +21,18 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/location', 'LocationController@getLocation');
     Route::get('admin/reviews', 'ReviewsController@getListReviews');
     Route::get('admin/review/{id}', 'ReviewsController@getReview');
+    Route::get('admin/activities', 'ActivitiesController@getListActivities');
+    Route::get('admin/activity/{id}', 'ActivitiesController@getActivity');
 
     Route::put('admin/gyms/confirm/{id}', 'GymsController@confirmGym');
     Route::put('admin/gyms/{id}', 'GymsController@updateGym');
     Route::put('admin/review/{id}', 'ReviewsController@updateReview');
     Route::put('admin/review/confirm/{id}', 'ReviewsController@confirmReview');
+    Route::post('admin/update/activity', 'ActivitiesController@updateActivity');
 
     Route::delete('admin/user/{id}', 'UsersController@deleteUser');
+    Route::delete('admin/activity/{id}', 'ActivitiesController@deleteActivity');
 
     Route::post('admin/review/notification', 'ReviewsController@sendEmailToAdmin');
+    Route::post('admin/create/activity', 'ActivitiesController@store');
 });

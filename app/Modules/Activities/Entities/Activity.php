@@ -12,7 +12,10 @@ class Activity extends AbstractEntity
     protected $fillable = [
         'name',
         'displayed_name',
+        'image'
     ];
+
+    public static $PATH_FOR_IMAGE = 'Admin/Activity';
 
     /**
      * @return BelongsToMany
