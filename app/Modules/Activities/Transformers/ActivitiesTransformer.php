@@ -3,6 +3,7 @@
 namespace App\Modules\Activities\Transformers;
 
 use App\Ship\Parents\Resource;
+use Illuminate\Support\Facades\Storage;
 
 class ActivitiesTransformer extends Resource
 {
@@ -18,6 +19,14 @@ class ActivitiesTransformer extends Resource
             'id' => $this->id,
             'name' => $this->name,
             'displayed_name' => $this->displayed_name,
+            'image' => $this->getImage()
         ];
+    }
+
+    private function getImage()
+    {
+        if($image = $this->image) {
+            return env('APP_URL') . Storage::url($image);
+        }
     }
 }
