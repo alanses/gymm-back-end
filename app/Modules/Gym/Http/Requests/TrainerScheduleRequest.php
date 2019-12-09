@@ -6,7 +6,9 @@ use App\Ship\Abstraction\AbstractRequest;
 
 class TrainerScheduleRequest extends AbstractRequest
 {
-    protected $urlParameters = [];
+    protected $urlParameters = [
+        'id'
+    ];
 
     /**
      * Get the validation rules that apply to the request.
@@ -16,7 +18,7 @@ class TrainerScheduleRequest extends AbstractRequest
     public function rules()
     {
         return [
-
+            'id' => 'required|exists:trainers,id'
         ];
     }
 
