@@ -2,9 +2,12 @@
 
 namespace App\Modules\Gym\Http\Controllers;
 
+use App\Modules\Gym\Actions\GetTrainerByIdForScheduleAction;
 use App\Modules\Gym\Actions\Trainers\DeleteTrainerAction;
 use App\Modules\Gym\Actions\Trainers\GetListTrainersForProfileAction;
 use App\Modules\Gym\Http\Requests\DeleteTrainerRequest;
+use App\Modules\Gym\Http\Requests\TrainerScheduleRequest;
+use App\Modules\Gym\Transformers\TrainerScheduleTransformer;
 use App\Modules\Gym\Transformers\TrainersForProfileTransformer;
 use App\Ship\Parents\ApiController;
 use App\Modules\Gym\Actions\CreateTrainerAction;
@@ -58,6 +61,13 @@ class TrainerController extends ApiController
         $trainers = $this->call(GetListTrainersForProfileAction::class);
 
         return TrainersForProfileTransformer::collection($trainers);
+    }
+
+    public function getTrainerSchedule(TrainerScheduleRequest $request)
+    {
+        $trainer = $this->call(GetTrainerByIdForScheduleAction::class, [$request->id]);
+
+        return new TrainerScheduleTransformer($trainer);
     }
 
     public function deleteTrainer(DeleteTrainerRequest $request)

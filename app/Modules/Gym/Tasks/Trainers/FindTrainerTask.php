@@ -41,4 +41,9 @@ class FindTrainerTask extends AbstractTask
     {
         return $this->trainerRepository->with('activities');
     }
+
+    public function withCountClassSchedules()
+    {
+        $this->trainerRepository->withCount('classSchedules');
+    }
 }
