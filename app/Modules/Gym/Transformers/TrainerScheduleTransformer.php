@@ -65,7 +65,7 @@ class TrainerScheduleTransformer extends Resource
     private function getPastBooking()
     {
         return $this->bookings->filter(function ($booking) {
-            return $booking->classSchedule->start_date < Carbon::now();
+            return $booking->classSchedule->start_date <= Carbon::now();
         })
             ->map(function ($booking) {
                 return $this->getBookingDate($booking);
