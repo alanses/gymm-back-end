@@ -18,8 +18,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('trainer/{id}', 'TrainerController@getTrainerById');
     Route::get('list/trainers/for/select', 'TrainerController@getListTrainersForSelect');
     Route::get('gym/trainers', 'TrainerController@getListTrainerForProfile');
-    Route::delete('trainer/{id}', 'TrainerController@deleteTrainer');
+    Route::get('schedule/trainer/{id}', 'TrainerController@getTrainerSchedule');
 
     Route::get('list/gyms', 'GymController@getListGyms');
     Route::get('gym/{id}', 'GymController@getGym');
+
+    Route::delete('trainer/{id}', 'TrainerController@deleteTrainer');
 });
