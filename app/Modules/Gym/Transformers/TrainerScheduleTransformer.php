@@ -49,27 +49,30 @@ class TrainerScheduleTransformer extends Resource
             'future' => $this->getFutureBooking(),
             'past' => $this->getPastBooking(),
         ];
-
     }
 
     private function getFutureBooking()
     {
-        return $this->bookings->filter(function ($booking) {
-            return $booking->classSchedule->start_date > Carbon::now();
-        })
-            ->map(function ($booking) {
-                return $this->getBookingDate($booking);
-            });
+        $data = collect();
+        foreach ($this->bookings as $booking) {
+            if($booking->classSchedule->start_date > Carbon::now()) {
+                $data->push($this->getBookingDate($booking));
+            }
+        }
+
+        return $data;
     }
 
     private function getPastBooking()
     {
-        return $this->bookings->filter(function ($booking) {
-            return $booking->classSchedule->start_date <= Carbon::now();
-        })
-            ->map(function ($booking) {
-                return $this->getBookingDate($booking);
-            });
+        $data = collect();
+        foreach ($this->bookings as $booking) {
+            if($booking->classSchedule->start_date <= Carbon::now()) {
+                $data->push($this->getBookingDate($booking));
+            }
+        }
+
+        return $data;
     }
 
     private function getBookingDate($booking)
