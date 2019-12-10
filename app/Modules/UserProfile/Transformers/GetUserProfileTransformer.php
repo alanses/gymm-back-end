@@ -14,7 +14,7 @@ class GetUserProfileTransformer extends Resource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request
+     * @param \Illuminate\Http\Request
      * @return array
      */
     public function toArray($request)
@@ -37,7 +37,7 @@ class GetUserProfileTransformer extends Resource
 
     private function userCurrentPoints()
     {
-        if($lastTransaction = $this->lastTransaction()) {
+        if ($lastTransaction = $this->lastTransaction()) {
             return $lastTransaction->total;
         }
 
@@ -46,15 +46,15 @@ class GetUserProfileTransformer extends Resource
 
     private function getUserPlan()
     {
-        if($userDetail = $this->userDetail) {
-           return $userDetail->plan;
+        if ($userDetail = $this->userDetail) {
+            return $userDetail->plan;
         }
     }
 
     private function getAvatar()
     {
-        if($photo = $this->userPhoto) {
-            return env('APP_URL') . Storage::url(UserPhoto::getBasePathForUserPhotos() .  $photo->file_name);
+        if ($photo = $this->userPhoto) {
+            return env('APP_URL') . Storage::url(UserPhoto::getBasePathForUserPhotos() . $photo->file_name);
         }
     }
 
@@ -69,15 +69,15 @@ class GetUserProfileTransformer extends Resource
 
     private function getReviews()
     {
-        if($this->reviews) {
-                return $this->reviews->map(function ($review) {
-                    return [
-                        'reviews_id' => $review->id,
-                        'description' => $review->comment,
-                        'rating_value' => $review->rating_value,
-                        'name' => $this->getReviewsName($review)
+        if ($this->reviews) {
+            return $this->reviews->map(function ($review) {
+                return [
+                    'reviews_id' => $review->id,
+                    'description' => $review->comment,
+                    'rating_value' => $review->rating_value,
+                    'name' => $this->getReviewsName($review)
                 ];
-                });
+            });
         }
 
         return [];
@@ -85,7 +85,7 @@ class GetUserProfileTransformer extends Resource
 
     private function getReviewsName($review)
     {
-        if($classSchedule = $review->classSchedule) {
+        if ($classSchedule = $review->classSchedule) {
             return optional($classSchedule->activityType)->displayed_name;
         }
     }
@@ -94,6 +94,7 @@ class GetUserProfileTransformer extends Resource
     {
         return $this->bookings->map(function ($booking) {
             return [
+                'id' => $booking->id,
                 'start_time' => $this->convertStartTime($booking),
                 'end_time' => $this->convertEndTime($booking),
                 'lesson_time' => $this->getLessonTime($booking),
@@ -109,7 +110,7 @@ class GetUserProfileTransformer extends Resource
 
     private function checkIfBookingActual(BookingClass $booking)
     {
-        if($classSchedule = $booking->classSchedule) {
+        if ($classSchedule = $booking->classSchedule) {
             return ($classSchedule->start_date > Carbon::now()) ? true : false;
         }
     }
@@ -121,21 +122,21 @@ class GetUserProfileTransformer extends Resource
 
     private function getTrainerName(BookingClass $booking)
     {
-        if($classSchedule = $booking->classSchedule) {
+        if ($classSchedule = $booking->classSchedule) {
             return optional($classSchedule->trainer)->trainer_name;
         }
     }
 
     private function getAddress(BookingClass $booking)
     {
-        if($classSchedule = $booking->classSchedule) {
+        if ($classSchedule = $booking->classSchedule) {
             return optional($classSchedule->gym)->address;
         }
     }
 
     private function getActivityType(BookingClass $booking)
     {
-        if($classSchedule = $booking->classSchedule) {
+        if ($classSchedule = $booking->classSchedule) {
             return optional($classSchedule->activityType)->displayed_name;
         }
     }
@@ -144,7 +145,7 @@ class GetUserProfileTransformer extends Resource
     {
         $start_time = optional($booking->classSchedule)->start_time;
 
-        if($start_time) {
+        if ($start_time) {
             return Carbon::parse($start_time)->format('H:i');
         }
     }
@@ -153,7 +154,7 @@ class GetUserProfileTransformer extends Resource
     {
         $end_time = optional($booking->classSchedule)->end_time;
 
-        if($end_time) {
+        if ($end_time) {
             return Carbon::parse($end_time)->format('H:i');
         }
     }
@@ -163,7 +164,7 @@ class GetUserProfileTransformer extends Resource
         $start_time = optional($booking->classSchedule)->start_time;
         $end_time = optional($booking->classSchedule)->end_time;
 
-        if($start_time && $end_time) {
+        if ($start_time && $end_time) {
             $start_time = Carbon::createFromFormat('Y-m-d H:i:s', $start_time);
             $end_time = Carbon::createFromFormat('Y-m-d H:i:s', $end_time);
 
@@ -174,7 +175,7 @@ class GetUserProfileTransformer extends Resource
     private function getAvgRating(BookingClass $bookingClass)
     {
         if ($classSchedule = $bookingClass->classSchedule) {
-            if($trainer = $classSchedule->trainer) {
+            if ($trainer = $classSchedule->trainer) {
                 $avg = $trainer->avgRating;
                 if ($avg->isNotEmpty()) {
                     return $avg
@@ -189,15 +190,15 @@ class GetUserProfileTransformer extends Resource
 
     private function getPlanName()
     {
-        if($userDetail = $this->userDetail) {
+        if ($userDetail = $this->userDetail) {
             return optional($userDetail->plan)->name;
         }
     }
 
     private function getTotalCredits()
     {
-        if($userDetail = $this->userDetail) {
-           return optional($userDetail->plan)->count_credits;
+        if ($userDetail = $this->userDetail) {
+            return optional($userDetail->plan)->count_credits;
         }
     }
 
@@ -205,7 +206,7 @@ class GetUserProfileTransformer extends Resource
     {
         $transactions = $this->userTransactions;
 
-        if($transactions->isEmpty()) {
+        if ($transactions->isEmpty()) {
             return 0;
         }
 
