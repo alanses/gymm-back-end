@@ -32,7 +32,16 @@ class UpdateActivityAction extends AbstractAction
 
         $activity->update($this->getDateForUpdateActivity($request, $this->fileName));
 
+        $this->syncLocalization($request, $activity);
+
         return $activity;
+    }
+
+    private function syncLocalization(ActivityRequest $request, Activity $activity)
+    {
+        $activity->setTranslation('displayed_name', 'ru', $request->ru_displayed_name);
+        $activity->setTranslation('displayed_name', 'kz', $request->kz_displayed_name);
+        $activity->save();
     }
 
     private function getDateForUpdateActivity(ActivityRequest $request, string $fileName = null)

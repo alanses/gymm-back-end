@@ -6,14 +6,19 @@ use App\Modules\Achievements\Entities\Achievement;
 use App\Modules\User\Entities\User;
 use App\Ship\Abstraction\AbstractEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Translatable\HasTranslations;
 
 class Activity extends AbstractEntity
 {
+    use HasTranslations;
+
     protected $fillable = [
         'name',
         'displayed_name',
         'image'
     ];
+
+    public $translatable = ['displayed_name'];
 
     public static $PATH_FOR_IMAGE = 'Admin/Activity';
 
