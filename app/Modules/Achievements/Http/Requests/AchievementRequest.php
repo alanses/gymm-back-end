@@ -22,7 +22,7 @@ class AchievementRequest extends AbstractRequest
             'kz_displayed_name' => 'required|string|max:255',
             'activity_id' => 'required|integer|exists:activities,id',
             'count_classes' => 'required|integer',
-            'image' => 'required|file'
+            'image' => 'nullable|file'
         ];
     }
 

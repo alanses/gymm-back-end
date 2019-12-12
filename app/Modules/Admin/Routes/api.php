@@ -40,5 +40,5 @@ Route::middleware('auth:api')->group(function () {
 
     Route::post('admin/review/notification', 'ReviewsController@sendEmailToAdmin');
     Route::post('admin/create/activity', 'ActivitiesController@store');
-    Route::post('admin/create/activement', 'AchievementController@store');
+    Route::post('admin/create/achievement', 'AchievementController@store');
 });

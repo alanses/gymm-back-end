@@ -12,12 +12,13 @@ use App\Modules\Activities\Actions\GetListActivitiesForSelectAction;
 use App\Modules\Activities\Transformers\ListActivitiesForSelectTrasformer;
 use App\Modules\Admin\Actions\CreateAchievementAction;
 use App\Ship\Parents\ApiController;
+use Illuminate\Http\Request;
 
 class AchievementController extends ApiController
 {
-    public function getListAchievement()
+    public function getListAchievement(Request $request)
     {
-        $achievements = $this->call(GetListAchievementsAction::class);
+        $achievements = $this->call(GetListAchievementsAction::class, [$request]);
 
         return AchievementsTransformer::collection($achievements);
     }

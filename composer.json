@@ -20,7 +20,8 @@
         "socialiteproviders/facebook": "dev-master",
         "socialiteproviders/instagram": "^3.0",
         "socialiteproviders/vkontakte": "^4.0",
-        "spatie/laravel-fractal": "^5.5"
+        "spatie/laravel-fractal": "^5.5",
+        "spatie/laravel-translatable": "^4.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
