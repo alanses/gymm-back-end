@@ -24,19 +24,19 @@ class SeedCyclingTableSeeder extends Seeder
 
         $this->repository->create([
             'displayed_name' => '3 Cycling Classes',
-            'achivement_id' => 2,
+            'activity_id' => 2,
             'count_classes' => 3,
         ]);
 
         $this->repository->create([
             'displayed_name' => '15 Cycling Classes',
-            'achivement_id' => 2,
+            'activity_id' => 2,
             'count_classes' => 15,
         ]);
 
         $this->repository->create([
             'displayed_name' => '30 Cycling Classes',
-            'achivement_id' => 2,
+            'activity_id' => 2,
             'count_classes' => 30,
         ]);
     }
