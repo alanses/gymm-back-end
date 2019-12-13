@@ -15,4 +15,5 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->group(function () {
     Route::get('user/achievements',  'AchievementsController@getUserAchievements');
+    Route::get('achievements', 'AchievementsController@getListAchievements');
 });

@@ -122,6 +122,12 @@ class User extends AbstractEntity implements AuthenticatableContract, Authorizab
         return $this->hasMany(SubscribeHistory::class, 'user_id', 'id');
     }
 
+    public function userPassedBookings()
+    {
+        return $this->hasMany(BookingClass::class, 'user_id', 'id')
+                    ->where('passed', '=', 1);
+    }
+
     public function userActivity()
     {
         return $this->hasMany(UserActivity::class, 'user_id', 'id');
