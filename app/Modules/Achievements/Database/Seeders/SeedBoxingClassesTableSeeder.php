@@ -24,19 +24,19 @@ class SeedBoxingClassesTableSeeder extends Seeder
 
         $this->repository->create([
             'displayed_name' => '3 Boxing Classes',
-            'achivement_id' => 5,
+            'activity_id' => 5,
             'count_classes' => 3,
         ]);
 
         $this->repository->create([
             'displayed_name' => '15 Boxing Classes',
-            'achivement_id' => 5,
+            'activity_id' => 5,
             'count_classes' => 15,
         ]);
 
         $this->repository->create([
             'displayed_name' => '30 Boxing Classes',
-            'achivement_id' => 5,
+            'activity_id' => 5,
             'count_classes' => 30,
         ]);
     }

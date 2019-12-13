@@ -24,19 +24,19 @@ class SeedDancesClassesTableSeeder extends Seeder
 
         $this->repository->create([
             'displayed_name' => '10 Dances Classes',
-            'achivement_id' => 6,
+            'activity_id' => 6,
             'count_classes' => 3,
         ]);
 
         $this->repository->create([
             'displayed_name' => '15 Dances Classes',
-            'achivement_id' => 6,
+            'activity_id' => 6,
             'count_classes' => 15,
         ]);
 
         $this->repository->create([
             'displayed_name' => '30 Dances Classes',
-            'achivement_id' => 6,
+            'activity_id' => 6,
             'count_classes' => 30,
         ]);
     }
