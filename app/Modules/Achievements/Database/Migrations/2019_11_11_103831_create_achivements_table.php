@@ -17,10 +17,10 @@ class CreateAchivementsTable extends Migration
             $table->bigIncrements('id');
             $table->string('displayed_name')->nullable();
             $table->integer('count_classes')->nullable();
-            $table->unsignedBigInteger('achivement_id')->nullable();
+            $table->unsignedBigInteger('activity_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('achivement_id')
+            $table->foreign('activity_id')
                 ->references('id')
                 ->on('activities')
                 ->onDelete('cascade');

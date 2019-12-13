@@ -19,10 +19,19 @@ class ListActivitiesTransformer extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'displayed_name' => $this->displayed_name,
+            'displayed_name' => $this->getTransliterationDisplayedName('en'),
+            'ru_displayed_name' => $this->getTransliterationDisplayedName('ru'),
+            'kz_displayed_name' => $this->getTransliterationDisplayedName('kz'),
             'image' => $this->getImage(),
             'created_at' => Carbon::parse($this->created_at)->format('Y-m-d H:i:s'),
         ];
+    }
+
+    private function getTransliterationDisplayedName(string $lang)
+    {
+        if($this->hasTranslation('displayed_name', $lang)) {
+            return $this->getTranslation('displayed_name', $lang);
+        }
     }
 
     private function getImage()

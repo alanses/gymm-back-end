@@ -23,16 +23,22 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/review/{id}', 'ReviewsController@getReview');
     Route::get('admin/activities', 'ActivitiesController@getListActivities');
     Route::get('admin/activity/{id}', 'ActivitiesController@getActivity');
+    Route::get('admin/achievements', 'AchievementController@getListAchievement');
+    Route::get('admin/list/activities/for/select', 'AchievementController@getDateForCreateAchievement');
+    Route::get('admin/achievement/{id}', 'AchievementController@show');
 
     Route::put('admin/gyms/confirm/{id}', 'GymsController@confirmGym');
     Route::put('admin/gyms/{id}', 'GymsController@updateGym');
     Route::put('admin/review/{id}', 'ReviewsController@updateReview');
     Route::put('admin/review/confirm/{id}', 'ReviewsController@confirmReview');
     Route::post('admin/update/activity', 'ActivitiesController@updateActivity');
+    Route::post('admin/update/achievement', 'AchievementController@update');
 
     Route::delete('admin/user/{id}', 'UsersController@deleteUser');
     Route::delete('admin/activity/{id}', 'ActivitiesController@deleteActivity');
+    Route::delete('admin/achievement/{id}', 'AchievementController@delete');
 
     Route::post('admin/review/notification', 'ReviewsController@sendEmailToAdmin');
     Route::post('admin/create/activity', 'ActivitiesController@store');
+    Route::post('admin/create/achievement', 'AchievementController@store');
 });

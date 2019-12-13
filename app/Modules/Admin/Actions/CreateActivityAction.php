@@ -18,6 +18,8 @@ class CreateActivityAction extends AbstractAction
 
         $activity = $this->call(CreateActivityTask::class, [$this->getDateForCreateActivity($request, $fileName)]);
 
+        $this->syncLocalization($request, $activity);
+
         return $activity;
     }
 
@@ -28,5 +30,12 @@ class CreateActivityAction extends AbstractAction
             'displayed_name' => $request->displayed_name,
             'image' => $fileName,
         ];
+    }
+
+    private function syncLocalization(ActivityRequest $request, Activity $activity)
+    {
+        $activity->setTranslation('displayed_name', 'ru', $request->ru_displayed_name);
+        $activity->setTranslation('displayed_name', 'kz', $request->kz_displayed_name);
+        $activity->save();
     }
 }
