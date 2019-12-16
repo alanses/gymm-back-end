@@ -14,7 +14,7 @@ class GetListAchievementsForUserAction extends AbstractAction
 
         $user = $this->call(GetAuthenticatedUserTask::class);
 
-        $userBookings = $user->load('userPassedBookings.classSchedule.activityType');
+        $userBookings = $user->load(['userPassedBookings.classSchedule.activityType', 'language']);
 
         $achievements = $this->call(GetAchivementsForUserTask::class);
 

@@ -26,13 +26,22 @@ class ListAchievementsForUserTransformer extends Resource
         return $this->resource['achievements']->map(function ($achievement) {
             return [
                 'id' => $achievement->id,
-                'displayed_name' => $achievement->displayed_name,
+                'displayed_name' => $this->getDisplayedName($achievement),
                 'count_classes' => $achievement->count_classes,
                 'activity_id' => $achievement->activity_id,
                 'image' => $this->getImage($achievement),
                 'visited_by_user' => $this->getVisitedByUser($achievement)
             ];
         });
+    }
+
+    private function getDisplayedName(Achievement $achievement)
+    {
+        if($shortName = $this->resource['user']->language->short_name) {
+            if($achievement->hasTranslation('displayed_name', $shortName)) {
+                return $achievement->getTranslation('displayed_name', $shortName);
+            }
+        }
     }
 
     private function getVisitedByUser(Achievement $achievement) {
