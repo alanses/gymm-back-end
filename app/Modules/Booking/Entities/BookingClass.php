@@ -2,6 +2,7 @@
 
 namespace App\Modules\Booking\Entities;
 
+use App\Modules\Activities\Entities\Activity;
 use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\User\Entities\User;
 use App\Ship\Abstraction\AbstractEntity;

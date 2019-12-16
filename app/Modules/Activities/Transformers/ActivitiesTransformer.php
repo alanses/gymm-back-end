@@ -18,9 +18,18 @@ class ActivitiesTransformer extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'displayed_name' => $this->displayed_name,
+            'displayed_name' => $this->getDisplayedName($request),
             'image' => $this->getImage()
         ];
+    }
+
+    private function getDisplayedName($request)
+    {
+        if($shortName = $request->user()->language->short_name) {
+            if($this->hasTranslation('displayed_name', $shortName)) {
+                return $this->getTranslation('displayed_name', $shortName);
+            }
+        }
     }
 
     private function getImage()
