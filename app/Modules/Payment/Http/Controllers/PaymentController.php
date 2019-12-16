@@ -7,6 +7,7 @@ use App\Modules\Payment\Actions\ConfirmPaymentAction;
 use App\Modules\Payment\Actions\GetListPaymentsPlansAction;
 use App\Modules\Payment\Actions\MakePaymentAction;
 use App\Modules\Payment\Actions\RegisterUserPaymentAction;
+use App\Modules\Payment\Http\Requests\PaymentCryptFormRequest;
 use App\Modules\Payment\Http\Requests\PaymentRequest;
 use App\Modules\Payment\Service\CloudPaymentsService;
 use App\Modules\Payment\Transformers\ListPaymentsTransformer;
@@ -28,6 +29,11 @@ class PaymentController extends ApiController
         } catch (Need3DVerificationException $exception) {
             return new ValidationPayment3DTransformer($exception->getData());
         }
+    }
+
+    public function paymentCryptForm(PaymentCryptFormRequest $request)
+    {
+        return view('payment::payments.payment-crypt');
     }
 
     public function paymentForm(Request $request)
