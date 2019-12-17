@@ -26,13 +26,18 @@ class CreateGymTable extends Migration
             $table->float('lat')->nullable();
             $table->float('lng')->nullable();
             $table->smallInteger('is_available')->default(Gym::$IS_NOT_AVAILABLE);
-
+            $table->unsignedBigInteger('city_id')->nullable()->unique();
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('cities')
+                ->onDelete('set null');
         });
     }
 

@@ -52,10 +52,9 @@
                 if(json.data.need_validation) {
                     window.location.href = json.data.validation_url;
                 }
-                console.log(json);
-            }).catch();
-
-
+            }).catch((err) => {
+                alert('Service unavailable');
+            });
 
         } else {
             for (var msgName in result.messages) {

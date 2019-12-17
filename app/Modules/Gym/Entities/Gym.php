@@ -17,7 +17,8 @@ class Gym extends AbstractEntity
         'lat',
         'lng',
         'is_available',
-        'description'
+        'description',
+        'city_id'
     ];
 
     public static $IS_AVAILABLE = 1;
