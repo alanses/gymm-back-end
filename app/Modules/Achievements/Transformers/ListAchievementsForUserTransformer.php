@@ -29,10 +29,18 @@ class ListAchievementsForUserTransformer extends Resource
                 'displayed_name' => $this->getDisplayedName($achievement),
                 'count_classes' => $achievement->count_classes,
                 'activity_id' => $achievement->activity_id,
+                'activity_type' => $this->getActivityType($achievement),
                 'image' => $this->getImage($achievement),
                 'visited_by_user' => $this->getVisitedByUser($achievement)
             ];
         });
+    }
+
+    private function getActivityType(Achievement $achievement)
+    {
+        if($activityType = $achievement->activity) {
+            return $activityType->displayed_name;
+        }
     }
 
     private function getDisplayedName(Achievement $achievement)

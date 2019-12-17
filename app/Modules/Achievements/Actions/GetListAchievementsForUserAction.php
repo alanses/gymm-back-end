@@ -19,7 +19,7 @@ class GetListAchievementsForUserAction extends AbstractAction
         $achievements = $this->call(GetAchivementsForUserTask::class);
 
         $collection->put('user', $userBookings);
-        $collection->put('achievements', $achievements);
+        $collection->put('achievements', $achievements->load(['activity']));
 
         return $collection;
     }
