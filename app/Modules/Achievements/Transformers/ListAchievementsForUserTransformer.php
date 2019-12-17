@@ -33,7 +33,7 @@ class ListAchievementsForUserTransformer extends Resource
                 'image' => $this->getImage($achievement),
                 'visited_by_user' => $this->getVisitedByUser($achievement)
             ];
-        });
+        })->groupBy('activity_type');
     }
 
     private function getActivityType(Achievement $achievement)
