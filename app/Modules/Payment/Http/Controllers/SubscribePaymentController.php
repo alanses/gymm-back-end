@@ -7,6 +7,7 @@ use App\Modules\Payment\Actions\ConfirmSubscribeAction;
 use App\Modules\Payment\Actions\MakeSubscribeAction;
 use App\Modules\Payment\Actions\RegisterUserSubscribeAction;
 use App\Modules\Payment\Actions\UnFollowSubscribeAction;
+use App\Modules\Payment\Http\Requests\SubscribeCryptRequest;
 use App\Modules\Payment\Http\Requests\SubscribeRequest;
 use App\Modules\Payment\Transformers\PaymentTransformer;
 use App\Modules\Payment\Transformers\ValidationSubscribe3DTransformer;
@@ -25,6 +26,11 @@ class SubscribePaymentController extends ApiController
         } catch (Need3DVerificationException $exception) {
             return new ValidationSubscribe3DTransformer($exception->getData());
         }
+    }
+
+    public function subscribeCryptForm(SubscribeCryptRequest $request)
+    {
+        return view('payment::subscribes.subscribes-crypt');
     }
 
     public function subscribePaymentForm(Request $request)
