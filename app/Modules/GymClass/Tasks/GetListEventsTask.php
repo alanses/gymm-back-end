@@ -33,9 +33,13 @@ class GetListEventsTask extends AbstractTask
         $this->repository->pushCriteria(new WhereInCriteria('activities_id', $activities));
     }
 
-    public function whereLevelIs($value)
+    public function whereLevelIs($level)
     {
-        $this->repository->pushCriteria(new ThisEqualThatCriteria('level', $value));
+        if($level == 0) {
+            $this->repository->pushCriteria(new WhereInCriteria('level', [1,2,3]));
+        } else {
+            $this->repository->pushCriteria(new ThisEqualThatCriteria('level', $level));
+        }
     }
 
     public function wherePoints($from, $to)
