@@ -8,6 +8,7 @@ use App\Modules\Location\Actions\GetCityAction;
 use App\Modules\Location\Actions\GetListCitiesForAdminPageAction;
 use App\Modules\Location\Actions\UpdateCityAction;
 use App\Modules\Location\Http\Requests\CityRequest;
+use App\Modules\Location\Http\Requests\UpdateCityRequest;
 use App\Ship\Parents\ApiController;
 use App\Modules\Location\Actions\Cities\GetListCitiesAction;
 use App\Modules\Location\Transformers\CitiesTransformer;
@@ -36,7 +37,7 @@ class CityController extends ApiController
         return new CitiesTransformer($city);
     }
 
-    public function updateCity(Request $request)
+    public function updateCity(UpdateCityRequest $request)
     {
         $city = $this->call(UpdateCityAction::class, [$request]);
 

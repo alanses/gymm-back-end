@@ -4,7 +4,7 @@ namespace App\Modules\Location\Http\Requests;
 
 use App\Ship\Abstraction\AbstractRequest;
 
-class CityRequest extends AbstractRequest
+class UpdateCityRequest extends AbstractRequest
 {
     protected $urlParameters = [];
 
@@ -16,8 +16,8 @@ class CityRequest extends AbstractRequest
     public function rules()
     {
         return [
-            'displayed_name' => 'required|string|max:255|unique:cities,displayed_name',
-            'name' => 'required|string|max:255|unique:cities,name'
+            'displayed_name' => 'required|string|max:255',
+            'name' => 'required|string|max:255'
         ];
     }
 
@@ -26,10 +26,8 @@ class CityRequest extends AbstractRequest
         return [
             'displayed_name.required' => 'Field City name is required',
             'displayed_name.max' => 'Field City name has max symbols 255',
-            'displayed_name.unique' => 'Field City name are exist in database',
             'name.required' => 'Field City slag is required',
             'name.max' => 'Field City slag has max symbols 255',
-            'name.unique' => 'Field City slag are exist in database',
         ];
     }
 
