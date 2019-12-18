@@ -7,6 +7,7 @@ use App\Modules\GymClass\Criterias\ThisLessOrGreaterColumnThatInTableEventsCrite
 use App\Modules\GymClass\Repositories\ClassScheduleEventRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\BetweenCriteria;
+use App\Ship\Criterias\Eloquent\FindByRelationCriteria;
 use App\Ship\Criterias\Eloquent\OrderByCriteria;
 use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
 use App\Ship\Criterias\Eloquent\WhereInCriteria;
@@ -60,6 +61,10 @@ class GetListEventsTask extends AbstractTask
         );
     }
 
+    public function whereCityIs($cityId)
+    {
+        $this->repository->pushCriteria(new FindByRelationCriteria('gym', 'city_id', $cityId));
+    }
 
     public function sortByTime()
     {

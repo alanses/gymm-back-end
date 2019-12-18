@@ -40,9 +40,15 @@ class GetListClassSchedulesWithUserFilterAction extends AbstractAction
                 $this->getCretitsFrom($this->userSetting),
                 $this->getCretitsTo($this->userSetting),
             ]],
-            ['whereSpots' => [$this->getSpots($this->userSetting)]]
+            ['whereSpots' => [$this->getSpots($this->userSetting)]],
+            ['whereCityIs' => [$this->getCityOfUser($this->userSetting)]]
         ])
             ->load(['activityType', 'trainer.avgRating']);
+    }
+
+    private function getCityOfUser(UserSetting $userSetting) :?int
+    {
+        return $userSetting ? $userSetting->city_id : null;
     }
 
     private function getActivitiesIds(User $user) :array
