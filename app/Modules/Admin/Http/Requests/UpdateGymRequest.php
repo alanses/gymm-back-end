@@ -19,8 +19,8 @@ class UpdateGymRequest extends AbstractRequest
     {
         return [
             'id' => 'required|integer|exists:gyms,id',
-            'email' => 'required|string',
-            'name' => 'required|string',
+            'email' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'address' => 'nullable|string',
             'description' => 'nullable|string'
         ];
@@ -30,7 +30,9 @@ class UpdateGymRequest extends AbstractRequest
     {
         return [
             'email.required' => 'Field Email is required',
+            'email.max' => 'Field Email has max symbols 255',
             'name.required' => 'Field Gym name is required',
+            'name.max' => 'Field Gym name has max symbols 255',
         ];
     }
 
