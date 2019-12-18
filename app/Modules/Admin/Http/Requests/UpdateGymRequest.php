@@ -26,6 +26,14 @@ class UpdateGymRequest extends AbstractRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'email.required' => 'Field Email is required',
+            'name.required' => 'Field Gym name is required',
+        ];
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      *
