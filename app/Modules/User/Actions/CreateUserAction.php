@@ -28,11 +28,13 @@ class CreateUserAction extends AbstractAction
 
         $user = $this->call(GenerateTokenDataForUserTask::class, [$user]);
 
-        $this->call(CreateGymTask::class, [
-            [
-                'user_id' => $user->id
-            ]
-        ]);
+        if($userType == User::$is_gym) {
+            $this->call(CreateGymTask::class, [
+                [
+                    'user_id' => $user->id
+                ]
+            ]);
+        }
 
         return $user;
     }
