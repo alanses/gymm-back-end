@@ -23,7 +23,15 @@ class GetUserSettingsTransformer extends Resource
             'cretits_from' => optional($this->userSetting)->cretits_from,
             'cretits_to' => optional($this->userSetting)->cretits_to,
             'activities' => $this->includeActivities(),
+            'city_name' => $this->getCityName()
         ];
+    }
+
+    private function getCityName()
+    {
+        if($userSetting = $this->userSetting) {
+           return optional($userSetting->city)->displayed_name;
+        }
     }
 
     private function includeActivities()
