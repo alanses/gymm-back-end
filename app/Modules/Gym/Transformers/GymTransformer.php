@@ -25,8 +25,14 @@ class GymTransformer extends Resource
             'lng' => $this->lng,
             'available_from' => $this->getAvailableFrom(),
             'available_to' => $this->getAvailableTo(),
-            'trainers' => $this->includeTrainers()
+            'trainers' => $this->includeTrainers(),
+            'gym_name' => $this->getGymName()
         ];
+    }
+
+    private function getGymName()
+    {
+        return $this->name;
     }
 
     public function includeTrainers()

@@ -22,6 +22,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('list/gyms', 'GymController@getListGyms');
     Route::get('gym/{id}', 'GymController@getGym');
+    Route::get('gym-info', 'GymController@getGymInfo');
 
     Route::delete('trainer/{id}', 'TrainerController@deleteTrainer');
 });
