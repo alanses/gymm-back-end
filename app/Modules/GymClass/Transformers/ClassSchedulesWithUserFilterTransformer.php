@@ -22,7 +22,7 @@ class ClassSchedulesWithUserFilterTransformer extends Resource
             'trainer' => $this->getTrainerName(),
             'avg_rating' => $this->getAvgRating(),
             'description' => $this->getGymDescription(),
-            'gymName' => $this->getGymName(),
+            'gym_name' => $this->getGymName(),
         ];
     }
 
