@@ -3,6 +3,7 @@
 namespace App\Modules\Statistic\Actions\Gym;
 
 use App\Modules\Gym\Tasks\GetGymFromUserTask;
+use App\Modules\Statistic\Tasks\GetStatisticForPaymentsTask;
 use App\Modules\Statistic\Tasks\Gym\GetStatisticForClassTask;
 use App\Modules\Statistic\Tasks\Gym\GetStatisticForClientsTask;
 use App\Modules\Statistic\Tasks\Gym\GetStatisticForReviewsTask;
@@ -40,6 +41,8 @@ class GetStatisticForMouthAction extends AbstractAction
         ]);
 
         $data['count_trainers'] = $data['count_classes']; // becouse 1 class has 1 trainer
+
+        $data['count_payment'] = $this->call(GetStatisticForPaymentsTask::class);
 
         return $data;
     }

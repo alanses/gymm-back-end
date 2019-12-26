@@ -18,7 +18,8 @@ class GymStatisticsTransformer extends Resource
             'classes_count' => $this->resource['count_classes'],
             'count_clients' => $this->resource['count_clients'],
             'reviews' => $this->resource['count_reviews'],
-            'trainers' => $this->resource['count_trainers']
+            'trainers' => $this->resource['count_trainers'],
+            'count_money' => 0
         ];
     }
 }
