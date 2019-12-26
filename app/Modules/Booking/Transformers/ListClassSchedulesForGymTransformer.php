@@ -2,6 +2,7 @@
 
 namespace App\Modules\Booking\Transformers;
 
+use App\Modules\Booking\Entities\BookingClass;
 use Illuminate\Http\Resources\Json\Resource;
 use Carbon\Carbon;
 
@@ -26,8 +27,28 @@ class ListClassSchedulesForGymTransformer extends Resource
             'count_persons' => $this->count_persons,
             'address' => $this->getAddress(),
             'class_type' => $this->getClassType(),
-            'gym_name' => $this->getGymName()
+            'gym_name' => $this->getGymName(),
+            'users_booked' => $this->getBookedUser()
         ];
+    }
+
+    private function getBookedUser()
+    {
+        if($bookingUsers = $this->bookingUsers) {
+            return $bookingUsers->map(function (BookingClass $booking) {
+                return [
+                    'name' => optional($booking->user)->name,
+                    'email' => optional($booking->user)->email,
+                    'photo' => $this->getUserPhoto($booking)
+                ];
+            });
+        }
+
+    }
+
+    private function getUserPhoto(BookingClass $booking)
+    {
+        return optional($booking->user)->email;
     }
 
     private function getGymName()

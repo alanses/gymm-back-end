@@ -21,6 +21,6 @@ class GetListClassSchedulesForGymAction extends AbstractAction
             ['whereStartDateIs' => [$request->booking_date]],
             ['sortByTime' => []]
         ])
-            ->load(['trainer', 'classType', 'gym', 'activityType']);
+            ->load(['trainer', 'classType', 'gym', 'activityType', 'bookingUsers.user.userPhoto']);
     }
 }
