@@ -38,9 +38,13 @@ class GetClassScheduleTask extends AbstractTask
         $this->classScheduleRepository->pushCriteria(new WhereInCriteria('activities_id', $activities));
     }
 
-    public function whereLevelIs($value)
+    public function whereLevelIs($level)
     {
-        $this->classScheduleRepository->pushCriteria(new ThisEqualThatCriteria('level', $value));
+        if($level == 0) {
+            $this->classScheduleRepository->pushCriteria(new WhereInCriteria('level', [1,2,3]));
+        } else {
+            $this->classScheduleRepository->pushCriteria(new ThisEqualThatCriteria('level', $level));
+        }
     }
 
     public function wherePoints($from, $to)
