@@ -43,7 +43,7 @@ class GetListClassSchedulesWithUserFilterAction extends AbstractAction
             ['whereSpots' => [$this->getSpots($this->userSetting)]],
             ['whereCityIs' => [$this->getCityOfUser($this->userSetting)]]
         ])
-            ->load(['activityType', 'trainer.avgRating']);
+            ->load(['activityType', 'trainer.avgRating', 'gym']);
     }
 
     private function getCityOfUser(UserSetting $userSetting) :?int
