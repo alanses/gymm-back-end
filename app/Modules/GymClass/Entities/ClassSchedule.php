@@ -109,6 +109,11 @@ class ClassSchedule extends AbstractEntity
         return $this->hasMany(RatingForTrainer::class, 'event_id', 'id');
     }
 
+    public function bookingUsers()
+    {
+        return $this->hasMany(BookingClass::class, 'event_id', 'id');
+    }
+
     public function userBookings()
     {
         return $this

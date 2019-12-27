@@ -1,0 +1,14 @@
+{
+    "name": "SliderImages",
+    "alias": "sliderimages",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "App\\Modules\\SliderImages\\Providers\\SliderImagesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
