@@ -43,7 +43,6 @@ class ListClassSchedulesForGymTransformer extends Resource
                 ];
             });
         }
-
     }
 
     private function getUserPhoto(BookingClass $booking)

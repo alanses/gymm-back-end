@@ -13,7 +13,9 @@ class Transaction extends AbstractEntity
         'user_id',
         'total',
         'points',
-        'operation_type'
+        'operation_type',
+        'amount',
+        'currency'
     ];
 
     public static $ADD_BONUS = 1;

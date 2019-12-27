@@ -66,6 +66,8 @@ class SubscribePaymentForUser implements ShouldQueue
                 'user_id' => $this->user->id,
                 'operation_type' => 1,
                 'points' => $this->plan->count_credits,
+                'amount' => $this->plan->payment_for_month,
+                'currency' => 'USD',
                 'total' => $this->getTotalPoints()
             ]);
 

@@ -49,12 +49,18 @@ class MakeSubscribeAction extends AbstractAction
         $this->call(RegisterTransactionTask::class, [$user], [
             ['addPoints' => [$user, $plan]],
             ['setPointsFromPlan' => [$plan]],
-            ['setOperationType' => ['add']]
+            ['setOperationType' => ['add']],
+            ['setAmount' => [$this->getAmountFromPlanSubscribe($plan)]]
         ]);
 
         $this->call(MakeSettingBonusToAccountTask::class, [$user, $plan, $subscribe]);
 
         return $payment;
+    }
+
+    private function getAmountFromPlanSubscribe($plan)
+    {
+        return $plan->payment_for_month;
     }
 
     private function getCardCryptogramPacket(SubscribeRequest $request)

@@ -20,12 +20,16 @@ class RegisterTransactionTask extends AbstractTask
     protected $totalPoints;
     protected $operationType;
     protected $countPoint;
+    protected $amount;
+    protected $currency;
 
     public function __construct(TransactionRepository $repository)
     {
         $this->repository = $repository;
         $this->totalPoints = 0;
         $this->countPoint = 0;
+        $this->amount = null;
+        $this->currency = 'USD';
     }
 
     public function run(User $user)
@@ -34,7 +38,9 @@ class RegisterTransactionTask extends AbstractTask
             'user_id' => $user->id,
             'operation_type' => $this->getOperationType(),
             'points' => $this->getCountPoint(),
-            'total' => $this->getTotalPoints()
+            'total' => $this->getTotalPoints(),
+            'amount' => $this->getAmount(),
+            'currency' => $this->getCurrency(),
         ]);
     }
 
@@ -77,6 +83,11 @@ class RegisterTransactionTask extends AbstractTask
         $this->countPoint = $plan->count_credits;
     }
 
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+    }
+
     public function setOperationType(string $operationType)
     {
         if($operationType == 'add') {
@@ -101,5 +112,15 @@ class RegisterTransactionTask extends AbstractTask
     public function getCountPoint(): int
     {
         return $this->countPoint;
+    }
+
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    public function getCurrency()
+    {
+        return $this->currency;
     }
 }
