@@ -5,6 +5,7 @@ namespace App\Modules\Statistic\Tasks;
 use App\Modules\Booking\Repositories\BookingClassRepository;
 use App\Ship\Abstraction\AbstractTask;
 use App\Ship\Criterias\Eloquent\FindByRelationCriteria;
+use App\Ship\Criterias\Eloquent\ThisEqualThatCriteria;
 use App\Ship\Criterias\Eloquent\WhereMonthCriteria;
 use App\Ship\Criterias\Eloquent\WhereYearIsCriteria;
 
@@ -46,5 +47,10 @@ class GetStatisticForPaymentsTask extends AbstractTask
     public function whereStartDateIs(string $field, string $numberOfMouth)
     {
         $this->repository->pushCriteria(new WhereMonthCriteria($field, $numberOfMouth));
+    }
+
+    public function findByField(string $field, string $value)
+    {
+        $this->repository->pushCriteria(new ThisEqualThatCriteria($field, $value));
     }
 }

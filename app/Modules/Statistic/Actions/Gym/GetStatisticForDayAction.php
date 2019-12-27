@@ -2,6 +2,7 @@
 
 namespace App\Modules\Statistic\Actions\Gym;
 
+use App\Modules\Statistic\Tasks\GetStatisticForPaymentsTask;
 use App\Modules\Statistic\Tasks\Gym\GetStatisticForClassTask;
 use App\Modules\Statistic\Tasks\Gym\GetStatisticForClientsTask;
 use App\Modules\Statistic\Tasks\Gym\GetStatisticForReviewsTask;
@@ -34,6 +35,11 @@ class GetStatisticForDayAction extends AbstractAction
         ]);
 
         $data['count_trainers'] = $data['count_classes']; // becouse 1 class has 1 trainer
+
+        $data['count_payment'] = $this->call(GetStatisticForPaymentsTask::class, [], [
+            ['findByField' => ['created_at', $date]],
+            ['whereGymIS' => [$gym->id]],
+        ]);
 
         return $data;
     }
