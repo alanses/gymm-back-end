@@ -42,7 +42,11 @@ class GetStatisticForMouthAction extends AbstractAction
 
         $data['count_trainers'] = $data['count_classes']; // becouse 1 class has 1 trainer
 
-        $data['count_payment'] = $this->call(GetStatisticForPaymentsTask::class);
+        $data['count_payment'] = $this->call(GetStatisticForPaymentsTask::class, [], [
+            ['whereStartDateIs' => ['created_at', $month]],
+            ['whereGymIS' => [$gym->id]],
+            ['whereYearIS' => ['created_at', $year]]
+        ]);
 
         return $data;
     }

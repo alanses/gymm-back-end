@@ -19,6 +19,8 @@ class CreateTransactionsTable extends Migration
             $table->unsignedInteger('total')->default(0);
             $table->unsignedInteger('points')->default(0);
             $table->smallInteger('operation_type')->nullable();
+            $table->integer('amount')->nullable();
+            $table->string('currency')->nullable();
             $table->timestamps();
         });
     }

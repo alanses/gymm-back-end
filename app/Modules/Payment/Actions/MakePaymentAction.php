@@ -37,8 +37,14 @@ class MakePaymentAction extends AbstractAction
         $this->call(RegisterTransactionTask::class, [$user], [
             ['addPoints' => [$user, $paymentPlan]],
             ['setPointsFromPlan' => [$paymentPlan]],
-            ['setOperationType' => ['add']]
+            ['setOperationType' => ['add']],
+            ['setAmount' => [$this->getAmountFromPlan($paymentPlan)]]
         ]);
+    }
+
+    private function getAmountFromPlan($paymentPlan)
+    {
+        return $paymentPlan->price;
     }
 
     private function getCardCryptogramPacket(PaymentRequest $request)
