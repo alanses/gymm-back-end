@@ -27,6 +27,11 @@ class CreateGymTable extends Migration
             $table->float('lng')->nullable();
             $table->smallInteger('is_available')->default(Gym::$IS_NOT_AVAILABLE);
             $table->unsignedBigInteger('city_id')->nullable()->unique();
+
+            $table->string('web_site')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('public_email')->nullable();
+
             $table->timestamps();
 
             $table->foreign('user_id')

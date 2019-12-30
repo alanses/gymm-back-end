@@ -32,7 +32,10 @@ class UpdateGymAction extends AbstractAction
             'description' => $request->description,
             'available_from' => $this->getAvailableFrom($request),
             'available_to' => $this->getAvailableTo($request),
-            'city_id' => $request->city_id
+            'city_id' => $request->city_id,
+            'web_site' => $request->web_site,
+            'phone' => $request->phone,
+            'public_email' => $request->public_email,
         ];
     }
 

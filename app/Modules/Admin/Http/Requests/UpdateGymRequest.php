@@ -22,7 +22,10 @@ class UpdateGymRequest extends AbstractRequest
             'email' => 'required|string|max:255',
             'name' => 'required|string|max:255',
             'address' => 'nullable|string',
-            'description' => 'nullable|string'
+            'description' => 'nullable|string',
+            'web_site' => 'nullable|string',
+            'phone' => 'nullable|string',
+            'public_email' => 'nullable|string',
         ];
     }
 
