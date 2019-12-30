@@ -25,4 +25,5 @@ Route::post('/send-new-password', 'AuthenticationController@sendNewPassword');
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/restore-password', 'AuthenticationController@restorePassword');
+    Route::post('logout', 'AuthenticationController@logout');
 });

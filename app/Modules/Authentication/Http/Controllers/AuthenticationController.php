@@ -87,4 +87,13 @@ class AuthenticationController extends ApiController
 
         return $this->transform($user, UserTransformer::class);
     }
+
+    public function logout()
+    {
+        $user = \Auth::user();
+
+        return response()->json(['data' => [
+            'logout' => $user->token()->revoke()
+        ]]);
+    }
 }

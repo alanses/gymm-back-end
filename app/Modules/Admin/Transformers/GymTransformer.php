@@ -26,7 +26,10 @@ class GymTransformer extends Resource
             'lat' => $this->lat,
             'lng' => $this->lng,
             'is_available' => $this->getIsAvailable(),
-            'city_id' => $this->city_id
+            'city_id' => $this->city_id,
+            'web_site' => $this->web_site,
+            'phone' => $this->phone,
+            'public_email' => $this->public_email
         ];
     }
 
