@@ -36,6 +36,6 @@ class SliderImagesTransformer extends Resource
 
     private function getPathToImage(ImageSlider $image)
     {
-        return env('APP_URL') . Storage::url(ImageSlider::$PATH_TO_IMAGE .  $image->image);
+        return env('APP_URL') . Storage::url(ImageSlider::$PATH_TO_IMAGE . '/' . $image->image);
     }
 }
