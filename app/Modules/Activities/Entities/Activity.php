@@ -3,6 +3,7 @@
 namespace App\Modules\Activities\Entities;
 
 use App\Modules\Achievements\Entities\Achievement;
+use App\Modules\GymClass\Entities\ClassSchedule;
 use App\Modules\User\Entities\User;
 use App\Ship\Abstraction\AbstractEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -33,5 +34,10 @@ class Activity extends AbstractEntity
     public function achievement()
     {
         return $this->hasOne(Achievement::class, 'achivement_id', 'id');
+    }
+
+    public function classSchedules()
+    {
+        return $this->hasMany(ClassSchedule::class, 'activities_id', 'id');
     }
 }

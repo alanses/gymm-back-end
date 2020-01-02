@@ -30,6 +30,13 @@ class CityController extends ApiController
         return CitiesTransformer::collection($cities);
     }
 
+    public function getListCitiesForSelect()
+    {
+        $cities = $this->call(GetListCitiesAction::class);
+
+        return CitiesTransformer::collection($cities);
+    }
+
     public function createCity(CityRequest $request)
     {
         $city = $this->call(CreateCityAction::class, [$request]);

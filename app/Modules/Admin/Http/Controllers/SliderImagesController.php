@@ -6,15 +6,15 @@ use App\Modules\SliderImages\Actions\GetListImagesForSliderAction;
 use App\Modules\SliderImages\Actions\GetSliderImageAction;
 use App\Modules\SliderImages\Actions\SaveSliderImagesAction;
 use App\Modules\SliderImages\Actions\UpdatePhotoForSliderAction;
+use App\Modules\SliderImages\Http\Requests\SaveImagesForSliderRequest;
 use App\Modules\SliderImages\Http\Requests\UpdateImageSliderRequest;
 use App\Modules\SliderImages\Transformers\ListImagesForSliderTransformer;
 use App\Modules\SliderImages\Transformers\SliderImagesTransformer;
 use App\Ship\Parents\ApiController;
-use Illuminate\Http\Request;
 
 class SliderImagesController extends ApiController
 {
-    public function saveImages(Request $request)
+    public function saveImages(SaveImagesForSliderRequest $request)
     {
         $images = $this->call(SaveSliderImagesAction::class, [$request]);
 
