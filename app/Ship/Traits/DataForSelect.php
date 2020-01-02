@@ -20,6 +20,7 @@ trait DataForSelect
     public function getDataForSelect(array $fiels = ['*']) :Collection
     {
         return $this->model
+            ->orderBy('displayed_name')
             ->select($fiels)
             ->get();
     }

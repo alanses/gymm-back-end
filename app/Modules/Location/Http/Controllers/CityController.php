@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class CityController extends ApiController
 {
-    public function getAllCityControllers()
+    public function getAllCity()
     {
         $cities = $this->call(GetListCitiesAction::class);
 
@@ -26,6 +26,13 @@ class CityController extends ApiController
     public function getListCities(Request $request)
     {
         $cities = $this->call(GetListCitiesForAdminPageAction::class, [$request]);
+
+        return CitiesTransformer::collection($cities);
+    }
+
+    public function getListCitiesForSelect()
+    {
+        $cities = $this->call(GetListCitiesAction::class);
 
         return CitiesTransformer::collection($cities);
     }

@@ -26,6 +26,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('admin/achievements', 'AchievementController@getListAchievement');
     Route::get('admin/list/activities/for/select', 'AchievementController@getDateForCreateAchievement');
     Route::get('admin/achievement/{id}', 'AchievementController@show');
+    Route::get('admin/list/images', 'SliderImagesController@listImagesForSlider');
+    Route::get('admin/slider/image/{id}', 'SliderImagesController@getSliderImage');
 
     Route::put('admin/gyms/confirm/{id}', 'GymsController@confirmGym');
     Route::put('admin/gyms/{id}', 'GymsController@updateGym');
@@ -33,6 +35,7 @@ Route::middleware('auth:api')->group(function () {
     Route::put('admin/review/confirm/{id}', 'ReviewsController@confirmReview');
     Route::post('admin/update/activity', 'ActivitiesController@updateActivity');
     Route::post('admin/update/achievement', 'AchievementController@update');
+    Route::post('admin/update/photo/slider', 'SliderImagesController@updateImage');
 
     Route::delete('admin/user/{id}', 'UsersController@deleteUser');
     Route::delete('admin/activity/{id}', 'ActivitiesController@deleteActivity');
