@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class CityController extends ApiController
 {
-    public function getAllCityControllers()
+    public function getAllCity()
     {
         $cities = $this->call(GetListCitiesAction::class);
 
